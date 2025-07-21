@@ -1,0 +1,48 @@
+@reference "tailwindcss";
+
+.section {
+  @apply bg-[#060606] fixed flex flex-col h-lvh pt-[20px]!;
+
+}
+
+.menu-container {
+  @apply text-white relative flex justify-start h-[25px] w-full pl-[calc(110px*0.5)]!;
+
+}
+
+.menu-img-icon {
+  @apply relative flex items-center justify-center h-[35px] w-[35px] rounded-full hover:bg-[#4545458a] cursor-pointer;
+
+}
+
+.img-icon {
+  @apply absolute h-[16px] w-[16px];
+
+}
+
+
+.options-container {
+  @apply flex items-center justify-start h-[44px] w-full pl-[calc(106px*0.5)]! cursor-pointer;
+
+  .options {
+    @apply flex items-center h-auto w-auto p-[12px]! rounded-full hover:bg-[#6f6f6fad] cursor-pointer;
+
+  }
+
+  .options__icon {
+    @apply h-[18px] w-[18px];
+
+  }
+
+}
+
+.most-watched-content, .trending-content {
+  @apply flex flex-col gap-[5px] h-[171px] mt-[18px]!;
+
+  .most-watched-content__item, .trending-content__item {
+    @apply flex items-center justify-start h-[30px] w-full pl-[calc(106px*0.5)]! cursor-pointer;
+
+  }
+
+}
+

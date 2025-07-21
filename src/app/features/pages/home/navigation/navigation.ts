@@ -1,0 +1,47 @@
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-navigation',
+  imports: [
+    CommonModule
+
+  ],
+  templateUrl: './navigation.html',
+  styleUrl: './navigation.css'
+})
+export class Navigation {
+  protected readonly bars = "assets/navigation/bars.png";
+  protected readonly xMark = "assets/navigation/x-mark.png";
+
+  protected readonly icons = [
+    { id: 0, name: "Início", icon: "assets/navigation/house.png" },
+    { id: 1, name: "Catálogo", icon: "assets/navigation/tv.png" },
+    { id: 2, name: "Tendências", icon: "assets/navigation/fire.png" },
+    { id: 3, name: "Favoritos", icon: "assets/navigation/star.png" },
+    { id: 4, name: "Biblioteca", icon: "assets/navigation/layer.png" },
+
+  ];
+
+  protected readonly mostWatchedContent = [
+    { id: 0, name: "serie 1" },
+    { id: 1, name: "serie 2" },
+    { id: 2, name: "serie 3" },
+    { id: 3, name: "serie 4" },
+    { id: 4, name: "serie 5" }
+
+  ];
+
+  protected readonly trendingContent = [
+    { id: 0, name: "Ação", color: "bg-blue-500" },
+    { id: 1, name: "Aventura", color: "bg-orange-500" },
+    { id: 2, name: "Comédia", color: "bg-red-500" },
+    { id: 3, name: "Terror", color: "bg-yellow-500" },
+    { id: 4, name: "Fantasia", color: "bg-green-500" },
+    { id: 5, name: "Animação", color: "bg-pink-500" }
+
+  ];
+
+  protected isOpen = false;
+
+}
