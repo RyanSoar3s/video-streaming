@@ -16,7 +16,8 @@
     "module": "preserve",
     "types": [ "jest", "node" ],
     "paths": {
-      "@features/*": [ "src/app/features/*" ]
+      "@features/*": [ "src/app/features/*" ],
+      "@core/*": [ "src/app/core/*" ],
 
     }
   },
