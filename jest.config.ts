@@ -7,18 +7,19 @@ const config: Config = {
   coverageDirectory: "coverage",
   coverageProvider: "v8",
   collectCoverageFrom: [
-    "!src/**/*.ts",
-    "src/app/app.ts"
+    "src/**/*.ts",
 
   ],
   moduleFileExtensions: [
+    "js",
     "ts"
 
   ],
   setupFilesAfterEnv: [ '<rootDir>/setup-jest.ts' ],
 
   moduleNameMapper: {
-    "@components/(.*)": "<rootDir>/src/app/components/$1",
+    "@core/(.*)": "<rootDir>/src/app/core/$1",
+    "@features/(.*)": "<rootDir>/src/app/features/$1",
 
   },
 
