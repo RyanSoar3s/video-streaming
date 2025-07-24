@@ -43,8 +43,7 @@ export class Navigation {
 
   ];
 
-  protected isOpen = false;
-
   protected readonly responsive = inject(Responsive);
+  public isOpen = false;
 
 }
