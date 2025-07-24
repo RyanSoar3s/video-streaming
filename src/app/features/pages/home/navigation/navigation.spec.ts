@@ -28,7 +28,7 @@ describe('Navigation', () => {
     menu.triggerEventHandler("click", null);
     fixture.detectChanges();
 
-    expect(component.isOpen).toEqual(true);
+    expect(component.isOpen).toBeTruthy();
 
   });
 
