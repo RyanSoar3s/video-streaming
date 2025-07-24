@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Responsive } from '@core/services/responsive';
 
 @Component({
   selector: 'app-navigation',
@@ -43,5 +44,7 @@ export class Navigation {
   ];
 
   protected isOpen = false;
+
+  protected readonly responsive = inject(Responsive);
 
 }

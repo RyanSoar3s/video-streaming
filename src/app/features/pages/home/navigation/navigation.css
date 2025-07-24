@@ -1,17 +1,62 @@
 @reference "tailwindcss";
 
-.section {
-  @apply bg-[#060606] fixed flex flex-col h-lvh pt-[20px]!;
+@theme {
+  @keyframes open-menu {
+    to {
+      transform: translateX(-270px);
+
+    }
+    from {
+      transform: translateX(0px);
+
+    }
+
+  }
+
+  @keyframes close-menu {
+    to {
+      transform: translateX(0px);
+
+    }
+    from {
+      transform: translateX(-270px);
+
+    }
+
+  }
+
+}
+
+@utility scroll-width-none {
+  scrollbar-width: none;
+
+}
+
+@utility animate-open-menu {
+  animation: open-menu 0.5s ease-in-out forwards;
+
+}
+
+@utility animate-close-menu {
+  animation: close-menu 0.5s ease-in-out forwards;
+
+}
+
+@custom-variant hover-option {
+  &:hover {
+    @slot
+
+  }
 
 }
 
 .menu-container {
-  @apply text-white relative flex justify-start h-[25px] w-full pl-[calc(110px*0.5)]!;
+  @apply text-white fixed flex justify-start h-[35px] w-[91px] mt-[20px]! z-[999];
 
 }
 
 .menu-img-icon {
-  @apply relative flex items-center justify-center h-[35px] w-[35px] rounded-full hover:bg-[#4545458a] cursor-pointer;
+  @apply relative flex items-center justify-center h-[35px] w-[35px] rounded-full hover-option:bg-[#4545458a] cursor-pointer;
 
 }
 
@@ -20,12 +65,26 @@
 
 }
 
+.open-menu {
+  @apply animate-open-menu;
+
+}
+
+.close-menu {
+  @apply animate-close-menu;
+
+}
+
+.section {
+  @apply bg-[#060606] fixed flex flex-col h-lvh pt-[20px]! scroll-width-none overflow-auto;
+
+}
 
 .options-container {
   @apply flex items-center justify-start h-[44px] w-full pl-[calc(106px*0.5)]! cursor-pointer;
 
   .options {
-    @apply flex items-center h-auto w-auto p-[12px]! rounded-full hover:bg-[#6f6f6fad] cursor-pointer;
+    @apply flex items-center h-auto w-auto p-[12px]! rounded-full hover-option:bg-[#6f6f6fad] cursor-pointer;
 
   }
 
@@ -46,3 +105,7 @@
 
 }
 
+.hover-underline {
+  @apply hover-option:underline;
+
+}

@@ -1,25 +1,43 @@
-<section [ngClass]="'section'" [ngStyle]="{ 'width': (!isOpen) ? '150px' : '250px' }">
-  <div [ngClass]="'menu-container'">
-    <div [ngClass]="'menu-img-icon'" (click)="isOpen = !isOpen">
-      @if (isOpen) {
-        <img [ngClass]="'img-icon'" [src]="xMark" [alt]="'Fechar Menu'">
 
-      } @else {
-        <img [ngClass]="'img-icon'" [src]="bars" [alt]="'Abrir Menu'">
+@let XS = responsive.isXs();
+@let SM = responsive.isSm();
 
-      }
+@let isSmall = XS || SM;
+@let openMenu = isSmall || isOpen;
 
-    </div>
+<div [ngClass]="'menu-container'">
+  <div [ngClass]="'menu-img-icon'" [ngStyle]="{ 'marginLeft': (!isSmall) ? 'calc(110px*0.5)' : 'calc(110px*0.15)' }" (click)="isOpen = !isOpen">
+    @if (!isOpen) {
+      <img [ngClass]="'img-icon'" [src]="bars" [alt]="'Abrir Menu'">
+
+    } @else {
+      <img [ngClass]="'img-icon'" [src]="xMark" [alt]="'Fechar Menu'">
+
+    }
 
   </div>
 
-  <ul [ngClass]="'text-white flex flex-col gap-[6px] h-[244px] mt-[30px]!'">
+</div>
+
+<section [ngClass]="{
+            'section': true,
+            'open-menu': isSmall && !isOpen,
+            'close-menu': isSmall && isOpen
+
+          }"
+          [ngStyle]="{
+          'width': (openMenu) ? '250px' : '150px',
+          'transform': (!isSmall) ? 'translateX(0)' : 'translateX(-270px)'
+
+          }">
+
+  <ul [ngClass]="'text-white flex flex-col gap-[6px] h-[244px] mt-[50px]!'">
     @for (icon of icons; track icon.id) {
       <li [ngClass]="'options-container'">
-        <div [ngClass]="'options'" [ngStyle]="{ 'width': (isOpen) ? '170px' : 'auto' }">
+        <div [ngClass]="'options'" [ngStyle]="{ 'width': (openMenu) ? '170px' : 'auto' }">
           <img [ngClass]="'options__icon'" [src]="icon.icon" [alt]="icon.name"/>
 
-          @if (isOpen) {
+          @if (openMenu) {
             <p [ngClass]="'text-[0.88em] font-normal self-end m-[2px_0px_0px_12px]!'">{{ icon.name }}</p>
 
           }
@@ -32,7 +50,7 @@
 
   </ul>
 
-  @if (isOpen) {
+  @if (openMenu) {
     <hr [ngClass]="'border-[#6f6f6f] w-[70%] mt-[20px]! ml-[calc(75px*0.5)]!'"/>
     <div [ngClass]="'flex w-full pl-[calc(132px*0.5)]! mt-[20px]!'">
       <p [ngClass]="'text-[#848484] text-[0.9em] font-medium w-[118px]'">Mais assistidos</p>
@@ -44,7 +62,7 @@
         <li [ngClass]="'most-watched-content__item'">
           <div [ngClass]="'h-[28px] w-[28px] bg-gray-400 rounded-full'"></div>
 
-          <p [ngClass]="'text-white text-[0.9em] font-normal self-center ml-[12px]! hover:underline'">{{ content.name }}</p>
+          <p [ngClass]="'text-white text-[0.9em] font-normal self-center ml-[12px]! hover-underline'">{{ content.name }}</p>
 
         </li>
 
@@ -62,15 +80,13 @@
         <div [ngClass]="'trending-content__item'">
           <div [ngClass]="trending.color + ' h-[5px] w-[5px] rounded-full'"></div>
 
-          <p [ngClass]="'text-white text-[0.85em] font-normal self-center ml-[12px]! hover:underline'">{{ trending.name }}</p>
+          <p [ngClass]="'text-white text-[0.85em] font-normal self-center ml-[12px]! hover-underline'">{{ trending.name }}</p>
 
         </div>
 
       }
 
     </ul>
-
-
 
   }
 
