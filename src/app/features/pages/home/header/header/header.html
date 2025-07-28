@@ -1,0 +1,96 @@
+@let XS = responsive.isXs();
+@let SM = responsive.isSm();
+@let MD = responsive.isMd();
+@let LG = responsive.isLg();
+@let XL = responsive.isXl();
+
+@let isLarge = LG || XL;
+@let isSmall = XS || SM;
+
+<header [ngClass]="'header'" [ngStyle]="{ 'width': (isSmall) ? '100%' : 'calc(100% - 150px)' }">
+  <div [ngClass]="'flex justify-between w-full'">
+    <div [ngClass]="'h-[40px] w-[40px] select-auto'">
+      <img [ngClass]="'h-full w-full pointer-events-none select-auto'" [src]="'favicon.ico'" [alt]="'Logotipo'">
+
+    </div>
+    @if (!isSmall) {
+      <nav [ngClass]="{
+                  'nav': true,
+                  'w-[450px] h-[55px]': (isLarge),
+                  'w-[370px] h-[50px]': (MD)
+
+                  }">
+        @for (option of navOptions; track option.id) {
+          <div [ngClass]="{
+                          'option': true,
+                          'bg-[#e5e5e5]': (option.select),
+                          'w-[130px]': (option.id !== 3 && isLarge),
+                          'w-[100px]': (option.id !== 3 && MD),
+                          'h-[54px]! w-[54px]': (option.id === 3 && isLarge),
+                          'h-[48px]! w-[48px]': (option.id === 3 && MD)
+
+                          }"
+                (click)="void selectOption(option.id)"
+            >
+
+            @if (option.id !== 3) {
+              <p [ngClass]="{
+                              'font-medium': true,
+                              'text-[0.9em]': (isLarge),
+                              'text-[0.8em]': (MD)
+
+                            }" [ngStyle]="{ 'color': (option.select) ? 'black' : 'white' }">{{ option.content }}</p>
+
+            } @else {
+              <img [ngClass]="'h-[24px] w-[24px]'" [src]="option.content + ((option.select) ? 'black.png' : 'white.png')" [alt]="'lupa'">
+
+            }
+
+          </div>
+
+        }
+        <div [ngClass]="'bg-[#79797936] backdrop-blur-[5px] absolute h-full w-full rounded-full'"></div>
+
+      </nav>
+
+    }
+
+    <div [ngClass]="'bg-gray-400 border-white border-2 border-spacing-0.5 p-0.5! h-[45px] w-[45px] rounded-full cursor-pointer'">
+      <img [ngClass]="'h-full w-full select-auto pointer-events-none'" [src]="user" [alt]="'foto do usuario'">
+
+    </div>
+
+  </div>
+
+  <div [ngClass]="'text-white flex flex-col justify-evenly h-[320px] w-[365px]'">
+    <h1 [ngClass]="{
+                    'text-5xl': (isSmall),
+                    'text-6xl': (!isSmall),
+                    'font-medium': true
+
+                    }">Sherlock</h1>
+    <div [ngClass]="'flex items-center gap-2'">
+      <div [ngClass]="'h-[15px] w-[15px] mb-[6px]!'">
+        <img [ngClass]="'h-full w-full'" [src]="star" [alt]="'estrela'">
+
+      </div>
+      <p>9,0/10 󠁯•󠁏󠁏 Investigação 󠁯•󠁏󠁏 2010</p>
+
+    </div>
+
+    <div [ngClass]="'w-[350px]'">
+      <p [ngClass]="'text-justify text-ellipsis text-nowrap overflow-hidden w-full'">
+        Sherlock Holmes atua como detetive consultor <br> em Londres, resolvendo mistérios que a polícia <br> não consegue. Junto com o Dr. John Watson, <br> enfrentam casos intricados e adversários de alta periculosidade — principalmente o enigmático Jim Moriarty
+
+      </p>
+
+    </div>
+
+    <button [ngClass]="'button'">
+      <span [ngClass]="'text-[1.2em] font-normal'">Assistir</span>
+
+    </button>
+
+  </div>
+
+</header>
