@@ -1,11 +1,11 @@
 @reference "tailwindcss";
 
 @utility bg-main-banner {
-  background-image: url(../../../../../assets/content/banners/sherlock-1.jpg);
+  background-image: url(../../../../../assets/content/banners/sherlock-1.webp);
 
 }
 
 @utility bg-secundary-banner {
-  background-image: url(../../../../../assets/content/banners/sherlock-2.jpg);
+  background-image: url(../../../../../assets/content/banners/sherlock-2.webp);
 
 }
