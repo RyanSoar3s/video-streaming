@@ -5,12 +5,19 @@
 @let isSmall = XS || SM;
 @let openMenu = isSmall || isOpen;
 
-<div [ngClass]="'menu-container'">
-  <div [ngClass]="'menu-img-icon'" [ngStyle]="{ 'marginLeft': (!isSmall) ? 'calc(110px*0.5)' : 'calc(110px*0.15)' }" (click)="isOpen = !isOpen">
-    @if (!isOpen) {
+<div [ngClass]="'menu-container'"
+     [ngStyle]="{
+        'marginTop': (!isSmall) ? '20px' : '16px',
+        'marginLeft': (!isSmall) ? 'calc(110px*0.5)' : 'calc(110px*0.12)'
+
+      }">
+  <div [ngClass]="{ 'menu-img-icon': true, 'hover:bg-transparent!': (isSmall && !isOpen) }"
+      [ngStyle]="{ 'height': (!isSmall) ? '35px' : '42px', 'width': (!isSmall) ? '35px' : '42px' }"
+      (click)="isOpen = !isOpen">
+    @if (!isOpen && !isSmall) {
       <img [ngClass]="'img-icon'" [src]="bars" [alt]="'Abrir Menu'">
 
-    } @else {
+    } @else if (isOpen) {
       <img [ngClass]="'img-icon'" [src]="xMark" [alt]="'Fechar Menu'">
 
     }
@@ -31,7 +38,20 @@
 
           }">
 
-  <ul [ngClass]="'text-white flex flex-col gap-[6px] h-[244px] mt-[50px]!'">
+  @if (isSmall) {
+    <div [ngClass]="'flex justify-end w-full gap-[15px]'">
+      <input [ngClass]="'input'" [type]="'text'" [name]="'search'" [id]="'search'" [placeholder]="'buscar'">
+
+      <div [ngClass]="'flex items-center justify-center h-[25px] w-[25px] cursor-pointer'">
+       <img [ngClass]="'h-full w-full'" [src]="magnifyingGlass" [alt]="'lupa'">
+
+      </div>
+
+    </div>
+
+  }
+
+  <ul [ngClass]="'text-white flex flex-col gap-[6px] h-[244px] mt-[25px]!'">
     @for (icon of icons; track icon.id) {
       <li [ngClass]="'options-container'">
         <div [ngClass]="'options'" [ngStyle]="{ 'width': (openMenu) ? '170px' : 'auto' }">

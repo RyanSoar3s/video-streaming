@@ -14,6 +14,7 @@ import { Responsive } from '@core/services/responsive';
 export class Navigation {
   protected readonly bars = "assets/navigation/bars.png";
   protected readonly xMark = "assets/navigation/x-mark.png";
+  protected readonly magnifyingGlass = "assets/home/magnifying-glass-white.png";
 
   protected readonly icons = [
     { id: 0, name: "Início", icon: "assets/navigation/house.png" },
