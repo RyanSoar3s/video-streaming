@@ -6,11 +6,6 @@
 
 }
 
-* {
-  @apply m-0 p-0 box-border;
-
-}
-
 html, body {
   @apply h-lvh w-lvw font-rubik overflow-hidden;
 
