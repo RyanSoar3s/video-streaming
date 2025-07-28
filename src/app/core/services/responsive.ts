@@ -11,8 +11,8 @@ export class Responsive {
   private readonly breakpoints = {
     XS: '(max-width: 599px)',
     SM: '(min-width: 600px) and (max-width: 749px)',
-    MD: '(min-width: 750px) and (max-width: 969px)',
-    LG: '(min-width: 970px) and (max-width: 1199px)',
+    MD: '(min-width: 750px) and (max-width: 979px)',
+    LG: '(min-width: 980px) and (max-width: 1199px)',
     XL: '(min-width: 1200px)'
 
   };
