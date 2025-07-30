@@ -19,7 +19,7 @@ export class Navigation {
   protected readonly icons = [
     { id: 0, name: "Início", icon: "assets/navigation/house.png" },
     { id: 1, name: "Catálogo", icon: "assets/navigation/tv.png" },
-    { id: 2, name: "Tendências", icon: "assets/navigation/fire.png" },
+    { id: 2, name: "Mais vistos", icon: "assets/navigation/fire.png" },
     { id: 3, name: "Favoritos", icon: "assets/navigation/star.png" },
     { id: 4, name: "Biblioteca", icon: "assets/navigation/layer.png" },
 
