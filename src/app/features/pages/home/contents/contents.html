@@ -1,0 +1,85 @@
+@let SM = responsive.isSm();
+@let MD = responsive.isMd();
+@let LG = responsive.isLg();
+@let XL = responsive.isXl();
+
+@let categories = [
+  { option: [ "all", "Todos"] },
+  { option: [ "movies", "Filmes" ] },
+  { option: [ "series", "Séries" ] },
+  { option: [ "animations", "Animações" ] }
+
+];
+
+<div [ngClass]="'shadow'"></div>
+<div [ngClass]="'flex flex-col gap-[40px] h-[150px] w-[calc(100%-150px)] mt-[10px]! mb-[20px]! pl-[30px]!'">
+  <h1 [ngClass]="'text-[1.85em] font-normal'">Categorias</h1>
+
+  <nav [ngClass]="'inline-flex h-[38px] w-auto gap-5'">
+    @for (cat of categories; track cat) {
+      <div [ngClass]="'categories__options'">{{ cat.option[1] }}</div>
+
+    }
+
+  </nav>
+
+</div>
+
+<section [ngClass]="'flex flex-col h-auto w-full'">
+  @for (items of catalog.items; track items) {
+    <h2 [ngClass]="'text-[1.7em] font-bold mb-[20px]! ml-2.5'"> {{ items.title }}</h2>
+
+    <div [ngClass]="'w-full'">
+      <div [ngClass]="'flex justify-center h-auto m-[20px_0px]!'" [ngStyle]="{
+        'width': (XL) ? '100%' :
+                  (LG) ? 'calc(100% + ((100% / 4) - 180px) + 180px)' :
+                  (MD) ? 'calc(100% + (2 * ((100% / 3) - 170px)) + (2 * 170px))' :
+                    (SM) ? 'calc(100% + (2 * ((100% / 3) - 170px)) + (2 * 170px))' : 'calc(100% + (2 * ((100% / 3) - 120px)) + (2 * 120px))',
+
+        'gap': (XL) ? 'calc((100% / 5) - 185px)' :
+                (LG) ? 'calc((100% / 5) - 180px)' :
+                (MD) ? 'calc((100% / 5) - 170px)' :
+                (SM) ? 'calc((100% / 5) - 170px)' : 'calc((100% / 5) - 120px)'
+
+      }">
+        @for (items of catalog.items[0].content; track items) {
+          <div [ngClass]="'flex flex-col gap-[5px]'" [ngStyle]="{
+            'width': (XL) ? '185px' :
+                      (LG) ? '180px' :
+                      (MD) ? '170px' :
+                      (SM) ? '160px' : '120px'
+
+          }">
+            <div [ngClass]="'bg-gray-500 w-full rounded-[20px] transition hover:transform-[scale(1.05)] cursor-pointer'" [ngStyle]="{
+              'height': (XL) ? '265px' :
+                        (LG) ? '260px' :
+                        (MD) ? '250px' :
+                        (SM) ? '230px' : '200px'
+
+            }"></div>
+
+            <div [ngClass]="'flex justify-between w-full mt-[15px]!'">
+                  <p [ngClass]="'text-[#a9a9a9] text-[0.9em]'">{{ items.year }}</p>
+                  <span [ngClass]="'inline-flex justify-between w-[33px]'">
+                    <img [ngClass]="'h-[15px] w-[15px]'" [src]="star" [alt]="'estrela'">
+                    <p [ngClass]="'text-[#a9a9a9] text-[0.9em]'">{{ items.star }}</p>
+
+                  </span>
+
+              </div>
+
+              <h2 [ngClass]="'text-[1.3em] font-medium'">{{ items.contentTitle }}</h2>
+              <p [ngClass]="'text-[#a9a9a9] text-[0.9em]'">{{ items.season }}</p>
+
+
+          </div>
+
+        }
+
+      </div>
+
+    </div>
+
+  }
+
+</section>

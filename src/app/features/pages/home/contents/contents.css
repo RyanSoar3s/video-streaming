@@ -1,0 +1,16 @@
+@reference "tailwindcss";
+
+:host {
+  @apply bg-[#060606] text-white relative flex flex-col h-auto w-full;
+
+}
+
+.shadow {
+  @apply absolute bg-linear-[to_top,#000000ff_0%,#000000cc_25%,#00000099_50%,#00000055_75%,#00000000_100%] -top-[64px] h-[65px] w-[calc(100%-150px)];
+
+}
+
+.categories__options {
+  @apply bg-[#242424] inline-flex items-center justify-center h-full w-auto p-[0px_20px]! rounded-[20px] active:bg-[#363636] hover:bg-[#363636] cursor-pointer;
+
+}
