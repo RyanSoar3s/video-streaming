@@ -6,7 +6,13 @@
 
 }
 
-html, body {
-  @apply h-lvh w-lvw font-rubik overflow-hidden;
+@utility custom-scrollbar {
+  @apply [&::-webkit-scrollbar]:w-[8px] [&::-webkit-scrollbar-track]:bg-[#060606] [&::-webkit-scrollbar-thumb]:rounded-[20px] [&::-webkit-scrollbar-thumb]:bg-gray-500;
 
 }
+
+html, body {
+  @apply h-lvh w-lvw font-rubik custom-scrollbar overflow-x-hidden;
+
+}
+
