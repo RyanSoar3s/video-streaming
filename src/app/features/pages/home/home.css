@@ -1,0 +1,6 @@
+@reference "tailwindcss";
+
+:host {
+  @apply relative block h-auto;
+
+}
