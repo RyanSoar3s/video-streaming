@@ -51,12 +51,12 @@
 }
 
 :host {
-  @apply fixed block h-svh w-0 z-[998];
+  @apply absolute block h-svh w-0 z-[998];
 
 }
 
 .menu-container {
-  @apply text-white fixed flex justify-start h-[35px] w-[91px] z-[999];
+  @apply text-white absolute flex justify-start h-[42px] w-[91px] z-[999];
 
 }
 
