@@ -14,3 +14,8 @@
   @apply bg-[#242424] inline-flex items-center justify-center h-full w-auto p-[0px_20px]! rounded-[20px] active:bg-[#363636] hover:bg-[#363636] cursor-pointer;
 
 }
+
+.arrow {
+  @apply flex items-center justify-center h-[45px] w-[45px] border-2 border-solid border-gray-400 rounded-full text-white font-bold cursor-pointer active:bg-[#3d3d3d] hover:bg-[#3d3d3d];
+
+}
