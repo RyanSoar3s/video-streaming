@@ -6,7 +6,7 @@
 }
 
 .shadow {
-  @apply absolute bg-linear-[to_top,#000000ff_0%,#000000cc_25%,#00000099_50%,#00000055_75%,#00000000_100%] -top-[64px] h-[65px] w-[calc(100%-150px)];
+  @apply absolute bg-linear-[to_top,#000000ff_0%,#000000cc_25%,#00000099_50%,#00000055_75%,#00000000_100%] -top-[64px] h-[65px] w-full;
 
 }
 
