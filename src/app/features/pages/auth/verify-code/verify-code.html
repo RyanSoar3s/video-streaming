@@ -1,0 +1,58 @@
+@let inputsName = [ "d1", "d2", "d3", "d4", "d5", "d6" ];
+
+@let XS = responsive.isXs();
+@let SM = responsive.isSm();
+
+@if (errorMsg) {
+  <div [ngClass]="'absolute bg-[#00000085] flex items-center justify-center h-lvh w-lvw z-999'">
+    <div [ngClass]="'bg-black flex items-center h-[80px] w-auto p-2.5 border-2 border-solid border-white'">
+      <h1 [ngClass]="'font-medium'" [ngStyle]="{ 'font-size': (XS || SM) ? '1.4em' : '2.5em' }">❌ Não foi possível validar o código</h1>
+
+    </div>
+
+  </div>
+
+}
+
+
+<div [ngClass]="'absolute h-full w-full bg-black opacity-35'"></div>
+
+<div [ngClass]="'bg-black flex flex-col items-center justify-center gap-7 h-[400px] w-[650px] max-[1199px]:w-[500px] max-[749px]:w-[400px] rounded-2xl z-50'">
+  <h1 [ngClass]="'text-[1.7em] font-normal'">Digite o código recebido</h1>
+  <form [ngClass]="'flex flex-col items-center justify-center gap-[50px] h-auto w-[80%] max-[1199px]:w-[90%]'" [formGroup]="form" (ngSubmit)="void onSubmit()">
+    <div [ngClass]="'relative flex items-center justify-evenly h-[60px] w-full'">
+    <div
+      [ngClass]="
+        'absolute bottom-[140px] w-[290px] left-1/2 -translate-x-1/2
+        bg-red-500/15 border border-red-500 text-red-600
+        px-4 py-2 rounded-lg text-sm font-medium
+        shadow-md backdrop-blur-sm flex items-center gap-2
+        transition-opacity duration-200 ease-out ' +
+        ((!isDigit) ? 'opacity-100' : 'opacity-0')
+      "
+    >
+      <span [ngClass]="'text-red-500 text-lg'">⚠️</span>
+      <h3>Digite apenas valores numéricos</h3>
+
+    </div>
+
+
+      @for (name of inputsName; track $index) {
+        <input #inputs [ngClass]="'h-[60px] w-[60px] max-[749px]:h-[48px] max-[749px]:w-[48px] border-2 border-solid border-white pl-[4.5%] outline-none rounded-[20px] cursor-pointer'" [maxlength]="1" [type]="'text'" [formControlName]="name" [id]="name" [name]="name"
+        (input)="void selectNextInput($index)" (keydown)="lastKey = $event.key">
+
+      }
+
+    </div>
+
+    <button
+      [ngClass]="'bg-white text-black text-[1.2em] font-medium h-[50px] w-full rounded-[20px] hover:opacity-70 active:opacity-70 disabled:opacity-50 cursor-pointer'"
+      [type]="'submit'"
+      [disabled]="form.invalid">
+        Enviar
+
+      </button>
+
+  </form>
+
+</div>
