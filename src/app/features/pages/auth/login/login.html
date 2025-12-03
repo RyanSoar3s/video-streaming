@@ -1,0 +1,103 @@
+@let XS = responsive.isXs();
+@let SM = responsive.isSm();
+@let MD = responsive.isMd();
+@let LG = responsive.isLg();
+@let XL = responsive.isXl();
+
+@let validEmail = form.controls.email.valid && form.controls.email.touched;
+@let invalidEmail = form.controls.email.invalid && form.controls.email.touched;
+
+@let validPass = form.controls.password.valid && form.controls.password.touched;
+@let invalidPass = form.controls.password.invalid && form.controls.password.touched;
+
+@if (errorMsg) {
+  <div [ngClass]="'absolute bg-[#00000085] flex items-center justify-center h-lvh w-lvw z-999'">
+    <div [ngClass]="'bg-black flex items-center h-[80px] w-auto p-2.5 border-2 border-solid border-white'">
+      <h1 [ngClass]="'font-medium'" [ngStyle]="{ 'font-size': (XS || SM) ? '1.4em' : '2.5em' }">❌ Não foi possível criar ou acessar o usuário</h1>
+
+    </div>
+
+  </div>
+
+}
+
+<div [ngClass]="'fixed inset-0'">
+  <div [ngClass]="'absolute h-full w-full bg-black opacity-35'"></div>
+  <div class="absolute flex items-center justify-center h-full
+            min-[1200px]:w-[calc(100%-500px)]
+            min-[980px]:w-[calc(100%-350px)]
+            min-[750px]:w-[calc(100%-400px)]
+            w-[calc(100%-350px)]">
+
+    <div [ngClass]="{
+      'container-logo': true,
+      'bottom-[255px]': !(XL || LG),
+      'left-[30px]': (MD),
+      'left-[55px]': (SM || XS)
+
+    }">
+      <div [ngClass]="{
+        'logo': true,
+        'bg-gradient-linear': (XL || LG),
+        'shadow-[2px_2px_3px_1px_#00000069]': (XL || LG)
+
+        }" [ngStyle]="{
+        'height': (XL || LG) ? '70px' : '50px',
+        'width': (XL || LG) ? '70px' : '50px'
+
+      }">
+        <img [ngClass]="'h-[75%] w-[75%]'" [src]="logo" [alt]="'Logo do Site'">
+
+      </div>
+
+      <h1 class="hidden show text-[2.5em] text-center font-extrabold">Acesse Todo O Nosso Catálogo</h1>
+
+    </div>
+
+  </div>
+
+</div>
+
+<section [ngClass]="'fixed inset-0 flex items-center'" [ngStyle]="{ 'justify-content': (XL || LG) ? 'flex-end' : 'center' }">
+  <div [ngClass]="'bg-black flex flex-col justify-center container-section'" [ngStyle]="{ 'border-radius': !(XL || LG) ? '20px' : '0px' }">
+    <div [ngClass]="'flex flex-col items-center justify-evenly gap-2.5 h-[500px] w-full'">
+      <h2 [ngClass]="'text-[1.5em] text-center font-medium w-[350px]'">{{ messageRequestMode[requestMode][0] }}</h2>
+
+      <div #googleBtn [ngClass]="'h-[40px]'"></div>
+
+      <form [ngClass]="'relative flex flex-col justify-around gap-5 h-[240px] w-[60%]'" [formGroup]="form" (ngSubmit)="void onSubmit()">
+        <div [ngClass]="'absolute h-[50px] w-[50px] bottom-[440px] -left-[50px]'" [ngStyle]="{ 'visibility': (XL || LG) ? 'hidden' : 'visible' }">
+          <img [ngClass]="'h-[75%] w-[75%]'" [src]="logo" [alt]="'Logo do Site'">
+
+        </div>
+
+        <label #labels [ngClass]="'label top-[22px]'" for="email">Email</label>
+        <input [ngClass]="{ 'input': true, 'valid': (validEmail), 'invalid': (invalidEmail) }" formControlName="email" id="email" autocomplete="off" (input)="void changeVisibilityLabel($event, 0)">
+
+        <div [ngClass]="'absolute right-0 cursor-pointer'" (click)="void changeVisibilityPass()">
+          <fa-icon [icon]="(passIsHidden) ? faEyeSlash : faEye"></fa-icon>
+
+        </div>
+
+        <label #labels [ngClass]="'label top-[106px]'" for="password">Senha</label>
+        <input #pass [ngClass]="{ 'input': true, 'valid': (validPass), 'invalid': (invalidPass) }" type="password" id="password" formControlName="password" autocomplete="off" (input)="void changeVisibilityLabel($event, 1)">
+
+        <div [ngClass]="'absolute text-gray-300 text-[0.9em] font-medium  bottom-[73px] underline hover:text-white cursor-pointer'" (click)="void changeRequestMode()">
+          {{ messageRequestMode[requestMode][1] }}
+
+        </div>
+
+        <button [ngClass]="'bg-white text-black font-medium h-[40px] rounded-[20px] hover:opacity-80 active:opacity-80 disabled:opacity-60 cursor-pointer'" [disabled]="form.invalid" type="submit">
+          {{ messageRequestMode[requestMode][2] }}
+
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+<router-outlet></router-outlet>
