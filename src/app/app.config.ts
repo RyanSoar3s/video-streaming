@@ -8,8 +8,10 @@ import {
 import { provideRouter } from '@angular/router';
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { routes } from './app.routes';
+import { authInterceptor } from '@core/interceptors/auth-interceptor';
 
 registerLocaleData(ptBr);
 
@@ -18,8 +20,9 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
-    { provide: LOCALE_ID, useValue: 'pt' }
+    { provide: LOCALE_ID, useValue: 'pt' },
+    provideHttpClient(withInterceptors([ authInterceptor ]))
 
   ]
-  
+
 };
