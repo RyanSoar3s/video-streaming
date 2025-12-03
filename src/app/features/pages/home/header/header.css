@@ -1,18 +1,12 @@
 @reference "tailwindcss";
 
-:host {
-  --banner-path: url(../../../../../assets/content/banners/sherlock.webp);
+:host {;
   @apply relative flex justify-end h-[650px] w-lvw top-0;
 
 }
 
-@utility bg-banner {
-  background-image: var(--banner-path);
-
-}
-
 .header {
-  @apply relative flex flex-col justify-between bg-banner bg-cover bg-top bg-no-repeat h-full p-4! inset-shadow-[0px_0px_70px_25px_#000000c9] overflow-hidden;
+  @apply relative flex flex-col justify-between bg-[image:url(../banners/sherlock.webp)] bg-cover bg-top bg-no-repeat h-full p-4! inset-shadow-[0px_0px_70px_25px_#000000c9] overflow-hidden;
 
 }
 
