@@ -90,7 +90,7 @@ export class Login implements AfterViewInit {
   private handleCredentialResponse(response: any) {
     const jwt = response.credential;
     this.isLoading = true;
-    
+
     this.request.accessGoogle(jwt).subscribe({
       next: (value) => {
         console.log(value.message);
@@ -169,6 +169,7 @@ export class Login implements AfterViewInit {
             this.errorMsg = true;
             console.error(`Error: ${error}`);
             this.form.reset();
+            this.isLoading = false;
             this.cdr.detectChanges();
 
             timer(1000).subscribe(() => {
@@ -194,6 +195,7 @@ export class Login implements AfterViewInit {
             this.errorMsg = true;
             console.error(`Error: ${error}`);
             this.form.reset();
+            this.isLoading = false;
             this.cdr.detectChanges();
 
             timer(1000).subscribe(() => {
