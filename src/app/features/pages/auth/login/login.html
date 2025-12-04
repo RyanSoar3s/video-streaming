@@ -10,6 +10,11 @@
 @let validPass = form.controls.password.valid && form.controls.password.touched;
 @let invalidPass = form.controls.password.invalid && form.controls.password.touched;
 
+@if (isLoading) {
+  <app-loading></app-loading>
+
+}
+
 @if (errorMsg) {
   <div [ngClass]="'absolute bg-[#00000085] flex items-center justify-center h-lvh w-lvw z-999'">
     <div [ngClass]="'bg-black flex items-center h-[80px] w-auto p-2.5 border-2 border-solid border-white'">

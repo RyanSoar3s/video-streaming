@@ -1,0 +1,11 @@
+@let circles = [ "circle-1", "circle-2", "circle-3" ];
+
+<div [ngClass]="'absolute h-full w-full bg-[#00000082]'"></div>
+
+<div [ngClass]="'relative flex gap-[15px] h-[30px] w-auto z-[910]'">
+  @for (circle of circles; track $index) {
+    <div [ngClass]="'animation-loading circle ' + circle"></div>
+
+  }
+
+</div>

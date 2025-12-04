@@ -17,6 +17,7 @@ import { RequestApi } from '@core/services/request-api';
 import { Router, RouterOutlet } from '@angular/router';
 import { timer } from 'rxjs';
 import { PendingVerification } from '@core/services/pending-verification';
+import { Loading } from '@features/shared/loading/loading';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ import { PendingVerification } from '@core/services/pending-verification';
     CommonModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    RouterOutlet
+    RouterOutlet,
+    Loading
 
 ],
   templateUrl: './login.html',
@@ -59,6 +61,7 @@ export class Login implements AfterViewInit {
   protected passIsHidden = true;
 
   protected errorMsg = false;
+  protected isLoading = false;
 
   private labels = viewChildren<ElementRef<HTMLElement>>("labels");
   private googleBtn = viewChild<ElementRef<HTMLElement>>("googleBtn");
@@ -86,6 +89,7 @@ export class Login implements AfterViewInit {
 
   private handleCredentialResponse(response: any) {
     const jwt = response.credential;
+    this.isLoading = true;
 
     this.request.accessGoogle(jwt).subscribe({
       next: (value) => {
@@ -148,8 +152,10 @@ export class Login implements AfterViewInit {
   }
 
   onSubmit() {
-    if (this.form.valid) { //adicionar tela de carregamento
+    if (this.form.valid) {
       const data = this.form.value as { email: string, password: string };
+      this.isLoading = true;
+
       if (this.requestMode === "signup") {
         this.request.register(data).subscribe({
           next: (value) => {
@@ -163,6 +169,7 @@ export class Login implements AfterViewInit {
             this.errorMsg = true;
             console.error(`Error: ${error}`);
             this.form.reset();
+            this.isLoading = false;
             this.cdr.detectChanges();
 
             timer(1000).subscribe(() => {
@@ -188,6 +195,7 @@ export class Login implements AfterViewInit {
             this.errorMsg = true;
             console.error(`Error: ${error}`);
             this.form.reset();
+            this.isLoading = false;
             this.cdr.detectChanges();
 
             timer(1000).subscribe(() => {
