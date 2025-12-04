@@ -5,6 +5,7 @@ import { environment } from '@environments/environment';
 import { Observable, throwError, tap } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HandleToken } from './handle-token';
+import { responseError } from '@core/models/responseError.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class RequestApi {
 
     ).pipe(
       tap((res) => this.handleToken.setToken(res.token!)),
-      catchError((error) => this.handleError(error))
+      catchError((error: responseError) => this.handleError(error))
 
     );
 
@@ -37,7 +38,7 @@ export class RequestApi {
 
     )
     .pipe(
-      catchError((error) => this.handleError(error))
+      catchError((error: responseError) => this.handleError(error))
 
     );
 
@@ -50,7 +51,7 @@ export class RequestApi {
       { withCredentials: true }
 
     ).pipe(
-      catchError((error) => this.handleError(error))
+      catchError((error: responseError) => this.handleError(error))
 
     );
 
@@ -64,7 +65,7 @@ export class RequestApi {
 
     ).pipe(
       tap((res) => this.handleToken.setToken(res.token!)),
-      catchError((error) => this.handleError(error))
+      catchError((error: responseError) => this.handleError(error))
 
     );
 
@@ -84,8 +85,8 @@ export class RequestApi {
 
   }
 
-  private handleError(error: { message: string }): Observable<never> {
-    return throwError(() => error.message);
+  private handleError(error: responseError): Observable<never> {
+    return throwError(() => error);
 
   }
 
