@@ -5,13 +5,15 @@ import { Router } from '@angular/router';
 import { PendingVerification } from '@core/services/pending-verification';
 import { RequestApi } from '@core/services/request-api';
 import { Responsive } from '@core/services/responsive';
+import { Loading } from '@features/shared/loading/loading';
 import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-verify-code',
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Loading
 
   ],
   templateUrl: './verify-code.html',
@@ -27,6 +29,7 @@ export class VerifyCode implements AfterViewInit {
   protected responsive = inject(Responsive);
 
   protected errorMsg = false;
+  protected isLoading = false;
 
   protected form = this.fb.nonNullable.group({
     d1: [ "", [ Validators.required, Validators.maxLength(1), Validators.pattern(/\d{1}/) ] ],
@@ -81,6 +84,7 @@ export class VerifyCode implements AfterViewInit {
     if (this.form.valid) {
       const values = Object.values(this.form.value);
       const email = this.pendingVerification.getEmail();
+      this.isLoading = true;
 
       this.requestApi.verify(email, values.join("")).subscribe({
         next: (value) => {

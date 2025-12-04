@@ -5,13 +5,12 @@ import { HandleToken } from '@core/services/handle-token';
 import { RequestApi } from '@core/services/request-api';
 import { catchError, switchMap, throwError } from 'rxjs';
 
-export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => { console.log("Interceptado")
+export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
   const handleToken = inject(HandleToken);
   const requestApi = inject(RequestApi);
   const router = inject(Router);
 
   const token = handleToken.getToken();
-  console.log(`Token: ${token}`)
 
   let authReq = req;
 

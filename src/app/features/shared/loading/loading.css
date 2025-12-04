@@ -1,0 +1,65 @@
+@reference "tailwindcss";
+
+@theme {
+  @keyframes loading {
+    50% {
+      transform: translateY(-20px);
+
+    }
+
+  }
+
+}
+
+@utility loading {
+  animation: loading ease infinite;
+
+}
+
+@utility time-1 {
+  animation-duration: 0.8s;
+
+}
+
+@utility time-2 {
+  animation-duration: 0.8s;
+  animation-delay: 0.12s;
+
+}
+
+@utility time-3 {
+  animation-duration: 0.8s;
+  animation-delay: 0.22s;
+
+}
+
+
+:host {
+  @apply absolute flex items-center justify-center h-lvh w-lvw z-900;
+
+}
+
+.circle {
+  @apply bg-linear-[-90deg,#320709,#a7181b] shadow-[1px_1px_1px_1px_#00000054] h-[30px] w-[30px] rounded-full;
+
+}
+
+.animation-loading {
+  @apply loading;
+
+}
+
+.circle-1 {
+  @apply time-1;
+
+}
+
+.circle-2 {
+  @apply time-2;
+
+}
+
+.circle-3 {
+  @apply time-3;
+
+}
