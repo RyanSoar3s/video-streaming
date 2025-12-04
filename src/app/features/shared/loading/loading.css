@@ -12,23 +12,21 @@
 }
 
 @utility loading {
-  animation: loading ease infinite;
+  animation: loading 0.8s ease infinite;
 
 }
 
-@utility time-1 {
-  animation-duration: 0.8s;
+@utility delay-1 {
+  animation-delay: 0s;
 
 }
 
-@utility time-2 {
-  animation-duration: 0.8s;
+@utility delay-2 {
   animation-delay: 0.12s;
 
 }
 
-@utility time-3 {
-  animation-duration: 0.8s;
+@utility delay-3 {
   animation-delay: 0.22s;
 
 }
@@ -50,16 +48,16 @@
 }
 
 .circle-1 {
-  @apply time-1;
+  @apply delay-1;
 
 }
 
 .circle-2 {
-  @apply time-2;
+  @apply delay-2;
 
 }
 
 .circle-3 {
-  @apply time-3;
+  @apply delay-3;
 
 }
