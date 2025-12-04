@@ -39,14 +39,22 @@ const authController = {
   },
   verify: async (req, res) => {
     const { email, code } = req.body
+    let isValidToken = true
 
     try {
-      await userService.verify(email, String(code))
+      const isError = await userService.verify(email, String(code))
+
+      if (typeof isError === "function") {
+        isValidToken = false
+        throw isError()
+
+      }
+
       res.json({ message: "Email verificado com sucesso" })
 
     }
     catch (error) {
-      res.status(400).json({ message: error.message })
+      res.status(400).json({ message: error.message, isValidToken })
 
     }
 
