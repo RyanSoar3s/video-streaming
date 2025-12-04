@@ -95,6 +95,8 @@ const userService = {
 
     if (!userBD) throw new Error("Usuário não existe")
 
+    if (!userBD.verified) throw new Error("Usuário não verificado")
+
     const hash = userBD.hashPass
 
     const passIsValid = await comparePassword(pass, hash)
