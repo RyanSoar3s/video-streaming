@@ -73,9 +73,9 @@ const userService = {
   verify: async (email, code) => {
     const userBD = await user.findOne({ email })
 
-    if (!userBD) throw new Error("Usuário não encontrado")
+    if (!userBD) return () => new Error("Usuário não encontrado")
 
-    if (userBD.expiresAt < Date.now()) throw new Error("Código expirado")
+    if (userBD.expiresAt < Date.now()) return () => new Error("Código expirado")
 
     if (userBD.verificationCode !== code) throw new Error("Código está incorreto")
 

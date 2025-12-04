@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, inject, viewChildren } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { responseError } from '@core/models/responseError.model';
 import { PendingVerification } from '@core/services/pending-verification';
 import { RequestApi } from '@core/services/request-api';
 import { Responsive } from '@core/services/responsive';
@@ -93,10 +94,19 @@ export class VerifyCode implements AfterViewInit {
           this.router.navigate([ "/" ]);
 
         },
-        error: (error) => {
+        error: (error: responseError) => {
           this.errorMsg = true;
-          console.error(`Error: ${error}`);
+          console.error(`Error: ${error.error.message}`);
+
+          if (!error.error.isValidToken) {
+            this.pendingVerification.clear();
+            this.router.navigate([ "/" ]);
+            return;
+
+          }
+
           this.form.reset();
+          this.isLoading = false;
           this.cdr.detectChanges();
 
           timer(1000).subscribe(() => {
