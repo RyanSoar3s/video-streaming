@@ -4,6 +4,7 @@ import { loginGuard } from '@core/guards/login-guard';
 import { verifyGuard } from '@core/guards/verify-guard';
 import { Login } from '@features/pages/auth/login/login';
 import { VerifyCode } from '@features/pages/auth/verify-code/verify-code';
+import { Profile } from '@features/pages/home/profile/profile';
 
 export const routes: Routes = [
   {
@@ -21,7 +22,15 @@ export const routes: Routes = [
   {
     path: "home",
     canActivate: [ authGuard ],
-    loadComponent: () => import("@features/pages/home/home").then(m => m.Home)
+    loadComponent: () => import("@features/pages/home/home").then(m => m.Home),
+    children: [
+      {
+        path: "profile",
+        component: Profile
+
+      }
+
+    ]
 
   }
 
