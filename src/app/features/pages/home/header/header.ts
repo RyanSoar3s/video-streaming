@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { Responsive } from '@core/services/responsive';
 
 @Component({
   selector: 'app-header',
   imports: [
-    CommonModule
+    CommonModule,
+    RouterOutlet,
+    RouterLink
 
   ],
   templateUrl: './header.html',
