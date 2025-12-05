@@ -6,8 +6,35 @@ import user from "../db/user.js"
 import createUser from "../db/createUser.js"
 import { OAuth2Client } from "google-auth-library"
 import jwt from "jsonwebtoken"
+import generateUsername from "../utils/generateUsername.js"
 
 const userService = {
+  profile: async (token) => {
+    if (!token) throw new Error("Refresh token está ausente")
+
+    let payload
+
+    try {
+      payload = jwt.verify(token, process.env.REFRESH_SECRET)
+
+    } catch (_) {
+      throw new Error("Refresh token inválido")
+
+    }
+    const userDB = await user.findById(payload.id)
+
+    if (!userDB) throw new Error("Usuário não encontrado")
+
+    const username = userDB.username
+    const email = userDB.email
+
+    return {
+      username,
+      email
+
+    }
+
+  },
   accessGoogle: async (token) => {
     if (!token) throw new Error("Token é obrigatório")
 
@@ -24,23 +51,31 @@ const userService = {
 
     if (!email) throw new Error("Token inválido")
 
-    const userBD = await user.findOne({ email })
+    let userDB = await user.findOne({ email })
 
-    const accessToken = generateAccessToken(email)
-    const refreshToken = generateRefreshToken(email)
+    if (!userDB) {
+      const username = generateUsername()
 
-    if (!userBD) {
-      createUser({
+      userDB = await createUser({
+        username,
         email,
         hashPass: null,
         verificationCode: null,
         expiresAt: null,
         verified: true,
-        refreshTokens: [ { token: refreshToken } ]
+        refreshTokens: []
 
       })
 
     }
+
+    const userId = userDB._id.toString()
+
+    const accessToken = generateAccessToken(userId)
+    const refreshToken = generateRefreshToken(userId)
+
+    userDB.refreshTokens.push({ token: refreshToken })
+    await userDB.save();
 
     return {
       accessToken,
@@ -49,6 +84,7 @@ const userService = {
     }
 
   },
+
   register: async (email, password) => {
       const exist = await user.findOne({ email })
 
@@ -59,7 +95,10 @@ const userService = {
 
       await sendVerificationEmail(email, code.code)
 
+      const username = generateUsername()
+
       createUser({
+        username,
         email,
         hashPass: hash,
         verificationCode: code.code,
@@ -67,17 +106,18 @@ const userService = {
         verified: false
 
       })
+
       return true
 
   },
   verify: async (email, code) => {
-    const userBD = await user.findOne({ email })
+    const userDB = await user.findOne({ email })
 
-    if (!userBD) return () => new Error("Usuário não encontrado")
+    if (!userDB) return () => new Error("Usuário não encontrado")
 
-    if (userBD.expiresAt < Date.now()) return () => new Error("Código expirado")
+    if (userDB.expiresAt < Date.now()) return () => new Error("Código expirado")
 
-    if (userBD.verificationCode !== code) throw new Error("Código está incorreto")
+    if (userDB.verificationCode !== code) throw new Error("Código está incorreto")
 
     await user.updateOne(
       { email },
@@ -91,23 +131,24 @@ const userService = {
 
   },
   login: async (email, pass) => {
-    const userBD = await user.findOne({ email })
+    const userDB = await user.findOne({ email })
 
-    if (!userBD) throw new Error("Usuário não existe")
+    if (!userDB) throw new Error("Usuário não existe")
 
-    if (!userBD.verified) throw new Error("Usuário não verificado")
+    if (!userDB.verified) throw new Error("Usuário não verificado")
 
-    const hash = userBD.hashPass
+    const hash = userDB.hashPass
 
     const passIsValid = await comparePassword(pass, hash)
 
     if (!passIsValid) throw new Error("Senha inválida")
 
-    const accessToken = generateAccessToken(email)
-    const refreshToken = generateRefreshToken(email)
+    const userId = userDB._id.toString()
+    const accessToken = generateAccessToken(userId)
+    const refreshToken = generateRefreshToken(userId)
 
-    userBD.refreshTokens.push({ token: refreshToken })
-    await userBD.save()
+    userDB.refreshTokens.push({ token: refreshToken })
+    await userDB.save()
 
     return {
       accessToken,
@@ -119,51 +160,125 @@ const userService = {
   refresh: async (token) => {
     if (!token) throw new Error("Refresh token está ausente")
 
-    const newAccessToken = jwt.verify(token, process.env.REFRESH_SECRET, async (error, payload) => {
-      if (error) throw new Error("Refresh token inválido")
+    let payload
 
-      const userBD = await user.findById(payload.id)
+    try {
+      payload = jwt.verify(token, process.env.REFRESH_SECRET)
 
-      if (!userBD) throw new Error("Usuário não encontrado")
+    } catch (_) {
+      throw new Error("Refresh token inválido")
 
-      const found = userBD.refreshTokens.find((t) => t.token === token)
+    }
 
-      if (!found) throw new Error("Refresh token revogado")
+    const userDB = await user.findById(payload.id);
 
-      const newAccessToken = generateAccessToken(userBD.email)
-      const newRefreshToken = generateRefreshToken(userBD.email)
+    if (!userDB) throw new Error("Usuário não encontrado");
 
-      userBD.refreshTokens = userBD.refreshTokens.filter((t) => t.token !== token)
-      userBD.refreshTokens.push(newRefreshToken)
-      await user.save()
+    const found = userDB.refreshTokens.find((t) => t.token === token)
+    if (!found) throw new Error("Refresh token revogado")
 
-      return newAccessToken
+    const newAccessToken = generateAccessToken(userDB._id.toString())
+    const newRefreshToken = generateRefreshToken(userDB._id.toString())
 
-    })
+    userDB.refreshTokens = userDB.refreshTokens.filter((t) => t.token !== token)
+    userDB.refreshTokens.push({ token: newRefreshToken })
 
-    return newAccessToken
+    await userDB.save();
+
+    return {
+      accessToken: newAccessToken,
+      refreshToken: newRefreshToken
+
+    }
 
   },
-
-  logout: (token) => {
+  logout: async (token) => {
     if (!token) throw new Error("Refresh token está ausente")
 
-    jwt.verify(token, process.env.REFRESH_SECRET, async (error, payload) => {
-      if (error) throw new Error("Refresh token inválido")
+    let payload
 
-      const userBD = await user.findById(payload.id)
+    try {
+      payload = jwt.verify(token, process.env.REFRESH_SECRET)
 
-      if (!userBD) throw new Error("Usuário não encontrado")
+    } catch (_) {
+      throw new Error("Refresh token inválido")
 
-      const found = userBD.refreshTokens.find((t) => t.token === token)
+    }
 
-      if (!found) throw new Error("Refresh token revogado")
+    const userDB = await user.findById(payload.id)
 
-      userBD.refreshTokens = userBD.refreshTokens.filter((t) => t.token !== token)
+    if (!userDB) throw new Error("Usuário não encontrado")
 
-      await user.save()
+    const found = userDB.refreshTokens.find((t) => t.token === token)
+    if (!found) throw new Error("Refresh token revogado")
 
-    })
+    userDB.refreshTokens = userDB.refreshTokens.filter((t) => t.token !== token)
+
+    await userDB.save()
+
+    return true
+
+  },
+  changeEmail: async (email, newEmail) => {
+    const userDB = await user.findOne({ email })
+
+    if (!userDB) throw new Error("Usuário não encontrado")
+
+    userDB.email = newEmail
+    await userDB.save()
+
+    return true
+
+  },
+  changePassword: async (token, password, newPassword) => {
+    if (!token) throw new Error("Refresh token está ausente")
+
+    let payload
+
+    try {
+      payload = jwt.verify(token, process.env.REFRESH_SECRET)
+
+    } catch (_) {
+      throw new Error("Refresh token inválido")
+
+    }
+
+    const userDB = await user.findById(payload.id)
+
+    if (!userDB) throw new Error("Usuário não encontrado")
+
+    const hash = userDB.hashPass
+
+    const passIsValid = await comparePassword(password, hash)
+
+    if (!passIsValid) throw new Error("Senha incorreta")
+
+    const newPass = hashPassword(newPassword)
+
+    userDB.hashPass = newPass
+    await userDB.save()
+
+    return true
+
+  },
+  delete: async (token) => {
+    if (!token) throw new Error("Refresh token está ausente")
+
+    let payload
+
+    try {
+      payload = jwt.verify(token, process.env.REFRESH_SECRET)
+
+    } catch (_) {
+      throw new Error("Refresh token inválido")
+
+    }
+
+    const result = await user.deleteOne({ _id: payload.id })
+
+    if (result.deletedCount === 0) throw new Error("Usuário não encontrado")
+
+    return true
 
   }
 

@@ -1,6 +1,20 @@
 import userService from "../services/userService.js";
 
 const authController = {
+  profile: async (req, res) => {
+    const token = req.cookies.refresh_token
+
+    try {
+      const data = await userService.profile(token)
+
+      return res.json({ message: "Dados acessados com sucesso", data })
+
+    } catch (error) {
+      res.status(400).json({ message: error.message })
+
+    }
+
+  },
   accessGoogle: async (req, res) => {
     const { token } = req.body
 
@@ -42,11 +56,11 @@ const authController = {
     let isValidToken = true
 
     try {
-      const isError = await userService.verify(email, String(code))
+      const error = await userService.verify(email, String(code))
 
-      if (typeof isError === "function") {
+      if (typeof error === "function") {
         isValidToken = false
-        throw isError()
+        throw error()
 
       }
 
@@ -96,12 +110,58 @@ const authController = {
     }
 
   },
-  logout: (req, res) => {
+  logout: async (req, res) => {
+    const token = req.cookies.refresh_token
+
     try {
-      const token = req.cookies.refresh_token
-      userService.logout(token)
+      await userService.logout(token)
       res.clearCookie("refresh_token"),
       res.json({ message: "Logout concluído" })
+
+    } catch (error) {
+      res.status(400).json({ message: error.message })
+
+    }
+
+  },
+  changeEmail: async (req, res) => {
+    const { email, newEmail } = req.body
+
+    try {
+      await userService.changeEmail(email, newEmail)
+
+      res.json({ message: "Email alterado com sucesso" })
+
+    } catch (error) {
+      res.status(400).json({ message: error.message })
+
+    }
+
+  },
+  changePassword: async (req, res) => {
+    const token = req.cookies.refresh_token
+    const { password, newPassword } = req.body
+
+    try {
+      await userService.changePassword(token, password, newPassword)
+
+      res.json({ message: "Senha alterada com sucesso" })
+
+    } catch (error) {
+      res.status(400).json({ message: error.message })
+
+    }
+
+  },
+  delete: async (req, res) => {
+    const token = req.cookies.refresh_token
+
+    try {
+      await userService.delete(token)
+
+      res.clearCookie("refresh_token", { httpOnly: true, sameSite: "strict", secure: true })
+
+      res.json({ message: "Conta deletada com sucesso" })
 
     } catch (error) {
       res.status(400).json({ message: error.message })
