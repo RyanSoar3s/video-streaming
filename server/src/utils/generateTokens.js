@@ -11,9 +11,9 @@ if (!ACCESS_SECRET || !REFRESH_SECRET) throw new Error("ACCESS_SECRET or REFRESH
 const ACCESS_TIME = "15m";
 const REFRESH_TIME = "7d";
 
-const generateAccessToken = (email) => jwt.sign({ email }, ACCESS_SECRET, { expiresIn: ACCESS_TIME })
+const generateAccessToken = (id) => jwt.sign({ id }, ACCESS_SECRET, { expiresIn: ACCESS_TIME })
 
-const generateRefreshToken = (email) => jwt.sign({ email }, REFRESH_SECRET, { expiresIn: REFRESH_TIME })
+const generateRefreshToken = (id) => jwt.sign({ id }, REFRESH_SECRET, { expiresIn: REFRESH_TIME })
 
 export {
   generateAccessToken,
