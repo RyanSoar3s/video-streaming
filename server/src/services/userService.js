@@ -219,17 +219,6 @@ const userService = {
     return true
 
   },
-  changeEmail: async (email, newEmail) => {
-    const userDB = await user.findOne({ email })
-
-    if (!userDB) throw new Error("Usuário não encontrado")
-
-    userDB.email = newEmail
-    await userDB.save()
-
-    return true
-
-  },
   changePassword: async (token, password, newPassword) => {
     if (!token) throw new Error("Refresh token está ausente")
 

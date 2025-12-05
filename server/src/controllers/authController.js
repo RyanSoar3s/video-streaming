@@ -124,20 +124,6 @@ const authController = {
     }
 
   },
-  changeEmail: async (req, res) => {
-    const { email, newEmail } = req.body
-
-    try {
-      await userService.changeEmail(email, newEmail)
-
-      res.json({ message: "Email alterado com sucesso" })
-
-    } catch (error) {
-      res.status(400).json({ message: error.message })
-
-    }
-
-  },
   changePassword: async (req, res) => {
     const token = req.cookies.refresh_token
     const { password, newPassword } = req.body
