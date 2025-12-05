@@ -1,0 +1,11 @@
+@reference "tailwindcss";
+
+:host {
+  @apply absolute text-white flex justify-end pt-[15px] pr-[15px] w-lvw h-[500px] z-100;
+
+}
+
+.button {
+  @apply font-medium rounded-[20px] cursor-pointer hover:opacity-85 active:opacity-85;
+
+}

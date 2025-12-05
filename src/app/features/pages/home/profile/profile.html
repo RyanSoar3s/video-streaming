@@ -1,0 +1,35 @@
+<section [ngClass]="'relative bg-[#1a1a1a] flex flex-col items-center justify-center h-full w-[350px] rounded-2xl'">
+  <div [ngClass]="'absolute h-[40px] w-[40px] top-0 right-0 mt-2.5 mr-4 text-[2em] cursor-pointer'">
+    <fa-icon [icon]="faXmark"></fa-icon>
+    <a [ngClass]="'absolute block h-full w-full top-0'" routerLink="/home"></a>
+
+  </div>
+  <div [ngClass]="'flex flex-col items-center justify-evenly h-[450px] w-full'">
+    <div [ngClass]="'h-[130px] w-[130px]'">
+      <img [ngClass]="'h-full w-full'" [src]="pathImg" [alt]="'foto de perfil'">
+
+    </div>
+
+    <div [ngClass]="'flex flex-col gap-2.5 w-[225px]'">
+      @for (info of infos; track $index) {
+        <div [ngClass]="'flex justify-between w-full'">
+          <p [ngClass]="'text-[1.1em] font-medium'">{{ info[0] }}: {{ info[1] }}</p>
+          <fa-icon [ngClass]="'cursor-pointer'" [icon]="faPenToSquare"></fa-icon>
+
+        </div>
+
+      }
+
+    </div>
+
+    <div [ngClass]="'flex justify-between h-[40px] w-[240px]'">
+      <button [ngClass]="'button bg-[#363636] w-[65px]'">Sair</button>
+      <button [ngClass]="'button bg-red-600 w-[125px]'">Deletar conta</button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<router-outlet></router-outlet>
