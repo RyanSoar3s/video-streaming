@@ -18,6 +18,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { timer } from 'rxjs';
 import { PendingVerification } from '@core/services/pending-verification';
 import { Loading } from '@features/shared/loading/loading';
+import { responseError } from '@core/models/responseError.model';
 
 @Component({
   selector: 'app-login',
@@ -165,9 +166,9 @@ export class Login implements AfterViewInit {
             this.router.navigate([ "/verify-code" ]);
 
           },
-          error: (error) => {
+          error: (error: responseError) => {
             this.errorMsg = true;
-            console.error(`Error: ${error}`);
+            console.error(`Error: ${error.error.message}`);
             this.form.reset();
             this.isLoading = false;
             this.cdr.detectChanges();
@@ -191,9 +192,9 @@ export class Login implements AfterViewInit {
             this.router.navigate([ "/home" ]);
 
           },
-          error: (error) => {
+          error: (error: responseError) => {
             this.errorMsg = true;
-            console.error(`Error: ${error}`);
+            console.error(`Error: ${error.error.message}`);
             this.form.reset();
             this.isLoading = false;
             this.cdr.detectChanges();
