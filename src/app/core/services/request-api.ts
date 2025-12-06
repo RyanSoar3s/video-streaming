@@ -44,10 +44,10 @@ export class RequestApi {
 
   }
 
-  verify(email: string, code: string): Observable<Response> {
+  verify(code: string): Observable<Response> {
     return this.http.post<Response>(
       `${this.apiUrl}/verify`,
-      { email, code },
+      { code },
       { withCredentials: true }
 
     ).pipe(
