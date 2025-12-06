@@ -16,6 +16,15 @@ export class RequestApi {
 
   private apiUrl = environment.apiUrl;
 
+  profile(): Observable<Response> {
+    return this.http.get<Response>(`${this.apiUrl}/profile`)
+              .pipe(
+                catchError((error: responseError) => this.handleError(error))
+
+              );
+
+  }
+
   accessGoogle(token: string): Observable<Response> {
     return this.http.post<Response>(
       `${this.apiUrl}/google`,
@@ -44,10 +53,10 @@ export class RequestApi {
 
   }
 
-  verify(email: string, code: string): Observable<Response> {
+  verify(code: string): Observable<Response> {
     return this.http.post<Response>(
       `${this.apiUrl}/verify`,
-      { email, code },
+      { code },
       { withCredentials: true }
 
     ).pipe(
@@ -79,9 +88,45 @@ export class RequestApi {
 
     ).pipe(
       tap((res) => this.handleToken.setToken(res.token!)),
-      catchError((error) => this.handleError(error))
+      catchError((error: responseError) => this.handleError(error))
 
     );
+
+  }
+
+  logout(): Observable<Response> {
+    return this.http.post<Response>(`${this.apiUrl}/logout`, {})
+                      .pipe(
+                        catchError((error: responseError) => this.handleError(error))
+
+                      );
+
+  }
+
+  changeUsername(data: { newUsername: string }): Observable<Response> {
+    return this.http.put<Response>(`${this.apiUrl}/change-username`, data)
+                      .pipe(
+                        catchError((error: responseError) => this.handleError(error))
+
+                      );
+
+  }
+
+  changePassword(data: { password: string, newPassword: string }): Observable<Response> {
+    return this.http.put<Response>(`${this.apiUrl}/change-password`, data)
+                      .pipe(
+                        catchError((error: responseError) => this.handleError(error))
+
+                      );
+
+  }
+
+  delete(): Observable<Response> {
+    return this.http.delete<Response>(`${this.apiUrl}/delete`)
+                      .pipe(
+                        catchError((error: responseError) => this.handleError(error))
+
+                      );
 
   }
 
