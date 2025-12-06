@@ -52,11 +52,12 @@ const authController = {
 
   },
   verify: async (req, res) => {
-    const { email, code } = req.body
+    const token = req.cookies.refresh_token
+    const { code } = req.body
     let isValidToken = true
 
     try {
-      const error = await userService.verify(email, String(code))
+      const error = await userService.verify(token, String(code))
 
       if (typeof error === "function") {
         isValidToken = false
@@ -117,6 +118,21 @@ const authController = {
       await userService.logout(token)
       res.clearCookie("refresh_token"),
       res.json({ message: "Logout concluído" })
+
+    } catch (error) {
+      res.status(400).json({ message: error.message })
+
+    }
+
+  },
+  changeUsername: async (req, res) => {
+    const token = req.cookies.refresh_token
+    const { newUsername } = req.body
+
+    try {
+      await userService.changeUsername(token, newUsername)
+
+      res.json({ message: "Usuário alterada com sucesso" })
 
     } catch (error) {
       res.status(400).json({ message: error.message })

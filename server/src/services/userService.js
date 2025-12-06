@@ -110,15 +110,27 @@ const userService = {
       return true
 
   },
-  verify: async (email, code) => {
-    const userDB = await user.findOne({ email })
+  verify: async (token, code) => {
+    if (!token) throw new Error("Refresh token está ausente")
 
-    if (!userDB) return () => new Error("Usuário não encontrado")
+    let payload
+
+    try {
+      payload = jwt.verify(token, process.env.REFRESH_SECRET)
+
+    } catch (_) {
+      throw new Error("Refresh token inválido")
+
+    }
+    const userDB = await user.findById(payload.id)
+
+    if (!userDB) throw new Error("Usuário não encontrado")
 
     if (userDB.expiresAt < Date.now()) return () => new Error("Código expirado")
 
     if (userDB.verificationCode !== code) throw new Error("Código está incorreto")
 
+    const email = userDB.email
     await user.updateOne(
       { email },
       {
@@ -170,9 +182,9 @@ const userService = {
 
     }
 
-    const userDB = await user.findById(payload.id);
+    const userDB = await user.findById(payload.id)
 
-    if (!userDB) throw new Error("Usuário não encontrado");
+    if (!userDB) throw new Error("Usuário não encontrado")
 
     const found = userDB.refreshTokens.find((t) => t.token === token)
     if (!found) throw new Error("Refresh token revogado")
@@ -215,6 +227,29 @@ const userService = {
     userDB.refreshTokens = userDB.refreshTokens.filter((t) => t.token !== token)
 
     await userDB.save()
+
+    return true
+
+  },
+  changeUsername: async (token, newUsername) => {
+    if (!token) throw new Error("Refresh token está ausente")
+
+    let payload
+
+    try {
+      payload = jwt.verify(token, process.env.REFRESH_SECRET)
+
+    } catch (_) {
+      throw new Error("Refresh token inválido")
+
+    }
+
+    const userDB = await user.findById(payload.id)
+
+    if (!userDB) throw new Error("Usuário não encontrado")
+
+    userDB.username = newUsername
+    await userDB.save();
 
     return true
 
