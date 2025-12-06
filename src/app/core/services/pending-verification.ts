@@ -5,18 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class PendingVerification {
   private STORAGE_FLAG = "pending_verification";
-  private STORAGE_EMAIL = "pending_verification_email";
-
-  setEmail(email: string): void {
-    localStorage.setItem(this.STORAGE_EMAIL, email);
-    
-  }
-
-  getEmail(): string {
-    return localStorage.getItem(this.STORAGE_EMAIL) ?? "";
-
-  }
-
   setPendingVerification(value: boolean): void {
     localStorage.setItem(this.STORAGE_FLAG, (value) ? "true" : "false");
 
@@ -29,7 +17,6 @@ export class PendingVerification {
 
   clear(): void {
     localStorage.removeItem(this.STORAGE_FLAG);
-    localStorage.removeItem(this.STORAGE_EMAIL);
 
   }
 
