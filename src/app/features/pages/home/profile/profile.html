@@ -1,3 +1,43 @@
+@let XS = responsive.isXs();
+@let SM = responsive.isSm();
+
+@let isChangeUsername = infos[0][2].edit;
+@let isChangePassword = infos[1][2].edit;
+
+@if (isError) {
+  <div [ngClass]="'fixed top-0 bg-[#00000085] flex items-center justify-center h-lvh w-lvw overflow-hidden z-999'">
+    <div [ngClass]="'bg-black flex items-center h-[80px] w-auto p-2.5 border-2 border-solid border-white'">
+      <h1 [ngClass]="'font-medium'" [ngStyle]="{ 'font-size': (XS || SM) ? '1.4em' : '2.5em' }">❌ Ocorreu um erro</h1>
+
+    </div>
+
+  </div>
+
+}
+
+@if (isChange) {
+  <div [ngClass]="'fixed top-0 bg-[#00000085] flex items-center justify-center h-lvh w-lvw overflow-hidden z-999'">
+    <div [ngClass]="'bg-black flex items-center h-[80px] w-auto p-2.5 border-2 border-solid border-white'">
+      <h1 [ngClass]="'font-medium'" [ngStyle]="{ 'font-size': (XS || SM) ? '1.4em' : '2.5em' }">✅ Alteração feita com sucesso</h1>
+
+    </div>
+
+  </div>
+
+}
+
+@if (isWarning) {
+  <div [ngClass]="'fixed top-0 bg-[#00000085] flex items-center justify-center h-lvh w-lvw overflow-hidden z-999'">
+    <div [ngClass]="'bg-black flex flex-col items-center gap-10 h-auto w-auto p-4 border-2 border-solid border-white'">
+      <h1 [ngClass]="'font-medium'" [ngStyle]="{ 'font-size': (XS || SM) ? '1.4em' : '2.5em' }">⚠️ Deseja deletar sua conta?</h1>
+      <button [ngClass]="'button h-[40px]  w-[150px] bg-red-600'" (click)="void onSubmitDelete()">Deletar conta</button>
+
+    </div>
+
+  </div>
+
+}
+
 <section [ngClass]="'relative bg-[#1a1a1a] flex flex-col items-center justify-center h-full w-[350px] rounded-2xl'">
   <div [ngClass]="'absolute h-[40px] w-[40px] top-0 right-0 mt-2.5 mr-4 text-[2em] cursor-pointer'">
     <fa-icon [icon]="faXmark"></fa-icon>
@@ -10,21 +50,57 @@
 
     </div>
 
-    <div [ngClass]="'flex flex-col gap-2.5 w-[225px]'">
-      @for (info of infos; track $index) {
+    <div [ngClass]="'flex flex-col gap-2.5 h-auto w-[225px]'">
+
+      @if (!isChangeUsername && !isChangePassword) {
         <div [ngClass]="'flex justify-between w-full'">
-          <p [ngClass]="'text-[1.1em] font-medium'">{{ info[0] }}: {{ info[1] }}</p>
-          <fa-icon [ngClass]="'cursor-pointer'" [icon]="faPenToSquare"></fa-icon>
+        <p [ngClass]="'text-[1.1em] font-medium'">email: {{ email }}</p>
 
         </div>
+        @for (info of infos; track $index) {
+          <div [ngClass]="'flex justify-between w-full'">
+            <p [ngClass]="'text-[1.1em] font-medium'">{{ info[0] }}: {{ info[1] }}</p>
+            <fa-icon [ngClass]="'cursor-pointer'" [icon]="faPenToSquare" (click)="void showForm($index, info)"></fa-icon>
+
+          </div>
+
+        }
 
       }
+      @else if (isChangeUsername) {
+        <form [ngClass]="'form'" [formGroup]="formUsername" (ngSubmit)="void onSubmitChangeUsername()">
+          <input [ngClass]="'input'" [placeholder]="'Nome'" formControlName="username" type="text" name="username" id="username" autocomplete="off">
+          <button [ngClass]="'button-submit mt-[18px]'" type="submit" [disabled]="formUsername.invalid">mudar</button>
+
+        </form>
+
+      }
+
+      @else {
+        <form [ngClass]="'form gap-[15px]'" [formGroup]="formPassword" (ngSubmit)="void onSubmitChangePassword()">
+          <input [ngClass]="'input'" [placeholder]="'Senha antiga'" formControlName="password" type="text" name="password" id="password" placeholder="senha antiga" autocomplete="off">
+          <input [ngClass]="'input'" [placeholder]="'Nova senha'" formControlName="newPassword" type="text" name="newPassword" id="newPassword" autocomplete="off">
+          <input [ngClass]="'input'" [placeholder]="'Repetir nova senha'" formControlName="repeatNewPassword" type="text" name="repeatNewPassword" id="repeatNewPassword" autocomplete="off">
+
+          <button [ngClass]="'button-submit'" type="submit" [disabled]="formPassword.invalid">mudar</button>
+
+        </form>
+
+      }
+
 
     </div>
 
     <div [ngClass]="'flex justify-between h-[40px] w-[240px]'">
-      <button [ngClass]="'button bg-[#363636] w-[65px]'">Sair</button>
-      <button [ngClass]="'button bg-red-600 w-[125px]'">Deletar conta</button>
+      @if (isChangeUsername || isChangePassword) {
+        <button [ngClass]="'button bg-[#363636] w-full'" (click)="void backToProfile()">voltar</button>
+
+      }
+      @else {
+        <button [ngClass]="'button bg-[#363636] w-[65px]'" (click)="void onSubmitLogout()">Sair</button>
+        <button [ngClass]="'button bg-red-600 w-[125px]'">Deletar conta</button>
+
+      }
 
     </div>
 
