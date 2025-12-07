@@ -87,8 +87,8 @@ export class Profile implements OnInit {
       const username = this.formUsername.controls["username"].value;
 
       this.request.changeUsername({ newUsername: username }).subscribe({
-        next: (value) => {
-          const username = value.data.username;
+        next: () => {
+          const username = this.profileInfo.profileInfo().username;
           this.formUsername.controls["username"].setValue(username!);
 
           this.isChange = true;
