@@ -17,7 +17,7 @@ export class RequestApi {
   private apiUrl = environment.apiUrl;
 
   profile(): Observable<Response> {
-    return this.http.get<Response>(`${this.apiUrl}/profile`)
+    return this.http.get<Response>(`${this.apiUrl}/profile`, { withCredentials: true })
               .pipe(
                 catchError((error: responseError) => this.handleError(error))
 
@@ -95,7 +95,7 @@ export class RequestApi {
   }
 
   logout(): Observable<Response> {
-    return this.http.post<Response>(`${this.apiUrl}/logout`, {})
+    return this.http.post<Response>(`${this.apiUrl}/logout`, {}, { withCredentials: true })
                       .pipe(
                         catchError((error: responseError) => this.handleError(error))
 
@@ -104,7 +104,7 @@ export class RequestApi {
   }
 
   changeUsername(data: { newUsername: string }): Observable<Response> {
-    return this.http.put<Response>(`${this.apiUrl}/change-username`, data)
+    return this.http.put<Response>(`${this.apiUrl}/change-username`, data, { withCredentials: true })
                       .pipe(
                         catchError((error: responseError) => this.handleError(error))
 
@@ -113,7 +113,7 @@ export class RequestApi {
   }
 
   changePassword(data: { password: string, newPassword: string }): Observable<Response> {
-    return this.http.put<Response>(`${this.apiUrl}/change-password`, data)
+    return this.http.put<Response>(`${this.apiUrl}/change-password`, data, { withCredentials: true })
                       .pipe(
                         catchError((error: responseError) => this.handleError(error))
 
@@ -122,7 +122,7 @@ export class RequestApi {
   }
 
   delete(): Observable<Response> {
-    return this.http.delete<Response>(`${this.apiUrl}/delete`)
+    return this.http.delete<Response>(`${this.apiUrl}/delete`, { withCredentials: true })
                       .pipe(
                         catchError((error: responseError) => this.handleError(error))
 
