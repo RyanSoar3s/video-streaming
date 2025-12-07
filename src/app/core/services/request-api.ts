@@ -6,6 +6,7 @@ import { Observable, throwError, tap } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HandleToken } from './handle-token';
 import { responseError } from '@core/models/responseError.model';
+import { ProfileInfo } from './profile-info';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,18 @@ import { responseError } from '@core/models/responseError.model';
 export class RequestApi {
   private http = inject(HttpClient);
   private handleToken = inject(HandleToken);
+  private profileInfo = inject(ProfileInfo);
 
   private apiUrl = environment.apiUrl;
 
   profile(): Observable<Response> {
     return this.http.get<Response>(`${this.apiUrl}/profile`, { withCredentials: true })
               .pipe(
+                tap((value) => {
+                  const data = { email: value.email, username: value.username };
+                  this.profileInfo.setValue(data as { email: string, username: string });
+
+                }),
                 catchError((error: responseError) => this.handleError(error))
 
               );
