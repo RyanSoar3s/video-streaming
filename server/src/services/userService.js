@@ -251,7 +251,7 @@ const userService = {
     userDB.username = newUsername
     await userDB.save();
 
-    return true
+    return newUsername
 
   },
   changePassword: async (token, password, newPassword) => {

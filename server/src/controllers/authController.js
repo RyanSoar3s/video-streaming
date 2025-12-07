@@ -130,9 +130,9 @@ const authController = {
     const { newUsername } = req.body
 
     try {
-      await userService.changeUsername(token, newUsername)
+      const data = { username: await userService.changeUsername(token, newUsername) }
 
-      res.json({ message: "Usuário alterada com sucesso" })
+      res.json({ message: "Usuário alterada com sucesso", data })
 
     } catch (error) {
       res.status(400).json({ message: error.message })
