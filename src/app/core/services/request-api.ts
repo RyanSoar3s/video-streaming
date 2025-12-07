@@ -113,6 +113,11 @@ export class RequestApi {
   changeUsername(data: { newUsername: string }): Observable<Response> {
     return this.http.put<Response>(`${this.apiUrl}/change-username`, data, { withCredentials: true })
                       .pipe(
+                        tap((value) => {
+                          const username = value.data.username;
+                          this.profileInfo.setUsername(username!);
+
+                        }),
                         catchError((error: responseError) => this.handleError(error))
 
                       );

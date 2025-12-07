@@ -17,4 +17,22 @@ export class ProfileInfo {
 
   }
 
+  setEmail(email: string): void {
+    this.profileInfoSignal.update((v) => ({
+      ...v,
+      email
+
+    }))
+
+  }
+
+  setUsername(username: string): void {
+    this.profileInfoSignal.update((v) => ({
+      ...v,
+      username
+
+    }))
+
+  }
+
 }
