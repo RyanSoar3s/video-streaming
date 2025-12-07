@@ -25,9 +25,17 @@ export class Home implements OnInit {
   private request = inject(RequestApi);
 
   ngOnInit(): void {
-    this.request.profile().subscribe((value) => {
-      const data = { email: value.email, username: value.username };
-      this.profileInfo.setValue(data as { email: string, username: string })
+    this.request.profile().subscribe({
+      next: (value) => {
+        const data = { email: value.email, username: value.username };
+        this.profileInfo.setValue(data as { email: string, username: string });
+        console.log("Dados obtidos com sucesso")
+
+      },
+      error: (error) => {
+        console.error(`Error: ${error}`)
+
+      }
 
     });
 
