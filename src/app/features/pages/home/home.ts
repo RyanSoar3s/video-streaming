@@ -5,7 +5,6 @@ import { Contents } from './contents/contents';
 import { Responsive } from '@core/services/responsive';
 import { CommonModule } from '@angular/common';
 import { RequestApi } from '@core/services/request-api';
-import { ProfileInfo } from '@core/services/profile-info';
 
 @Component({
   selector: 'app-home',
@@ -21,14 +20,11 @@ import { ProfileInfo } from '@core/services/profile-info';
 })
 export class Home implements OnInit {
   protected readonly responsive = inject(Responsive);
-  private profileInfo = inject(ProfileInfo);
   private request = inject(RequestApi);
 
   ngOnInit(): void {
     this.request.profile().subscribe({
-      next: (value) => {
-        const data = { email: value.email, username: value.username };
-        this.profileInfo.setValue(data as { email: string, username: string });
+      next: () => {
         console.log("Dados obtidos com sucesso")
 
       },
