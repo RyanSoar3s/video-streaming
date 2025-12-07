@@ -104,6 +104,7 @@ export class RequestApi {
   logout(): Observable<Response> {
     return this.http.post<Response>(`${this.apiUrl}/logout`, {}, { withCredentials: true })
                       .pipe(
+                        tap(() => this.handleToken.clear()),
                         catchError((error: responseError) => this.handleError(error))
 
                       );
