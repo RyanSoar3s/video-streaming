@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from '@core/guards/auth-guard';
 import { loginGuard } from '@core/guards/login-guard';
+import { profileGuard } from '@core/guards/profile-guard';
 import { verifyGuard } from '@core/guards/verify-guard';
 import { Login } from '@features/pages/auth/login/login';
 import { VerifyCode } from '@features/pages/auth/verify-code/verify-code';
@@ -26,6 +27,7 @@ export const routes: Routes = [
     children: [
       {
         path: "profile",
+        canActivate: [ profileGuard ],
         component: Profile
 
       }
