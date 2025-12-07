@@ -96,7 +96,7 @@ const authController = {
     }
 
   },
-  refresh: async (res, req) => {
+  refresh: async (req, res) => {
     const token = req.cookies.refresh_token
 
     try {
