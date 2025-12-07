@@ -2,7 +2,7 @@ import userService from "../services/userService.js";
 
 const authController = {
   profile: async (req, res) => {
-    const token = req.cookies.refresh_token
+    const token = req.cookie.refresh_token
 
     try {
       const data = await userService.profile(token)
@@ -52,7 +52,7 @@ const authController = {
 
   },
   verify: async (req, res) => {
-    const token = req.cookies.refresh_token
+    const token = req.cookie.refresh_token
     const { code } = req.body
     let isValidToken = true
 
@@ -97,7 +97,7 @@ const authController = {
 
   },
   refresh: async (res, req) => {
-    const token = req.cookies.refresh_token
+    const token = req.cookie.refresh_token
 
     try {
       const newAccessToken = await userService.refresh(token)
@@ -112,7 +112,7 @@ const authController = {
 
   },
   logout: async (req, res) => {
-    const token = req.cookies.refresh_token
+    const token = req.cookie.refresh_token
 
     try {
       await userService.logout(token)
@@ -126,7 +126,7 @@ const authController = {
 
   },
   changeUsername: async (req, res) => {
-    const token = req.cookies.refresh_token
+    const token = req.cookie.refresh_token
     const { newUsername } = req.body
 
     try {
@@ -141,7 +141,7 @@ const authController = {
 
   },
   changePassword: async (req, res) => {
-    const token = req.cookies.refresh_token
+    const token = req.cookie.refresh_token
     const { password, newPassword } = req.body
 
     try {
@@ -156,7 +156,7 @@ const authController = {
 
   },
   delete: async (req, res) => {
-    const token = req.cookies.refresh_token
+    const token = req.cookie.refresh_token
 
     try {
       await userService.delete(token)
