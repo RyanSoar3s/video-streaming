@@ -22,7 +22,7 @@ export class RequestApi {
     return this.http.get<Response>(`${this.apiUrl}/profile`, { withCredentials: true })
               .pipe(
                 tap((value) => {
-                  const data = { email: value.email, username: value.username };
+                  const data = { email: value.data.email, username: value.data.username };
                   this.profileInfo.setValue(data as { email: string, username: string });
 
                 }),
