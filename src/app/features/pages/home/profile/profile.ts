@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, inject, OnInit, Injector, runInInjectionContext } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { RequestApi } from '@core/services/request-api';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -9,6 +9,7 @@ import { validatePassword, validateUsername } from './validators/validateFormFie
 import { ProfileInfo } from '@core/services/profile-info';
 import { Responsive } from '@core/services/responsive';
 import { timer } from 'rxjs/internal/observable/timer';
+import { responseError } from '@core/models/responseError.model';
 
 @Component({
   selector: 'app-profile',
@@ -41,15 +42,16 @@ export class Profile implements OnInit {
   private fb = inject(FormBuilder);
   private cdr = inject(ChangeDetectorRef);
   private route = inject(Router);
+  private injector = inject(Injector);
 
   protected isError = false;
   protected isChange = false;
   protected isWarning = false;
 
-  protected formUsername = this.fb.nonNullable.group({
-    username: [ this.infos[0][1], [ Validators.required, Validators.minLength(5), validateUsername(this.infos[0][1]) ] ]
+  protected formUsername!: FormGroup<{
+    username: FormControl<string>
 
-  });
+  }>;
 
   protected formPassword = this.fb.nonNullable.group({
     password: [ "", [ Validators.required, Validators.minLength(6) ] ],
@@ -63,6 +65,24 @@ export class Profile implements OnInit {
   ngOnInit(): void {
     this.email = this.profileInfo.profileInfo().email;
     this.infos[0][1] = this.profileInfo.profileInfo().username;
+    this.formUsername = this.fb.nonNullable.group(
+      {
+        username: [
+          this.profileInfo.profileInfo().username,
+          [ Validators.required, Validators.minLength(5) ]
+
+        ]
+
+      },
+      {
+        validators: runInInjectionContext(this.injector, () =>
+          validateUsername()
+
+        )
+
+      }
+
+    );
 
   }
 
@@ -84,9 +104,9 @@ export class Profile implements OnInit {
 
   onSubmitChangeUsername(): void {
     if (this.formUsername.valid) {
-      const username = this.formUsername.controls["username"].value;
+      const newUsername = this.formUsername.controls["username"].value;
 
-      this.request.changeUsername({ newUsername: username }).subscribe({
+      this.request.changeUsername({ newUsername }).subscribe({
         next: () => {
           const username = this.profileInfo.profileInfo().username;
           this.infos[0][1] = username;
@@ -97,14 +117,15 @@ export class Profile implements OnInit {
 
           timer(1000).subscribe(() => {
             this.isChange = false;
+            this.route.navigate([ "/home" ]);
             this.cdr.detectChanges();
 
           });
 
         },
-        error: (error) => {
+        error: (error: responseError) => {
           this.isError = true;
-          console.error(`Error: ${error}`);
+          console.error(`Error: ${error.error.message}`);
           this.formUsername.reset();
           this.cdr.detectChanges();
 
@@ -139,9 +160,9 @@ export class Profile implements OnInit {
           });
 
         },
-        error: (error) => {
+        error: (error: responseError) => {
           this.isError = true;
-          console.error(`Error: ${error}`);
+          console.error(`Error: ${error.error.message}`);
           this.formUsername.reset();
           this.cdr.detectChanges();
 
@@ -166,9 +187,9 @@ export class Profile implements OnInit {
         this.route.navigate([ "/" ]);
 
       },
-      error: (error) => {
+      error: (error: responseError) => {
         this.isError = true;
-        console.error(`Error: ${error}`);
+        console.error(`Error: ${error.error.message}`);
         this.formUsername.reset();
         this.cdr.detectChanges();
 
@@ -191,9 +212,9 @@ export class Profile implements OnInit {
         this.route.navigate([ "/" ]);
 
       },
-      error: (error) => {
+      error: (error: responseError) => {
         this.isError = true;
-        console.error(`Error: ${error}`);
+        console.error(`Error: ${error.error.message}`);
         this.formUsername.reset();
         this.cdr.detectChanges();
 
