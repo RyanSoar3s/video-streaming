@@ -270,14 +270,14 @@ const userService = {
     const userDB = await user.findById(payload.id)
 
     if (!userDB) throw new Error("Usuário não encontrado")
-
+      
     const hash = userDB.hashPass
 
     const passIsValid = await comparePassword(password, hash)
 
     if (!passIsValid) throw new Error("Senha incorreta")
 
-    const newPass = hashPassword(newPassword)
+    const newPass = await hashPassword(newPassword)
 
     userDB.hashPass = newPass
     await userDB.save()
