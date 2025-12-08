@@ -5,6 +5,7 @@ import { Contents } from './contents/contents';
 import { Responsive } from '@core/services/responsive';
 import { CommonModule } from '@angular/common';
 import { RequestApi } from '@core/services/request-api';
+import { responseError } from '@core/models/responseError.model';
 
 @Component({
   selector: 'app-home',
@@ -28,8 +29,8 @@ export class Home implements OnInit {
         console.log("Dados obtidos com sucesso")
 
       },
-      error: (error) => {
-        console.error(`Error: ${error}`)
+      error: (error: responseError) => {
+        console.error(`Error: ${error.error.message}`)
 
       }
 
