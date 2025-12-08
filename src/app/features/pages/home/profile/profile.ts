@@ -155,6 +155,7 @@ export class Profile implements OnInit {
 
           timer(1000).subscribe(() => {
             this.isChange = false;
+            this.route.navigate([ "/home" ]);
             this.cdr.detectChanges();
 
           });
