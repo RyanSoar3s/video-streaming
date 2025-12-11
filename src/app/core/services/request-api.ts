@@ -59,11 +59,10 @@ export class RequestApi {
     );
 
   }
-
-  verify(code: string): Observable<Response> {
+  verify(data: { email: string, code: string }): Observable<Response> {
     return this.http.post<Response>(
       `${this.apiUrl}/verify`,
-      { code },
+      data,
       { withCredentials: true }
 
     ).pipe(
@@ -137,6 +136,7 @@ export class RequestApi {
   delete(): Observable<Response> {
     return this.http.delete<Response>(`${this.apiUrl}/delete`, { withCredentials: true })
                       .pipe(
+                        tap(() => this.handleToken.clear()),
                         catchError((error: responseError) => this.handleError(error))
 
                       );
