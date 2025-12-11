@@ -5,7 +5,7 @@ const ACCESS_SECRET = process.env.ACCESS_SECRET;
 const authMiddleware = (req, res, next) => {
   const auth = req.headers.authorization
 
-  if (!auth) return res.sendStatus(401)
+  if (!auth) return res.status(401).json({ message: "Não autorizado" })
 
   const token = auth.split(" ")[1]
 
@@ -15,7 +15,7 @@ const authMiddleware = (req, res, next) => {
     next()
 
   } catch (error) {
-    return res.sendStatus(401)
+    return res.status(401).json({ message: error.message })
 
   }
 

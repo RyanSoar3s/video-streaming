@@ -10,7 +10,7 @@ const authController = {
       return res.json({ message: "Dados acessados com sucesso", data })
 
     } catch (error) {
-      res.status(400).json({ message: error.message })
+      res.status(404).json({ message: error.message })
 
     }
 
@@ -41,7 +41,7 @@ const authController = {
     const { email, password } = req.body
 
     try {
-     await userService.register(email, password)
+      await userService.register(email, password)
 
       res.json({ message: "Código enviado com sucesso" })
 
@@ -52,12 +52,11 @@ const authController = {
 
   },
   verify: async (req, res) => {
-    const token = req.cookies.refresh_token
-    const { code } = req.body
+    const { email, code } = req.body
     let isValidToken = true
 
     try {
-      const error = await userService.verify(token, String(code))
+      const error = await userService.verify(email, String(code))
 
       if (typeof error === "function") {
         isValidToken = false
@@ -100,9 +99,20 @@ const authController = {
     const token = req.cookies.refresh_token
 
     try {
-      const newAccessToken = await userService.refresh(token)
+      const { accessToken, refreshToken } = await userService.refresh(token)
 
-      return res.json({ message: "Access token renovado", token: newAccessToken })
+      if (!!refreshToken) {
+        res.cookie("refresh_token", refreshToken, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "strict",
+          maxAge: 7 * 24 * 60 * 60 * 1000
+
+        })
+
+      }
+
+      return res.json({ message: "Access token renovado", token: accessToken })
 
 
     } catch (error) {
