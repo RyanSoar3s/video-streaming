@@ -8,10 +8,10 @@
 
 }
 
-@if (errorMsg) {
+@if (isError) {
   <div [ngClass]="'absolute bg-[#00000085] flex items-center justify-center h-lvh w-lvw z-999'">
     <div [ngClass]="'bg-black flex items-center h-[80px] w-auto p-2.5 border-2 border-solid border-white'">
-      <h1 [ngClass]="'font-medium'" [ngStyle]="{ 'font-size': (XS || SM) ? '1.4em' : '2.5em' }">❌ Não foi possível validar o código</h1>
+      <h1 [ngClass]="'font-medium'" [ngStyle]="{ 'font-size': (XS || SM) ? '1.4em' : '2.5em' }">❌ {{ errorMsg }}</h1>
 
     </div>
 
@@ -19,6 +19,16 @@
 
 }
 
+@if (valid) {
+  <div [ngClass]="'absolute bg-[#00000085] flex items-center justify-center h-lvh w-lvw z-999'">
+    <div [ngClass]="'bg-black flex items-center h-[80px] w-auto p-2.5 border-2 border-solid border-white'">
+      <h1 [ngClass]="'font-medium'" [ngStyle]="{ 'font-size': (XS || SM) ? '1.4em' : '2.5em' }">✅ Conta validada com sucesso</h1>
+
+    </div>
+
+  </div>
+
+}
 
 <div [ngClass]="'absolute h-full w-full bg-black opacity-35'"></div>
 
