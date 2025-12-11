@@ -97,7 +97,7 @@ const userService = {
 
       const username = generateUsername()
 
-      createUser({
+      await createUser({
         username,
         email,
         hashPass: hash,
@@ -110,27 +110,17 @@ const userService = {
       return true
 
   },
-  verify: async (token, code) => {
-    if (!token) throw new Error("Refresh token está ausente")
+  verify: async (email, code) => {
+    if (!email) throw new Error("Email está ausente")
 
-    let payload
+    const userDB = await user.findOne({ email })
 
-    try {
-      payload = jwt.verify(token, process.env.REFRESH_SECRET)
-
-    } catch (_) {
-      throw new Error("Refresh token inválido")
-
-    }
-    const userDB = await user.findById(payload.id)
-
-    if (!userDB) throw new Error("Usuário não encontrado")
+    if (!userDB) () => new Error("Usuário não encontrado")
 
     if (userDB.expiresAt < Date.now()) return () => new Error("Código expirado")
 
     if (userDB.verificationCode !== code) throw new Error("Código está incorreto")
 
-    const email = userDB.email
     await user.updateOne(
       { email },
       {
@@ -173,12 +163,23 @@ const userService = {
     if (!token) throw new Error("Refresh token está ausente")
 
     let payload
+    let expired = false
 
     try {
       payload = jwt.verify(token, process.env.REFRESH_SECRET)
 
-    } catch (_) {
-      throw new Error("Refresh token inválido")
+    } catch (error) {
+      if (error.name === "TokenExpiredError") {
+        expired = true
+        payload = jwt.decode(token)
+
+        if (!payload) throw new Error("Token inválido")
+
+      }
+      else {
+        throw new Error("Token inválido")
+
+      }
 
     }
 
@@ -186,16 +187,23 @@ const userService = {
 
     if (!userDB) throw new Error("Usuário não encontrado")
 
-    const found = userDB.refreshTokens.find((t) => t.token === token)
-    if (!found) throw new Error("Refresh token revogado")
+    const exists = userDB.refreshTokens.some(t => t.token === token)
 
-    const newAccessToken = generateAccessToken(userDB._id.toString())
-    const newRefreshToken = generateRefreshToken(userDB._id.toString())
+    if (!exists) throw new Error("Refresh token não registrado")
 
-    userDB.refreshTokens = userDB.refreshTokens.filter((t) => t.token !== token)
-    userDB.refreshTokens.push({ token: newRefreshToken })
+    const userId = userDB._id.toString()
 
-    await userDB.save();
+    const newAccessToken = generateAccessToken(userId)
+    let newRefreshToken = ""
+
+    if (expired) {
+      newRefreshToken = generateRefreshToken(userId)
+      userDB.refreshTokens = userDB.refreshTokens.filter((t) => t.token !== token)
+      userDB.refreshTokens.push({ token: newRefreshToken })
+
+      await userDB.save();
+
+    }
 
     return {
       accessToken: newAccessToken,
@@ -270,7 +278,7 @@ const userService = {
     const userDB = await user.findById(payload.id)
 
     if (!userDB) throw new Error("Usuário não encontrado")
-      
+
     const hash = userDB.hashPass
 
     const passIsValid = await comparePassword(password, hash)
