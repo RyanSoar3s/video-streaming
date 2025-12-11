@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, inject, viewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, inject, OnInit, viewChildren } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { responseError } from '@core/models/responseError.model';
@@ -20,7 +20,7 @@ import { timer } from 'rxjs';
   templateUrl: './verify-code.html',
   styleUrl: './verify-code.css'
 })
-export class VerifyCode implements AfterViewInit {
+export class VerifyCode implements OnInit, AfterViewInit {
   private inputs = viewChildren<ElementRef<HTMLElement>>("inputs");
   private requestApi = inject(RequestApi);
   private pendingVerification = inject(PendingVerification);
@@ -29,7 +29,7 @@ export class VerifyCode implements AfterViewInit {
   private fb = inject(FormBuilder);
   protected responsive = inject(Responsive);
 
-  protected errorMsg = false;
+  protected isError = false;
   protected isLoading = false;
 
   protected form = this.fb.nonNullable.group({
@@ -43,8 +43,33 @@ export class VerifyCode implements AfterViewInit {
   });
 
   protected isDigit = true;
+  protected valid = false;
+
+  protected errorMsg = "";
 
   protected lastKey: string = "";
+
+  ngOnInit(): void {
+    const expiresAt = this.pendingVerification.getExpiresAt();
+
+    if (!expiresAt || expiresAt! > Date.now()) {
+      this.errorMsg = "Código expirado";
+
+      this.isError = true;
+
+      this.form.reset();
+      this.isLoading = false;
+      this.cdr.detectChanges();
+
+      timer(1000).subscribe(() => {
+        this.isError = false;
+        this.cdr.detectChanges();
+
+      });
+
+    }
+
+  }
 
   ngAfterViewInit(): void {
     this.inputs()[0].nativeElement.focus();
@@ -91,27 +116,42 @@ export class VerifyCode implements AfterViewInit {
         next: (value) => {
           console.log(value.message);
           this.pendingVerification.clear();
-          this.router.navigate([ "/" ]);
+          this.valid = true;
+
+          this.cdr.detectChanges();
+
+          timer(1000).subscribe(() => {
+            this.valid = false;
+            this.cdr.detectChanges();
+
+            this.router.navigate([ "/" ]);
+
+          });
 
         },
         error: (error: responseError) => {
-          this.errorMsg = true;
+          const tokenIsValid = error.error.isValidToken;
+
+          this.errorMsg = (tokenIsValid) ?
+                            "Não foi possível validar o código" :
+                            "Código expirado"
+
+          this.isError = true;
           console.error(`Error: ${error.error.message}`);
-
-          if (!error.error.isValidToken) {
-            this.pendingVerification.clear();
-            this.router.navigate([ "/" ]);
-            return;
-
-          }
 
           this.form.reset();
           this.isLoading = false;
           this.cdr.detectChanges();
 
           timer(1000).subscribe(() => {
-            this.errorMsg = false;
+            this.isError = false;
             this.cdr.detectChanges();
+
+            if (!error.error.isValidToken) {
+              this.pendingVerification.clear();
+              this.router.navigate([ "/" ]);
+
+            }
 
           });
 
