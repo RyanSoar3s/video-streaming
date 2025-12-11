@@ -43,11 +43,10 @@ export class RequestApi {
     );
 
   }
-
-  verify(code: string): Observable<Response> {
+  verify(data: { email: string, code: string }): Observable<Response> {
     return this.http.post<Response>(
       `${this.apiUrl}/verify`,
-      { code },
+      data,
       { withCredentials: true }
 
     ).pipe(
@@ -79,7 +78,7 @@ export class RequestApi {
 
     ).pipe(
       tap((res) => this.handleToken.setToken(res.token!)),
-      catchError((error) => this.handleError(error))
+      catchError((error: responseError) => this.handleError(error))
 
     );
 
