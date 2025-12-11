@@ -163,6 +163,7 @@ export class Login implements AfterViewInit {
             console.log(value.message);
             this.pendingVerification.setPendingVerification(true);
             this.pendingVerification.setEmail(data.email);
+            this.pendingVerification.setExpiresAt(String(value.expiresAt));
             this.router.navigate([ "/verify-code" ]);
 
           },
