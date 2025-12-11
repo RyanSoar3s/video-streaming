@@ -12,6 +12,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { authInterceptor } from '@core/interceptors/auth-interceptor';
+import { errorInterceptor } from '@core/interceptors/error-interceptor';
 
 registerLocaleData(ptBr);
 
@@ -21,7 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes),
     { provide: LOCALE_ID, useValue: 'pt' },
-    provideHttpClient(withInterceptors([ authInterceptor ]))
+    provideHttpClient(withInterceptors([ authInterceptor, errorInterceptor ]))
 
   ]
 
