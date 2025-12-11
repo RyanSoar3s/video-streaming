@@ -115,7 +115,7 @@ const userService = {
 
     const userDB = await user.findOne({ email })
 
-    if (!userDB) () => new Error("Usuário não encontrado")
+    if (!userDB) return () => new Error("Usuário não encontrado")
 
     if (userDB.expiresAt < Date.now()) return () => new Error("Código expirado")
 
