@@ -11,12 +11,12 @@
 }
 
 .nav {
-  @apply relative flex items-center justify-between rounded-full;
+  @apply relative flex items-center justify-between rounded-full z-[800];
 
 }
 
 .option {
-  @apply relative flex items-center justify-center h-full rounded-full cursor-pointer z-[900];
+  @apply relative flex items-center justify-center h-full rounded-full cursor-pointer z-[850];
 
 }
 
