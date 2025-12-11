@@ -59,11 +59,15 @@ export class VerifyCode implements OnInit, AfterViewInit {
 
       this.form.reset();
       this.isLoading = false;
+      this.pendingVerification.clear();
+
       this.cdr.detectChanges();
 
       timer(1000).subscribe(() => {
         this.isError = false;
         this.cdr.detectChanges();
+
+        this.router.navigate([ "" ]);
 
       });
 
