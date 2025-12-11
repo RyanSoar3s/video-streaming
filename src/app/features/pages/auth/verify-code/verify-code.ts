@@ -83,10 +83,11 @@ export class VerifyCode implements AfterViewInit {
 
   onSubmit(): void {
     if (this.form.valid) {
+      const email = this.pendingVerification.getEmail();
       const values = Object.values(this.form.value);
       this.isLoading = true;
 
-      this.requestApi.verify(values.join("")).subscribe({
+      this.requestApi.verify({ email, code: values.join("") }).subscribe({
         next: (value) => {
           console.log(value.message);
           this.pendingVerification.clear();
