@@ -52,7 +52,7 @@ export class VerifyCode implements OnInit, AfterViewInit {
   ngOnInit(): void {
     const expiresAt = this.pendingVerification.getExpiresAt();
 
-    if (!expiresAt || expiresAt! > Date.now()) {
+    if (!expiresAt || expiresAt! < Date.now()) {
       this.errorMsg = "Código expirado";
 
       this.isError = true;
