@@ -107,7 +107,7 @@ const userService = {
 
       })
 
-      return true
+      return code.expires;
 
   },
   verify: async (email, code) => {

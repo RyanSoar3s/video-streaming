@@ -41,9 +41,9 @@ const authController = {
     const { email, password } = req.body
 
     try {
-      await userService.register(email, password)
+      const expiresAt = await userService.register(email, password)
 
-      res.json({ message: "Código enviado com sucesso" })
+      res.json({ message: "Código enviado com sucesso", expiresAt: String(expiresAt) })
 
     } catch (error) {
       res.status(400).json({ message: error.message })
