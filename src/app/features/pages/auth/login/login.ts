@@ -162,6 +162,7 @@ export class Login implements AfterViewInit {
           next: (value) => {
             console.log(value.message);
             this.pendingVerification.setPendingVerification(true);
+            this.pendingVerification.setEmail(data.email);
             this.router.navigate([ "/verify-code" ]);
 
           },
