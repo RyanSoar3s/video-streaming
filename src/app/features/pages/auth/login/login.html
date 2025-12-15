@@ -68,7 +68,7 @@
     <div [ngClass]="'flex flex-col items-center justify-evenly gap-2.5 h-[500px] w-full'">
       <h2 [ngClass]="'text-[1.5em] text-center font-medium w-[350px]'">{{ messageRequestMode[requestMode][0] }}</h2>
 
-      <div #googleBtn [ngClass]="'h-[40px]'"></div>
+      <div data-testid="googleBtn" #googleBtn [ngClass]="'h-[40px]'"></div>
 
       <form [ngClass]="'relative flex flex-col justify-around gap-5 h-[240px] w-[60%]'" [formGroup]="form" (ngSubmit)="void onSubmit()">
         <div [ngClass]="'absolute h-[50px] w-[50px] bottom-[440px] -left-[50px]'" [ngStyle]="{ 'visibility': (XL || LG) ? 'hidden' : 'visible' }">
@@ -87,7 +87,7 @@
         <label #labels [ngClass]="'label top-[106px]'" for="password">Senha</label>
         <input #pass [ngClass]="{ 'input': true, 'valid': (validPass), 'invalid': (invalidPass) }" type="password" id="password" formControlName="password" autocomplete="off" (input)="void changeVisibilityLabel($event, 1)">
 
-        <div [ngClass]="'absolute text-gray-300 text-[0.9em] font-medium  bottom-[73px] underline hover:text-white cursor-pointer'" (click)="void changeRequestMode()">
+        <div data-testid="change-mode" [ngClass]="'absolute text-gray-300 text-[0.9em] font-medium  bottom-[73px] underline hover:text-white cursor-pointer'" (click)="void changeRequestMode()">
           {{ messageRequestMode[requestMode][1] }}
 
         </div>
