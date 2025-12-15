@@ -3,10 +3,11 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "types": [
-      "jest"
+      "vitest"
+
     ]
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
   ]
 }
