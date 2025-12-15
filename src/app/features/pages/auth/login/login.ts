@@ -49,7 +49,7 @@ export class Login implements AfterViewInit {
 
   });
 
-  protected requestMode: "signin" | "signup" = "signin";
+  public requestMode: "signin" | "signup" = "signin";
   protected messageRequestMode = {
     "signin": [ "Entre E Aproveite Nosso Conteúdo", "Não possui conta?", "Entrar" ],
     "signup": [ "Tenha Acesso Ao Maior Catálogo Existente", "Já possui conta?", "Cadastrar" ]
@@ -61,8 +61,8 @@ export class Login implements AfterViewInit {
   protected readonly faEyeSlash = faEyeSlash;
   protected passIsHidden = true;
 
-  protected errorMsg = false;
-  protected isLoading = false;
+  public errorMsg = false;
+  public isLoading = false;
 
   private labels = viewChildren<ElementRef<HTMLElement>>("labels");
   private googleBtn = viewChild<ElementRef<HTMLElement>>("googleBtn");
@@ -98,9 +98,9 @@ export class Login implements AfterViewInit {
         this.router.navigate([ "/home" ]);
 
       },
-      error: (error) => {
+      error: (error: responseError) => {
         this.errorMsg = true;
-        console.error(`Error: ${error}`);
+        console.error(`Error: ${error.error.message}`);
         this.form.reset();
         this.cdr.detectChanges();
 
