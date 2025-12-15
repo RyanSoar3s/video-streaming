@@ -14,12 +14,14 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve",
-    "types": [ "jest", "node" ],
+    "types": [ "vitest", "node" ],
     "paths": {
       "@features/*": [ "src/app/features/*" ],
       "@core/*": [ "src/app/core/*" ],
       "@environments/*": [ "src/environments/*" ],
-      "@shared/*": [ "src/app/features/shared/*" ]
+      "@shared/*": [ "src/app/features/shared/*" ],
+      "@mock/*": [ "src/app/mocks/*" ],
+      "@locale": [ "setup.locale.ts" ]
 
     }
   },
