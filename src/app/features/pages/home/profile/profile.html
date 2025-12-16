@@ -1,5 +1,8 @@
 @let XS = responsive.isXs();
 @let SM = responsive.isSm();
+@let MD = responsive.isMd();
+@let LG = responsive.isLg();
+@let XL = responsive.isXl();
 
 @let isChangeUsername = infos[0][2].edit;
 @let isChangePassword = infos[1][2].edit;
@@ -42,20 +45,33 @@
 
 }
 
-<section [ngClass]="'relative bg-[#1a1a1a] flex flex-col items-center justify-center h-full w-[350px] rounded-2xl'">
+<section [ngClass]="'relative bg-[#1a1a1a] flex flex-col items-center justify-center h-full rounded-2xl'"
+  [ngStyle]="{
+    'width': (XL) ? '350px' :
+              (LG) ? '320px' :
+              (MD) ? '300px' : '280px'
+
+  }">
   <div [ngClass]="'absolute h-[40px] w-[40px] top-0 right-0 mt-2.5 mr-4 text-[2em] cursor-pointer'">
     <fa-icon [icon]="faXmark"></fa-icon>
     <a [ngClass]="'absolute block h-full w-full top-0'" routerLink="/home"></a>
 
   </div>
   <div [ngClass]="'flex flex-col items-center justify-evenly h-[450px] w-full'">
-    <div [ngClass]="'h-[130px] w-[130px]'">
+    <div [ngStyle]="{
+      'height': (XL) ? '130px' :
+                  (LG) ? '110px' :
+                  (MD) ? '90px' : '85px',
+      'width' : (XL) ? '130px' :
+                  (LG) ? '110px' :
+                  (MD) ? '90px' : '85px'
+
+    }">
       <img [ngClass]="'h-full w-full'" [src]="pathImg" [alt]="'foto de perfil'">
 
     </div>
 
     <div [ngClass]="'flex flex-col gap-2.5 h-auto w-[225px]'">
-
       @if (!isChangeUsername && !isChangePassword) {
         <div [ngClass]="'flex justify-between w-full'">
         <p [ngClass]="'text-[1.1em] font-medium over truncate'">email: {{ email }}</p>
