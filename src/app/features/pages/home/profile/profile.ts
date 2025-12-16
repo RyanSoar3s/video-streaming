@@ -22,7 +22,12 @@ import { responseError } from '@core/models/responseError.model';
 
   ],
   templateUrl: './profile.html',
-  styleUrl: './profile.css'
+  styleUrl: './profile.css',
+  host: {
+    '[style.height]': `(responsive.isXl()) ? "500px" :
+                        (responsive.isLg()) ? "450px" : "420px"`
+
+  }
 })
 export class Profile implements OnInit {
   protected readonly pathImg = "assets/home/user-white.png";
