@@ -29,8 +29,8 @@ export class VerifyCode implements OnInit, AfterViewInit {
   private fb = inject(FormBuilder);
   protected responsive = inject(Responsive);
 
-  protected isError = false;
-  protected isLoading = false;
+  public isError = false;
+  public isLoading = false;
 
   protected form = this.fb.nonNullable.group({
     d1: [ "", [ Validators.required, Validators.maxLength(1), Validators.pattern(/\d{1}/) ] ],
@@ -45,7 +45,7 @@ export class VerifyCode implements OnInit, AfterViewInit {
   protected isDigit = true;
   protected valid = false;
 
-  protected errorMsg = "";
+  public errorMsg = "";
 
   protected lastKey: string = "";
 
@@ -67,7 +67,7 @@ export class VerifyCode implements OnInit, AfterViewInit {
         this.isError = false;
         this.cdr.detectChanges();
 
-        this.router.navigate([ "" ]);
+        this.router.navigate([ "/" ]);
 
       });
 
