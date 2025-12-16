@@ -31,6 +31,21 @@ const registerErrorMock = (request: RequestApi) => {
 
 };
 
+const verifyCodeErrorMock = (request: RequestApi) => {
+  vi.spyOn(request, "verify").mockReturnValue(
+    throwError(() => ({
+      error: {
+        message: "Código está incorreto",
+        isValidToken: true
+
+      }
+
+    } satisfies responseError))
+
+  );
+
+};
+
 const loginErrorMock = (request: RequestApi) => {
   vi.spyOn(request, "login").mockReturnValue(
     throwError(() => ({
@@ -48,6 +63,7 @@ const loginErrorMock = (request: RequestApi) => {
 export {
   accessGoogleErrorMock,
   registerErrorMock,
+  verifyCodeErrorMock,
   loginErrorMock
 
 };
