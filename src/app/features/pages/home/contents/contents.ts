@@ -15,7 +15,11 @@ import { DecimalPipe } from '@angular/common';
 
   ],
   templateUrl: './contents.html',
-  styleUrl: './contents.css'
+  styleUrl: './contents.css',
+  host: {
+    '[style.paddingLeft]': '(responsive.isXs() || responsive.isSm()) ? "0px": "150px"'
+
+  }
 })
 export class Contents {
   protected readonly catalogs: Array<Catalog<Categorie> & { posX: number }> = [
