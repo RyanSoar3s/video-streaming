@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { expect, it, describe, beforeEach } from 'vitest';
 
 import { Header } from './header'
+import { ActivatedRoute } from '@angular/router';
 
 describe('Header', () => {
   let component: Header
@@ -8,7 +10,17 @@ describe('Header', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Header]
+      imports: [ Header ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { params: {}, queryParams: {} }
+          }
+
+        }
+
+      ]
     }).compileComponents()
 
     fixture = TestBed.createComponent(Header)

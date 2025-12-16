@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { expect, it, describe, beforeEach } from 'vitest';
 
 import { Profile } from './profile';
+import { ActivatedRoute } from '@angular/router';
 
 describe('Profile', () => {
   let component: Profile;
@@ -8,7 +10,17 @@ describe('Profile', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Profile]
+      imports: [ Profile ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { params: {}, queryParams: {} }
+          }
+
+        }
+
+      ]
     })
     .compileComponents();
 
