@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { expect, it, describe, beforeEach } from 'vitest';
 
 import { Navigation } from './navigation';
 import { By } from '@angular/platform-browser';

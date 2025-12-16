@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { CanActivateFn } from '@angular/router';
+import { expect, it, describe, beforeEach } from 'vitest';
 
 import { verifyGuard } from './verify-guard';
 
 describe('verifyGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
+  const executeGuard: CanActivateFn = (...guardParameters) =>
       TestBed.runInInjectionContext(() => verifyGuard(...guardParameters));
 
   beforeEach(() => {

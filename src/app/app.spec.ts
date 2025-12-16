@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
+import { expect, it, describe, beforeEach } from 'vitest';
 
 describe('App', () => {
   beforeEach(async () => {
@@ -13,5 +14,5 @@ describe('App', () => {
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
-  
+
 });

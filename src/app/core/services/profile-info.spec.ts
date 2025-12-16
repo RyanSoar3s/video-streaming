@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { expect, it, describe, beforeEach } from 'vitest';
 
 import { ProfileInfo } from './profile-info';
 
