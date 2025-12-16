@@ -35,6 +35,21 @@ const registerMock = (request: RequestApi) => {
 
 };
 
+const verifyCodeMock = (request: RequestApi) => {
+  vi.spyOn(request, "verify").mockReturnValue(
+    of(
+      {
+        message: "Email verificado com sucesso",
+        data: {}
+
+      } satisfies Response
+
+    )
+
+  );
+
+};
+
 const loginMock = (request: RequestApi) => {
   vi.spyOn(request, "login").mockReturnValue(
     of(
@@ -54,6 +69,7 @@ const loginMock = (request: RequestApi) => {
 export {
   accessGoogleMock,
   registerMock,
+  verifyCodeMock,
   loginMock
 
 };
