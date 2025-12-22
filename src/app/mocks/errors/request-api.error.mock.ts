@@ -46,6 +46,20 @@ const verifyCodeErrorMock = (request: RequestApi) => {
 
 };
 
+const refreshErrorMock = (request: RequestApi) => {
+  vi.spyOn(request, "logout").mockReturnValue(
+    throwError(() => ({
+      error: {
+        message: "Refresh token não registrado"
+
+      }
+
+    } satisfies responseError))
+
+  );
+
+};
+
 const loginErrorMock = (request: RequestApi) => {
   vi.spyOn(request, "login").mockReturnValue(
     throwError(() => ({
@@ -60,10 +74,57 @@ const loginErrorMock = (request: RequestApi) => {
 
 };
 
+
+const logoutErrorMock = (request: RequestApi) => {
+  vi.spyOn(request, "logout").mockReturnValue(
+    throwError(() => ({
+      error: {
+        message: "Refresh token revogado"
+
+      }
+
+    } satisfies responseError))
+
+  );
+
+};
+
+const changePasswordErrorMock = (request: RequestApi) => {
+  vi.spyOn(request, "changePassword").mockReturnValue(
+    throwError(() => ({
+      error: {
+        message: "Senha incorreta"
+
+      }
+
+    } satisfies responseError))
+
+  );
+
+};
+
+const deleteErrorMock = (request: RequestApi) => {
+  vi.spyOn(request, "delete").mockReturnValue(
+    throwError(() => ({
+      error: {
+        message: "Refresh token inválido"
+
+      }
+
+    } satisfies responseError))
+
+  );
+
+};
+
 export {
   accessGoogleErrorMock,
   registerErrorMock,
   verifyCodeErrorMock,
-  loginErrorMock
+  refreshErrorMock,
+  loginErrorMock,
+  logoutErrorMock,
+  changePasswordErrorMock,
+  deleteErrorMock
 
 };

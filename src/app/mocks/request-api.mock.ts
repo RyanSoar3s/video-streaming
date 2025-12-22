@@ -50,6 +50,21 @@ const verifyCodeMock = (request: RequestApi) => {
 
 };
 
+const refreshMock = (request: RequestApi) => {
+  vi.spyOn(request, "refresh").mockReturnValue(
+    of(
+      {
+        message: "Access token renovado",
+        data: {}
+
+      } satisfies Response
+
+    )
+
+  );
+
+};
+
 const loginMock = (request: RequestApi) => {
   vi.spyOn(request, "login").mockReturnValue(
     of(
@@ -66,10 +81,59 @@ const loginMock = (request: RequestApi) => {
 
 };
 
+const logoutMock = (request: RequestApi) => {
+  vi.spyOn(request, "logout").mockReturnValue(
+    of(
+      {
+        message: "Logout concluído",
+        data: {}
+
+      } satisfies Response
+
+    )
+
+  );
+
+};
+
+const changePasswordMock = (request: RequestApi) => {
+  vi.spyOn(request, "changePassword").mockReturnValue(
+    of(
+      {
+        message: "Senha alterada com sucesso",
+        data: {}
+
+      } satisfies Response
+
+    )
+
+  );
+
+};
+
+const deleteMock = (request: RequestApi) => {
+  vi.spyOn(request, "delete").mockReturnValue(
+    of(
+      {
+        message: "Conta deletada com sucesso",
+        data: {}
+
+      } satisfies Response
+
+    )
+
+  );
+
+};
+
 export {
   accessGoogleMock,
   registerMock,
   verifyCodeMock,
-  loginMock
+  refreshMock,
+  loginMock,
+  logoutMock,
+  changePasswordMock,
+  deleteMock
 
 };
