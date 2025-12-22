@@ -3,7 +3,9 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "types": [
-      "vitest"
+      "node",
+      "vitest/globals",
+      "@testing-library/jest-dom"
 
     ]
   },
