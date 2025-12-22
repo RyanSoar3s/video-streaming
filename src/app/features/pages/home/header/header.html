@@ -57,7 +57,7 @@
 
     <div [ngClass]="'relative bg-gray-400 border-white border-2 border-spacing-0.5 p-0.5! h-[45px] w-[45px] rounded-full cursor-pointer'">
       <img [ngClass]="'h-full w-full select-auto pointer-events-none'" [src]="user" [alt]="'foto do usuario'">
-      <a [ngClass]="'absolute block top-0 h-full w-full z-10'" routerLink="/home/profile"></a>
+      <a [attr.data-testid]="'profile-link'" [ngClass]="'absolute block top-0 h-full w-full z-10'" routerLink="/home/profile"></a>
 
     </div>
 
