@@ -35,7 +35,7 @@ export class Profile implements OnInit {
   protected readonly faPenToSquare = faPenToSquare;
 
   protected email = "";
-  protected infos: Array<[ string, string, { edit: boolean } ]> = [
+  public infos: Array<[ string, string, { edit: boolean } ]> = [
     [ "nome", "", { edit: false } ],
     [ "senha", "*******", { edit: false } ]
 
@@ -49,11 +49,11 @@ export class Profile implements OnInit {
   private route = inject(Router);
   private injector = inject(Injector);
 
-  protected isError = false;
-  protected isChange = false;
-  protected isWarning = false;
+  public isError = false;
+  public isChange = false;
+  public isWarning = false;
 
-  protected formUsername!: FormGroup<{
+  public formUsername!: FormGroup<{
     username: FormControl<string>
 
   }>;
@@ -119,11 +119,12 @@ export class Profile implements OnInit {
           this.isChange = true;
           console.log("Nome alterado com sucesso");
           this.cdr.detectChanges();
-
+          
           timer(1000).subscribe(() => {
             this.isChange = false;
-            this.route.navigate([ "/home" ]);
             this.cdr.detectChanges();
+
+            this.route.navigate([ "/home" ]);
 
           });
 
