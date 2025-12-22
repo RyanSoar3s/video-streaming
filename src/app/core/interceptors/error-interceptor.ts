@@ -13,7 +13,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
-      if (error.status !== 401) return throwError(() => error);
+      if (error.status !== 401 || req.url.includes("/refresh")) return throwError(() => error);
 
       return request.refresh().pipe(
         switchMap(({ token }) => {
