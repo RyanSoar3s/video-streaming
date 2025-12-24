@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Renderer2, viewChildren, ElementRef, Host, HostListener } from '@angular/core';
-import type { Catalog, Categorie } from '../models/catalog';
+import { Component, inject, Renderer2, viewChildren, ElementRef, HostListener } from '@angular/core';
 import { Responsive } from '@core/services/responsive';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
@@ -22,7 +21,7 @@ import { DecimalPipe } from '@angular/common';
   }
 })
 export class Contents {
-  protected readonly catalogs: Array<Catalog<Categorie> & { posX: number }> = [
+  protected readonly catalogs = [
     { sectionTitle: "Mais assistidos", items: [
       { title: "Os Vingadores", rating: 8.0, year: 2012, imageUrl: "assets/content/movies/Avengers.webp" },
       { title: "Eu Nunca", rating: 7.8, year: 2020, seasons: 4, imageUrl: "assets/content/series/never-have-i-ever.webp" },
