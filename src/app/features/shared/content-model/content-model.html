@@ -1,0 +1,86 @@
+@let XS = responsive.isXs();
+@let SM = responsive.isSm();
+@let MD = responsive.isMd();
+@let LG = responsive.isLg();
+@let XL = responsive.isXl();
+
+@let scrollLimitRate = (LG) ? 1 : 2;
+
+<section [ngClass]="'relative flex flex-col h-auto w-full mb-[30px]!'">
+  @for (content of contents(); track i; let i = $index) {
+    <h2 [ngClass]="'text-[1.7em] font-bold mt-[20px]! mb-[20px]! ml-2.5'"> {{ content.sectionTitle }}</h2>
+
+    <div [ngClass]="'relative w-full'">
+      @if (!XL) {
+        <div [ngClass]="'absolute h-full w-full'">
+          <div [ngClass]="'flex items-end justify-between p-[0px_10px]! h-full'">
+            <button [ngClass]="'arrow'" (click)="void navigateCarrousel('left', i, scrollLimitRate)">
+              <fa-icon [icon]="faArrowLeft"></fa-icon>
+
+            </button>
+            <button [ngClass]="'arrow'" (click)="void navigateCarrousel('right', i, scrollLimitRate)">
+              <fa-icon [icon]="faArrowRight"></fa-icon>
+
+            </button>
+
+          </div>
+
+        </div>
+
+      }
+
+      <div #items [ngClass]="'relative flex justify-center h-auto m-[20px_0px_60px_0px]! transition ease-out duration-500 scroll-smooth z-10'" [ngStyle]="{
+        'width': (XL) ? '100%' :
+                  (LG) ? 'calc(100% + (100% / 4))' : 'calc(100% + (2 * ((100% / 3)))',
+
+        'gap': (XL) ? 'calc((100% / 5) - 185px)' :
+                (LG) ? 'calc((100% / 5) - 180px)' :
+                (MD || SM) ? 'calc((100% / 5) - 170px)' : 'calc((100% / 5) - 120px)'
+
+      }">
+        @for (item of content.items; track item) {
+          <div [ngClass]="'flex flex-col gap-[5px]'" [ngStyle]="{
+            'width': (XL) ? '185px' :
+                      (LG) ? '180px' :
+                      (MD) ? '170px' :
+                      (SM) ? '160px' : '120px'
+
+          }">
+            <div [ngClass]="'bg-gray-500 w-full rounded-[20px] transition hover:transform-[scale(1.05)] active:transform-[scale(1.05)] cursor-pointer'" [ngStyle]="{
+              'height': (XL) ? '265px' :
+                        (LG) ? '260px' :
+                        (MD) ? '250px' :
+                        (SM) ? '230px' : '200px'
+
+            }">
+              <img [ngClass]="'h-full w-full rounded-[20px]'" [src]="item.imageUrl" [alt]="item.title">
+
+            </div>
+
+            <div [ngClass]="'flex justify-between w-full mt-[15px]!'">
+              <p [ngClass]="'text-[#a9a9a9] text-[0.9em]'">{{ item.year }}</p>
+              <span [ngClass]="'inline-flex justify-between w-[38px]'">
+                <img [ngClass]="'h-[15px] w-[15px]'" [src]="star" [alt]="'estrela'">
+                <p [ngClass]="'text-[#a9a9a9] text-[0.9em] ml-1.5'">{{ item.rating | number:'1.1-1':'pt-BR' }}</p>
+
+              </span>
+
+            </div>
+
+            <h2 [ngClass]="'font-medium'" [ngStyle]="{ 'font-size': (XS || SM) ? '1.1em' : '1.3em' }">{{ item.title }}</h2>
+            @if ('seasons' in item) {
+              <p [ngClass]="'text-[#a9a9a9] text-[0.9em] font-[600]'">Temp. {{ item.seasons }}</p>
+
+            }
+
+          </div>
+
+        }
+
+      </div>
+
+    </div>
+
+  }
+
+</section>

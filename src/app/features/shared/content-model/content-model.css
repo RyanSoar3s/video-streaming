@@ -1,0 +1,11 @@
+@reference "tailwindcss";
+
+:host {
+  @apply block;
+
+}
+
+.arrow {
+  @apply flex items-center justify-center h-[45px] w-[45px] border-2 border-solid border-gray-400 rounded-full text-white font-bold cursor-pointer active:bg-[#3d3d3d] hover:bg-[#3d3d3d];
+
+}
