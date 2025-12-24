@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Responsive } from '@core/services/responsive';
 
 @Component({
   selector: 'app-navigation',
   imports: [
-    CommonModule
+    CommonModule,
+    RouterLink
 
   ],
   templateUrl: './navigation.html',
@@ -17,11 +19,11 @@ export class Navigation {
   protected readonly magnifyingGlass = "assets/home/magnifying-glass-white.png";
 
   protected readonly icons = [
-    { id: 0, name: "Início", icon: "assets/navigation/house.png" },
-    { id: 1, name: "Catálogo", icon: "assets/navigation/tv.png" },
-    { id: 2, name: "Mais vistos", icon: "assets/navigation/fire.png" },
-    { id: 3, name: "Favoritos", icon: "assets/navigation/star.png" },
-    { id: 4, name: "Biblioteca", icon: "assets/navigation/layer.png" },
+    { id: 0, name: "Início",      icon: "assets/navigation/house.png", link: "/home" },
+    { id: 1, name: "Catálogo",    icon: "assets/navigation/tv.png",    link: "" },
+    { id: 2, name: "Mais vistos", icon: "assets/navigation/fire.png",  link: "" },
+    { id: 3, name: "Favoritos",   icon: "assets/navigation/star.png",  link: "" },
+    { id: 4, name: "Biblioteca",  icon: "assets/navigation/layer.png", link: "" }
 
   ];
 
@@ -35,14 +37,15 @@ export class Navigation {
   ];
 
   protected readonly trendingContent = [
-    { id: 0, name: "Ação", color: "bg-blue-500" },
-    { id: 1, name: "Aventura", color: "bg-orange-500" },
-    { id: 2, name: "Comédia", color: "bg-red-500" },
-    { id: 3, name: "Terror", color: "bg-yellow-500" },
-    { id: 4, name: "Fantasia", color: "bg-green-500" },
-    { id: 5, name: "Animação", color: "bg-pink-500" }
+    { id: 0, name: "Ação",     color: "bg-red-600" },
+    { id: 1, name: "Aventura", color: "bg-emerald-600" },
+    { id: 2, name: "Comédia",  color: "bg-yellow-400" },
+    { id: 3, name: "Terror",   color: "bg-gray-600" },
+    { id: 4, name: "Fantasia", color: "bg-purple-600" },
+    { id: 5, name: "Animação", color: "bg-sky-400" }
 
   ];
+
 
   protected readonly responsive = inject(Responsive);
   public isOpen = false;
