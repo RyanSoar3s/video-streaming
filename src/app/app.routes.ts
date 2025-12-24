@@ -5,6 +5,7 @@ import { profileGuard } from '@core/guards/profile-guard';
 import { verifyGuard } from '@core/guards/verify-guard';
 import { Login } from '@features/pages/auth/login/login';
 import { VerifyCode } from '@features/pages/auth/verify-code/verify-code';
+import { Catalog } from '@features/pages/catalog/catalog';
 import { Profile } from '@features/pages/home/profile/profile';
 
 export const routes: Routes = [
@@ -30,8 +31,12 @@ export const routes: Routes = [
         canActivate: [ profileGuard ],
         component: Profile
 
-      }
+      },
+      {
+        path: "catalog",
+        component: Catalog
 
+      }
     ]
 
   }
