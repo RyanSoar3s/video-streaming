@@ -7,6 +7,8 @@ import { catchError } from 'rxjs/operators';
 import { HandleToken } from './handle-token';
 import { responseError } from '@core/models/responseError.model';
 import { ProfileInfo } from './profile-info';
+import { TVideoStreaming } from '@models/videoStreaming.model';
+import { VideoStreaming } from './video-streaming';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,7 @@ export class RequestApi {
   private http = inject(HttpClient);
   private handleToken = inject(HandleToken);
   private profileInfo = inject(ProfileInfo);
+  private videoStreaming = inject(VideoStreaming);
 
   private apiUrl = environment.apiUrl;
 
@@ -29,6 +32,16 @@ export class RequestApi {
                 catchError((error: responseError) => this.handleError(error))
 
               );
+
+  }
+
+  catalog(): Observable<{ message: string } & TVideoStreaming> {
+    return this.http.get<{ message: string } & TVideoStreaming>(`${this.apiUrl}/catalog`, { withCredentials: true })
+                .pipe(
+                  tap((content) => this.videoStreaming.setVideoStreamingContent(content)),
+                  catchError((error: responseError) => this.handleError(error))
+
+                )
 
   }
 
