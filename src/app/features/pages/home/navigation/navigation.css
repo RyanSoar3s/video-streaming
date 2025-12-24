@@ -94,7 +94,7 @@
   @apply flex items-center justify-start h-[44px] w-full pl-[calc(106px*0.5)]! cursor-pointer;
 
   .options {
-    @apply flex items-center h-auto w-auto p-[12px]! rounded-full hover-option:bg-[#6f6f6fad] cursor-pointer;
+    @apply relative flex items-center h-auto w-auto p-[12px]! rounded-full hover-option:bg-[#6f6f6fad] cursor-pointer;
 
   }
 
