@@ -1,0 +1,13 @@
+@let vs = videoStreaming.videoStreaming();
+
+@if (vs) {
+  @let catalog = (vs.Catalog) ? [ vs.Catalog ] : null;
+
+  @if (catalog) {
+    <app-content-model [contents]="catalog"></app-content-model>
+
+  }
+
+
+}
+
