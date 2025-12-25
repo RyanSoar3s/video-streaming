@@ -1,4 +1,5 @@
 type TBaseMedia = {
+  type: Array<"movie" | "serie" | "animation">,
   id: string,
   title: string,
   description: string,
@@ -8,33 +9,28 @@ type TBaseMedia = {
   imageUrl: string,
   iframe: string
 
-}
+};
 
-type TMovie = TBaseMedia & {
-  type: "movie"
-
-}
+type TMovie = TBaseMedia;
 
 type TSerie = TBaseMedia & {
-  type: "serie",
   seasons: number,
   episodes: number
 
-}
+};
 
 type TAnimation = TBaseMedia & {
-  type: "animation",
   studio: string
 
-}
+};
 
-type TCategorie = TMovie | TSerie | TAnimation
+type TCategorie = TMovie | TSerie | TAnimation;
 
 export type TContent = {
   sectionTitle: string,
   items: Array<TCategorie>
 
-}
+};
 
 type TContentDivision = "Catalog" | "MostWatched" | "Releases";
 
