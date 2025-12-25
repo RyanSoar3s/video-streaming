@@ -7,6 +7,7 @@ import createUser from "../db/createUser.js"
 import { OAuth2Client } from "google-auth-library"
 import jwt from "jsonwebtoken"
 import generateUsername from "../utils/generateUsername.js"
+import catalog from "./catalogService.js"
 
 const userService = {
   profile: async (token) => {
@@ -35,6 +36,7 @@ const userService = {
     }
 
   },
+  catalog: () => catalog,
   accessGoogle: async (token) => {
     if (!token) throw new Error("Token é obrigatório")
 
