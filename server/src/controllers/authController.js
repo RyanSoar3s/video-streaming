@@ -15,6 +15,12 @@ const authController = {
     }
 
   },
+  catalog: (_, res) => {
+    const catalog = userService.catalog()
+
+    return res.json({ message: "Catálogo obtido", catalog })
+
+  },
   accessGoogle: async (req, res) => {
     const { token } = req.body
 

@@ -5,6 +5,7 @@ import authMiddleware from "../middleware/authMiddleware.js"
 const router = Router()
 
 router.get("/profile", authMiddleware, auth.profile)
+router.get("/catalog", authMiddleware, auth.catalog)
 router.post("/google", auth.accessGoogle)
 router.post("/register", auth.register)
 router.post("/login", auth.login)
