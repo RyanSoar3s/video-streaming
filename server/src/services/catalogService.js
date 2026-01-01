@@ -113,11 +113,11 @@ const AllContent = {
       title: "Sherlock",
       description: "Uma releitura moderna das histórias de Sherlock Holmes, ambientada na Londres contemporânea.",
       year: 2010,
-      genre: [ "Drama", "Crime", "Mistério" ],
-      rating: 9.1,
+      genre: [ "Investigação", "Drama", "Crime", "Mistério" ],
+      rating: 9.0,
       imagesUrl: [
         "https://m.media-amazon.com/images/M/MV5BNTQzNGZjNDEtOTMwYi00MzFjLWE2ZTYtYzYxYzMwMjZkZDc5XkEyXkFqcGc@._V1_.jpg",
-        "https://br.web.img2.acsta.net/pictures/16/12/26/17/20/541245.jpg"
+        "https://images5.alphacoders.com/853/853867.jpg"
       ],
       iframe: iframe("https://www.youtube.com/embed/Eq3pF5OhlJk?si=lNXEB7rlwlW_bciy"),
       seasons: 4,
