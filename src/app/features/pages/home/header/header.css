@@ -1,12 +1,56 @@
 @reference "tailwindcss";
 
+@utility header-before {
+  &::before {
+    content: "Conteúdo Indisponível";
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(180deg, #060606 0%, #07090B 33%, #13191e 66%, #20272e 100%);
+    color: white;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 2.3em;
+    font-weight: 500;
+
+  }
+
+}
+
+@utility header-after {
+  &::after {
+    content: "Erro ao Acessar o Catálogo";
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    top: 100px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 1.8em;
+    font-weight: 400;
+
+  }
+
+}
+
 :host {;
   @apply relative flex justify-end h-[650px] w-lvw top-0;
 
 }
 
 .header {
-  @apply relative flex flex-col justify-between bg-[image:url(../banners/sherlock.webp)] bg-cover bg-top bg-no-repeat h-full p-4! inset-shadow-[0px_0px_70px_25px_#000000c9] overflow-hidden;
+  @apply relative flex flex-col justify-between bg-cover bg-top bg-no-repeat h-full p-4! inset-shadow-[0px_0px_70px_25px_#000000c9] overflow-hidden;
+
+}
+
+.header-no-content {
+  @apply header-before header-after;
 
 }
 
