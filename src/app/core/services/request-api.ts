@@ -35,10 +35,10 @@ export class RequestApi {
 
   }
 
-  catalog(): Observable<{ message: string } & TVideoStreaming> {
-    return this.http.get<{ message: string } & TVideoStreaming>(`${this.apiUrl}/catalog`, { withCredentials: true })
+  catalog(): Observable<{ message: string, catalog: TVideoStreaming }> {
+    return this.http.get<{ message: string, catalog: TVideoStreaming }>(`${this.apiUrl}/catalog`, { withCredentials: true })
                 .pipe(
-                  tap((content) => this.videoStreaming.setVideoStreamingContent(content)),
+                  tap(({ catalog }) => this.videoStreaming.setVideoStreamingContent(catalog)),
                   catchError((error: responseError) => this.handleError(error))
 
                 )

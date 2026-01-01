@@ -7,7 +7,19 @@
 @let isLarge = LG || XL;
 @let isSmall = XS || SM;
 
-<header [ngClass]="'header'" [ngStyle]="{ 'width': (isSmall) ? '100%' : 'calc(100% - 150px)' }">
+@let vs = videoStreaming.videoStreaming();
+
+<header
+      [ngClass]="{
+        'header': true,
+        'header-no-content': (!vs)
+
+      }"
+      [ngStyle]="{
+      'background-image': (vs) ? 'url(' + vs.MainContent.items[0].imagesUrl[1] + ')' : '',
+      'width': (isSmall) ? '100%' : 'calc(100% - 150px)'
+
+      }">
   <div [ngClass]="'flex justify-between w-full'">
     <div [ngClass]="'h-[40px] w-[40px] select-auto'">
       <img [ngClass]="'h-full w-full pointer-events-none select-auto'" [src]="'favicon.ico'" [alt]="'Logotipo'">
@@ -63,25 +75,28 @@
 
   </div>
 
-  <div [ngClass]="'text-white flex flex-col justify-evenly h-[320px] w-[365px] mb-[30px]!'">
+  @if (vs) {
+    @let c = vs.MainContent.items[0];
+
+    <div [ngClass]="'text-white flex flex-col justify-evenly h-[320px] w-[365px] mb-[30px]!'">
     <h1 [ngClass]="{
                     'text-5xl': (isSmall),
                     'text-6xl': (!isSmall),
                     'font-medium': true
 
-                    }">Sherlock</h1>
+                    }">{{ c.title }}</h1>
     <div [ngClass]="'flex items-center gap-2'">
       <div [ngClass]="'h-[15px] w-[15px] mb-[6px]!'">
         <img [ngClass]="'h-full w-full'" [src]="star" [alt]="'estrela'">
 
       </div>
-      <p>9,0/10 󠁯•󠁏󠁏 Investigação 󠁯•󠁏󠁏 2010</p>
+      <p>{{ c.rating | number:'1.1-1' }}/10 󠁯•󠁏󠁏 {{ c.genre[0] }} 󠁯•󠁏󠁏 {{ c.year }}</p>
 
     </div>
 
     <div [ngClass]="'w-[350px]'">
-      <p [ngClass]="'text-justify text-ellipsis text-nowrap overflow-hidden w-full'">
-        Sherlock Holmes atua como detetive consultor <br> em Londres, resolvendo mistérios que a polícia <br> não consegue. Junto com o Dr. John Watson, <br> enfrentam casos intricados e adversários de alta periculosidade — principalmente o enigmático Jim Moriarty
+      <p [ngClass]="'text-justify line-clamp-2 w-full'">
+        {{ c.description }}
 
       </p>
 
@@ -93,6 +108,8 @@
     </button>
 
   </div>
+
+  }
 
 </header>
 

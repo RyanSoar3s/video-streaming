@@ -1,6 +1,6 @@
 import { CommonModule, DecimalPipe } from '@angular/common';
-import { Component, ElementRef, inject, input, OnInit, Renderer2, viewChildren } from '@angular/core';
-import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { Component, ElementRef, HostListener, inject, input, Renderer2, viewChildren } from '@angular/core';
+import { faArrowRight, faArrowLeft, faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Responsive } from '@core/services/responsive';
 import { TContent } from '@models/videoStreaming.model';
@@ -16,9 +16,11 @@ import { TContent } from '@models/videoStreaming.model';
   templateUrl: './content-model.html',
   styleUrl: './content-model.css',
 })
-export class ContentModel implements OnInit {
+
+export class ContentModel {
   protected readonly faArrowRight = faArrowRight;
   protected readonly faArrowLeft = faArrowLeft;
+  protected readonly faBoxOpen = faBoxOpen;
 
   protected readonly star = "assets/home/star.png";
 
@@ -28,36 +30,70 @@ export class ContentModel implements OnInit {
   private items = viewChildren<ElementRef<HTMLElement>>("items");
 
   isCarousel = input(false);
-  contents = input.required<Array<TContent & { posX?: number }>>();
+  contents = input.required<Array<TContent & { scroll?: number }>>();
 
-  ngOnInit(): void {
-    if (this.isCarousel()) this.contents().forEach((c) => c.posX = 0);
+  canScroll(index: number): boolean {
+    const container = this.items()[index]?.nativeElement;
+    const parent = container?.parentElement;
+
+    if (!container || !parent) return false;
+
+    const children = container.children;
+    if (children.length < 2) return false;
+
+    const step =
+      (children[1] as HTMLElement).offsetLeft -
+      (children[0] as HTMLElement).offsetLeft;
+
+    const visible = Math.ceil(parent.offsetWidth / step);
+
+    return children.length > visible;
 
   }
 
-  navigateCarrousel(direction: "left" | "right", index: number, scrollLimitRate: number): void {
-    const currentContent = this.contents()[index];
-    if (!currentContent) return;
+  navigateCarrousel(direction: "left" | "right", index: number): void {
+    const content = this.contents()[index];
+    const container = this.items()[index]?.nativeElement;
+    const parent = container?.parentElement;
 
-    const items = this.items()[index].nativeElement;
-    const limit = scrollLimitRate * 20;
+    if (!content || !container || !parent) return;
 
-    if (direction === "left") {
-      if ((currentContent.posX ?? 0) < 0) {
-        currentContent.posX! += limit;
+    if (content.scroll === undefined) content.scroll = 0;
 
-      }
+    const children = container.children;
+    if (children.length < 2) return;
 
-    }
-    else {
-      if ((currentContent.posX ?? 0) > -limit) {
-        currentContent.posX! -= limit;
+    const step =
+      (children[1] as HTMLElement).offsetLeft -
+      (children[0] as HTMLElement).offsetLeft;
 
-      }
+    const visible = Math.ceil(parent.offsetWidth / step);
+    const maxPage = Math.max(0, children.length - visible);
 
-    }
+    content.scroll = (direction === "right") ?
+                    Math.min(content.scroll + visible, maxPage) :
+                    Math.max(content.scroll - visible, 0);
 
-    this.renderer.setStyle(items, "transform", `translateX(${currentContent.posX}%)`);
+
+    const scroll = content.scroll * step;
+
+    this.renderer.setStyle(
+      container,
+      "transform",
+      `translateX(-${scroll}px)`
+
+    );
+
+  }
+
+  @HostListener("window:resize")
+  resetCarrouselsOnResize(): void {
+    this.contents().forEach((content, index) => {
+      content.scroll = 0;
+      const section = this.items()[index].nativeElement;
+      this.renderer.setStyle(section, "transform", "translateX(0px)");
+
+    });
 
   }
 

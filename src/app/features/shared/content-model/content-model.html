@@ -4,21 +4,19 @@
 @let LG = responsive.isLg();
 @let XL = responsive.isXl();
 
-@let scrollLimitRate = (LG) ? 1 : 2;
-
 <section [ngClass]="'relative flex flex-col h-auto w-full mb-[30px]!'">
   @for (content of contents(); track i; let i = $index) {
     <h2 [ngClass]="'text-[1.7em] font-bold mt-[20px]! mb-[20px]! ml-2.5'"> {{ content.sectionTitle }}</h2>
-
-    <div [ngClass]="'relative w-full'">
-      @if (!XL) {
+    <div [ngClass]="'relative w-full overflow-hidden'">
+      @if (isCarousel()) {
         <div [ngClass]="'absolute h-full w-full'">
           <div [ngClass]="'flex items-end justify-between p-[0px_10px]! h-full'">
-            <button [ngClass]="'arrow'" (click)="void navigateCarrousel('left', i, scrollLimitRate)">
+            <button [ngClass]="'arrow'" [disabled]="!canScroll(i)" (click)="void navigateCarrousel('left', i)">
               <fa-icon [icon]="faArrowLeft"></fa-icon>
 
             </button>
-            <button [ngClass]="'arrow'" (click)="void navigateCarrousel('right', i, scrollLimitRate)">
+
+            <button [ngClass]="'arrow'" [disabled]="!canScroll(i)" (click)="void navigateCarrousel('right', i)">
               <fa-icon [icon]="faArrowRight"></fa-icon>
 
             </button>
@@ -28,19 +26,18 @@
         </div>
 
       }
-
-      <div #items [ngClass]="'relative flex justify-center h-auto m-[20px_0px_60px_0px]! transition ease-out duration-500 scroll-smooth z-10'" [ngStyle]="{
-        'width': (XL) ? '100%' :
-                  (LG) ? 'calc(100% + (100% / 4))' : 'calc(100% + (2 * ((100% / 3)))',
-
-        'gap': (XL) ? 'calc((100% / 5) - 185px)' :
-                (LG) ? 'calc((100% / 5) - 180px)' :
-                (MD || SM) ? 'calc((100% / 5) - 170px)' : 'calc((100% / 5) - 120px)'
+      <div #items [ngClass]="'relative grid grid-flow-col h-auto w-full m-[20px_0px_60px_0px]! p-[0px_15px]! transition ease-out duration-500 scroll-smooth z-10'"
+      [ngStyle]="{
+        'grid-auto-columns': (XL) ? '185px' : (LG) ? '180px' : (MD) ? '170px' : (SM) ? '160px' : '120px',
+        'column-gap': (XL) ? 'calc((100% - (5 * 185px)) / 4)' :
+                      (LG) ? 'calc((100% - (4 * 180px)) / 3)' :
+                      (MD) ? 'calc((100% - (3 * 170px)) / 2)' :
+                      (SM) ? 'calc((100% - (3 * 160px)) / 2)' : 'calc((100% - (3 * 120px)) / 2)'
 
       }">
-        @for (item of content.items; track item) {
+        @for (item of content.items; track item.id) {
           <div [ngClass]="'flex flex-col gap-[5px]'" [ngStyle]="{
-            'width': (XL) ? '185px' :
+            'width':  (XL) ? '185px' :
                       (LG) ? '180px' :
                       (MD) ? '170px' :
                       (SM) ? '160px' : '120px'
@@ -53,7 +50,15 @@
                         (SM) ? '230px' : '200px'
 
             }">
-              <img [ngClass]="'h-full w-full rounded-[20px]'" [src]="item.imageUrl" [alt]="item.title">
+
+             <img
+              [src]="item.imagesUrl[0]"
+              [width]="185"
+              [height]="265"
+              [ngClass]="'h-full w-full rounded-[20px]'"
+              [alt]="item.title"
+
+              >
 
             </div>
 
@@ -78,6 +83,26 @@
         }
 
       </div>
+
+    </div>
+
+  }
+  @empty {
+    <div [ngClass]="'flex flex-col items-center justify-center w-full h-[280px] gap-4 text-center text-gray-400 select-none'">
+
+      <div [ngClass]="'flex items-center justify-center w-[80px] h-[80px] rounded-full bg-gray-800'">
+        <fa-icon [icon]="faBoxOpen" [ngClass]="'text-[2rem] text-gray-500'"></fa-icon>
+
+      </div>
+
+      <h3 [ngClass]="'text-lg font-semibold'">
+        Nenhum conteúdo disponível
+
+      </h3>
+
+      <p [ngClass]="'text-sm max-w-[320px]'">
+        No momento não há itens para exibir nesta seção.
+      </p>
 
     </div>
 

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { Responsive } from '@core/services/responsive';
+import { VideoStreaming } from '@core/services/video-streaming';
 
 @Component({
   selector: 'app-header',
@@ -27,6 +28,8 @@ export class Header {
                     { id: 3, content: this.magnifyingGlass, select: false }
 
                   ];
+
+  protected readonly videoStreaming = inject(VideoStreaming);
 
   selectOption(id: number): void {
     this.navOptions.forEach((el, index) => {
