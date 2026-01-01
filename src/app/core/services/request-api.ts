@@ -32,6 +32,16 @@ export class RequestApi {
 
   }
 
+  catalog(): Observable<{ message: string, catalog: TVideoStreaming }> {
+    return this.http.get<{ message: string, catalog: TVideoStreaming }>(`${this.apiUrl}/catalog`, { withCredentials: true })
+                .pipe(
+                  tap(({ catalog }) => this.videoStreaming.setVideoStreamingContent(catalog)),
+                  catchError((error: responseError) => this.handleError(error))
+
+                )
+
+  }
+
   accessGoogle(token: string): Observable<Response> {
     return this.http.post<Response>(
       `${this.apiUrl}/google`,
