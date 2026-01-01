@@ -24,6 +24,7 @@ export class Home implements OnInit {
   private request = inject(RequestApi);
 
   ngOnInit(): void {
+    this.request.catalog().subscribe(() => console.log("Catálogo obtido com sucesso"));
     this.request.profile().subscribe({
       next: () => {
         console.log("Dados obtidos com sucesso")
