@@ -27,10 +27,18 @@
         </div>
 
       }
+      <div #items [ngClass]="{
+        'carousel': true,
+        'grid-flow-col': isCarousel(),
+        'grid-flow-row gap-y-[50px]': !isCarousel(),
 
-      <div #items [ngClass]="'relative grid grid-flow-col h-auto w-full m-[20px_0px_60px_0px]! p-[0px_15px]! transition ease-out duration-500 scroll-smooth z-10'"
+      }"
       [ngStyle]="{
         'grid-auto-columns': (XL) ? '185px' : (LG) ? '180px' : (MD) ? '170px' : (SM) ? '160px' : '120px',
+        'grid-template-columns': (isCarousel()) ? 'none' :
+                                  (XL) ? 'repeat(5, 1fr)' :
+                                    (LG) ? 'repeat(4, 1fr)' : 'repeat(3, 1fr)',
+
         'column-gap': (XL) ? 'calc((100% - (5 * 185px)) / 4)' :
                       (LG) ? 'calc((100% - (4 * 180px)) / 3)' :
                       (MD) ? 'calc((100% - (3 * 170px)) / 2)' :
@@ -54,8 +62,8 @@
             }">
              <img
               [src]="item.imagesUrl[0]"
-              [width]="185"
-              [height]="265"
+              [attr.width]="185"
+              [attr.height]="265"
               [ngClass]="'h-full w-full rounded-[20px]'"
               [alt]="item.title"
 
@@ -103,6 +111,7 @@
 
       <p [ngClass]="'text-sm max-w-[320px]'">
         No momento não há itens para exibir nesta seção.
+
       </p>
 
     </div>
