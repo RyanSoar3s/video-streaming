@@ -17,11 +17,12 @@ export class Navigation {
   protected readonly magnifyingGlass = "assets/home/magnifying-glass-white.png";
 
   protected readonly icons = [
-    { id: 0, name: "Início", icon: "assets/navigation/house.png" },
-    { id: 1, name: "Catálogo", icon: "assets/navigation/tv.png" },
-    { id: 2, name: "Mais vistos", icon: "assets/navigation/fire.png" },
-    { id: 3, name: "Favoritos", icon: "assets/navigation/star.png" },
-    { id: 4, name: "Biblioteca", icon: "assets/navigation/layer.png" },
+
+    { id: 0, name: "Início",      icon: "assets/navigation/house.png", link: "/home" },
+    { id: 1, name: "Catálogo",    icon: "assets/navigation/tv.png",    link: "/home/catalog" },
+    { id: 2, name: "Mais vistos", icon: "assets/navigation/fire.png",  link: "" },
+    { id: 3, name: "Favoritos",   icon: "assets/navigation/star.png",  link: "" },
+    { id: 4, name: "Biblioteca",  icon: "assets/navigation/layer.png", link: "" }
 
   ];
 
