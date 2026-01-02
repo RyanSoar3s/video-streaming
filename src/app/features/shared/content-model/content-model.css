@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 @utility arrow-style {
-  @apply flex items-center justify-center h-[45px] w-[45px] border-2 border-solid border-gray-400 text-white font-bold  rounded-full;
+  @apply flex items-center justify-center h-[45px] w-[45px] border-2 border-solid border-gray-400 text-white font-bold rounded-full;
 
 }
 
@@ -16,7 +16,12 @@
 }
 
 :host {
-  @apply block;
+  @apply block w-[100%];
+
+}
+
+.carousel {
+  @apply relative grid h-auto w-full m-[20px_0px_60px_0px]! p-[0px_15px]! transition ease-out duration-500 scroll-smooth z-10;
 
 }
 
