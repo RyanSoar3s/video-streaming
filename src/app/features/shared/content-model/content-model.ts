@@ -9,8 +9,7 @@ import { TContent } from '@models/videoStreaming.model';
   selector: 'app-content-model',
   imports: [
     CommonModule,
-    FontAwesomeModule,
-    DecimalPipe
+    FontAwesomeModule
 
   ],
   templateUrl: './content-model.html',
