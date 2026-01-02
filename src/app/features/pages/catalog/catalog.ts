@@ -1,6 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { responseError } from '@core/models/responseError.model';
-import { RequestApi } from '@core/services/request-api';
+import { Component, inject } from '@angular/core';
+import { Responsive } from '@core/services/responsive';
 import { VideoStreaming } from '@core/services/video-streaming';
 import { ContentModel } from '@features/shared/content-model/content-model';
 
@@ -12,18 +11,14 @@ import { ContentModel } from '@features/shared/content-model/content-model';
   ],
   templateUrl: './catalog.html',
   styleUrl: './catalog.css',
-})
-export class Catalog implements OnInit {
-  private request = inject(RequestApi);
-  protected readonly videoStreaming = inject(VideoStreaming);
-
-  ngOnInit(): void {
-    this.request.catalog().subscribe({
-      next: () => console.log("Catálogo foi carregado"),
-      error: (error: responseError) => console.error(`Error: ${error.error.message}`)
-
-    });
+  host: {
+    '[style.padding]': `(responsive.isSm() || responsive.isXs()) ? '0px 20px' : '0px 50px'`
 
   }
+
+})
+export class Catalog {
+  protected readonly videoStreaming = inject(VideoStreaming);
+  protected readonly responsive = inject(Responsive);
 
 }
