@@ -9,7 +9,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     Navigation,
-    Header
+    Header,
+    RouterModule
   ],
   templateUrl: './home.html',
   styleUrl: './home.css'
