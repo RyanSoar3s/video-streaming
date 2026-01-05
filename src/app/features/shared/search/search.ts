@@ -1,15 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, input, output, viewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, input, output, viewChild } from '@angular/core';
 import { Responsive } from '@core/services/responsive';
-import { ɵInternalFormsSharedModule } from "@angular/forms";
 import { VideoStreaming } from '@core/services/video-streaming';
 import { TContent } from '@models/videoStreaming.model';
 
 @Component({
   selector: 'app-search',
   imports: [
-    CommonModule,
-    ɵInternalFormsSharedModule
+    CommonModule
 ],
   templateUrl: './search.html',
   styleUrl: './search.css',
@@ -34,6 +32,12 @@ export class Search {
 
   content = output<Array<TContent> | null>();
 
+  @HostListener("document:keydown", [ "$event" ])
+  onClickEnter(event: KeyboardEvent): void {
+    if (event.key === "Enter") this.searchContent();
+
+  }
+
   searchContent(): void {
     const search = this.search()?.nativeElement.value;
     const searchContent = this.videoStreaming.searchByTitle(search!);
@@ -41,7 +45,7 @@ export class Search {
     this.content.emit(
                       [
                         {
-                          sectionTitle: `Resultado: ${search}`,
+                          sectionTitle: (search) ? `Resultado: ${search}` : "Todos",
                           items: searchContent!
 
                         }
