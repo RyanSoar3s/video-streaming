@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, OnInit, Injector, runInInjectionContext } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { RequestApi } from '@core/services/request-api';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXmark, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
@@ -16,7 +16,6 @@ import { responseError } from '@core/models/responseError.model';
   imports: [
     CommonModule,
     FontAwesomeModule,
-    RouterOutlet,
     RouterLink,
     ReactiveFormsModule
 

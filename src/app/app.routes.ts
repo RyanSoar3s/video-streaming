@@ -27,9 +27,16 @@ export const routes: Routes = [
     loadComponent: () => import("@features/pages/home/home").then(m => m.Home),
     children: [
       {
+        path: "",
+        loadComponent: () => import("@features/pages/home/contents/contents").then(m => m.Contents)
+
+      },
+      {
         path: "profile",
+        pathMatch: "full",
         canActivate: [ profileGuard ],
-        component: Profile
+        component: Profile,
+        outlet: "info"
 
       },
       {
