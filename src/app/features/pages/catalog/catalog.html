@@ -1,4 +1,30 @@
+@let XS = responsive.isXs();
+@let SM = responsive.isSm();
+@let MD = responsive.isMd();
+@let LG = responsive.isLg();
+@let XL = responsive.isXl();
+
 @let vs = videoStreaming.videoStreaming();
-@let c = (vs) ? [ vs.All ] : [];
+@let c = (contentSearched) ? contentSearched :
+          (vs) ? [ vs.All ] : [];
+
+<div [ngClass]="'relative flex justify-center w-full mt-[10px] mb-[50px]'">
+  @if (XS || SM) {
+    <div [ngClass]="'absolute h-[42px] w-[42px] -left-1 bottom-0 cursor-pointer'" routerLink="/home">
+      <img [ngClass]="'h-full w-full'" [src]="icon" [alt]="'Imagem de ícone'">
+
+    </div>
+
+  }
+
+  <app-search
+            [height]="40"
+            [width]="(XL || LG) ? 70 : (MD) ? 87 : 84"
+            [margin]="(XS || SM) ? '0px 0px 0px 40px' : '0px'"
+            (content)="void setContentSearched($event)"
+
+            ></app-search>
+
+</div>
 
 <app-content-model [contents]="c"></app-content-model>
