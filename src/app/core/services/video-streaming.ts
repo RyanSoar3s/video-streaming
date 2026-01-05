@@ -42,4 +42,14 @@ export class VideoStreaming {
 
   }
 
+  searchByTitle(title: string): TContent["items"] | null {
+    const vs = this.videoStreamingSignal();
+
+    let content: TContent["items"] | null = (vs) ?
+                                             vs.All.items.filter((el) => el.title.toUpperCase().includes(title.toUpperCase().trim())) : null;
+
+    return content;
+
+  }
+
 }
