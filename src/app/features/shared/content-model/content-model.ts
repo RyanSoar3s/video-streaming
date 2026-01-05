@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, inject, input, Renderer2, viewChildren } from '@angular/core';
-import { faArrowRight, faArrowLeft, faBoxOpen } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faArrowLeft, faBoxOpen, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Responsive } from '@core/services/responsive';
 import { TContent } from '@models/videoStreaming.model';
@@ -20,6 +20,7 @@ export class ContentModel {
   protected readonly faArrowRight = faArrowRight;
   protected readonly faArrowLeft = faArrowLeft;
   protected readonly faBoxOpen = faBoxOpen;
+  protected readonly faSearch = faSearch;
 
   protected readonly star = "assets/home/star.png";
 

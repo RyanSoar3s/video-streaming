@@ -7,7 +7,7 @@
 <section [ngClass]="'relative flex flex-col h-auto w-full mb-[30px]!'">
   @for (content of contents(); track i; let i = $index) {
     <h2 [ngClass]="'text-[1.7em] font-bold mt-[20px]! mb-[20px]! ml-2.5'"> {{ content.sectionTitle }}</h2>
-    <div [ngClass]="'relative w-full overflow-hidden'">
+    <div [ngClass]="'relative w-full'">
       @if (isCarousel()) {
         <div [ngClass]="'absolute h-full w-full'">
           <div [ngClass]="'flex items-end justify-between p-[0px_10px]! h-full'">
@@ -90,6 +90,26 @@
           </div>
 
         }
+        @empty {
+          <div [ngClass]="'no-content'">
+            <div [ngClass]="'flex items-center justify-center w-[80px] h-[80px] rounded-full bg-gray-800'">
+              <fa-icon [icon]="faSearch" [ngClass]="'text-[2rem] text-gray-500'"></fa-icon>
+
+            </div>
+
+            <h3 [ngClass]="'text-[1.5em] font-bold'">
+              Nenhum resultado encontrado
+
+            </h3>
+
+            <p [ngClass]="'text-[1em] max-w-[320px]'">
+              Não encontramos nenhum título que corresponda à sua pesquisa.
+
+            </p>
+
+          </div>
+
+        }
 
       </div>
 
@@ -98,7 +118,6 @@
   }
   @empty {
     <div [ngClass]="'flex flex-col items-center justify-center w-full h-[280px] gap-4 text-center text-gray-400 select-none'">
-
       <div [ngClass]="'flex items-center justify-center w-[80px] h-[80px] rounded-full bg-gray-800'">
         <fa-icon [icon]="faBoxOpen" [ngClass]="'text-[2rem] text-gray-500'"></fa-icon>
 

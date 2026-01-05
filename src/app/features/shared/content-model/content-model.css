@@ -29,3 +29,13 @@
   @apply arrow-style arrow-enabled disabled:arrow-disabled;
 
 }
+
+.no-content {
+  @apply flex flex-col items-center justify-center gap-3 col-span-full w-full h-[220px] text-center text-gray-400 select-none transform-[translateY(50%)];
+
+}
+
+.no-content {
+  @apply flex flex-col items-center justify-center gap-3 col-span-full w-full h-[220px] text-center text-gray-400 select-none transform-[translateY(50%)];
+
+}
