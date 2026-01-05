@@ -1,6 +1,6 @@
-import { CommonModule, DecimalPipe } from '@angular/common';
-import { Component, ElementRef, inject, input, OnInit, Renderer2, viewChildren } from '@angular/core';
-import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { CommonModule } from '@angular/common';
+import { Component, ElementRef, HostListener, OnInit, inject, input, Renderer2, viewChildren } from '@angular/core';
+import { faArrowRight, faArrowLeft, faBoxOpen, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Responsive } from '@core/services/responsive';
 import { TContent } from '@models/videoStreaming.model';
@@ -9,8 +9,7 @@ import { TContent } from '@models/videoStreaming.model';
   selector: 'app-content-model',
   imports: [
     CommonModule,
-    FontAwesomeModule,
-    DecimalPipe
+    FontAwesomeModule
 
   ],
   templateUrl: './content-model.html',
@@ -19,6 +18,8 @@ import { TContent } from '@models/videoStreaming.model';
 export class ContentModel implements OnInit {
   protected readonly faArrowRight = faArrowRight;
   protected readonly faArrowLeft = faArrowLeft;
+  protected readonly faBoxOpen = faBoxOpen;
+  protected readonly faSearch = faSearch;
 
   protected readonly star = "assets/home/star.png";
 
