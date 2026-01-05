@@ -289,8 +289,8 @@ const AllContent = {
     {
       type: [ "animation", "movie" ],
       id: 19,
-      title: "Homem-Aranha no Aranhaverso",
-      description: "Diversas versões do Homem-Aranha se unem.",
+      title: "Homem Aranha no Aranhaverso",
+      description: "Diversas versões do Homem Aranha se unem.",
       year: 2018,
       genre: [ "Animação", "Ação", "Aventura" ],
       rating: 8.4,
