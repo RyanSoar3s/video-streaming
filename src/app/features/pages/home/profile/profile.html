@@ -52,7 +52,7 @@
               (MD) ? '300px' : '280px'
 
   }">
-  <div [ngClass]="'absolute h-[40px] w-[40px] top-0 right-0 mt-2.5 mr-4 text-[2em] cursor-pointer'">
+  <div [ngClass]="'absolute h-[40px] w-[40px] top-0 right-0 mt-2.5 mr-4 text-[2em] cursor-pointer z-500'">
     <fa-icon [icon]="faXmark"></fa-icon>
     <a [ngClass]="'absolute block h-full w-full top-0'" routerLink="/home"></a>
 
@@ -127,5 +127,3 @@
   </div>
 
 </section>
-
-<router-outlet></router-outlet>
