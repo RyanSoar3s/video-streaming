@@ -1,41 +1,19 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Navigation } from './navigation/navigation';
 import { Header } from './header/header';
-import { Contents } from './contents/contents';
-import { Responsive } from '@core/services/responsive';
 import { CommonModule } from '@angular/common';
-import { RequestApi } from '@core/services/request-api';
-import { responseError } from '@core/models/responseError.model';
 
 @Component({
   selector: 'app-home',
   imports: [
     CommonModule,
     Navigation,
-    Header,
-    Contents
-
+    Header
   ],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home implements OnInit {
-  protected readonly responsive = inject(Responsive);
-  private request = inject(RequestApi);
 
-  ngOnInit(): void {
-    this.request.profile().subscribe({
-      next: () => {
-        console.log("Dados obtidos com sucesso")
-
-      },
-      error: (error: responseError) => {
-        console.error(`Error: ${error.error.message}`)
-
-      }
-
-    });
-
-  }
+export class Home {
 
 }
