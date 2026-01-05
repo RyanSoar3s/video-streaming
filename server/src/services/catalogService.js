@@ -242,7 +242,7 @@ const AllContent = {
     {
       type: [ "animation", "serie" ],
       id: 16,
-      title: "Pica-Pau",
+      title: "Pica Pau",
       description: "As travessuras de um pássaro irreverente.",
       year: 1999,
       genre: [ "Animação", "Comédia" ],
