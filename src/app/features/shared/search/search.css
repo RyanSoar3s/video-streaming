@@ -1,0 +1,11 @@
+@reference "tailwindcss";
+
+:host {
+  @apply block;
+
+}
+
+.search {
+  @apply h-full w-full p-[0px_38px_0px_10px] border-2 border-solid border-white rounded-[8px] placeholder:text-[#c7c7c7] outline-none;
+
+}
