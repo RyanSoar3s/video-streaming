@@ -12,8 +12,8 @@ import { TContent } from '@models/videoStreaming.model';
   templateUrl: './search.html',
   styleUrl: './search.css',
   host: {
-    '[style.height]': `height() + 'px'`,
-    '[style.width]': `width() + '%'`,
+    '[style.height]': 'height()',
+    '[style.width]': 'width()',
     '[style.margin]': 'margin()'
 
   }
@@ -25,12 +25,12 @@ export class Search {
 
   protected readonly magnifyingGlass = "assets/home/magnifying-glass-white.png";
 
-  height = input.required<number>();
-  width = input.required<number>();
+  height = input.required<string>();
+  width = input.required<string>();
   margin = input<string>("0px");
   borderRadius = input<string>("0px");
 
-  content = output<Array<TContent> | null>();
+  content = output<Array<{ params: string } & TContent>>();
 
   @HostListener("document:keydown", [ "$event" ])
   onClickEnter(event: KeyboardEvent): void {
@@ -40,17 +40,18 @@ export class Search {
 
   searchContent(): void {
     const search = this.search()?.nativeElement.value;
-    const searchContent = this.videoStreaming.searchByTitle(search!);
+    const searchContent = this.videoStreaming.searchBySameTitle(search!);
 
     this.content.emit(
                       [
                         {
+                          params: (search) ? search : "Todos",
                           sectionTitle: (search) ? `Resultado: ${search}` : "Todos",
-                          items: searchContent!
+                          items: searchContent
 
                         }
 
-                      ] satisfies Array<TContent>
+                      ] satisfies Array<{ params: string } & TContent>
 
                     );
 
