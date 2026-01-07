@@ -182,7 +182,8 @@ const AllContent = {
       genre: [ "Drama", "Suspense" ],
       rating: 8.0,
       imagesUrl: [
-        "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p20492218_b_v8_ae.jpg"
+        "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p20492218_b_v8_ae.jpg",
+        "https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABSlCq3x0mzdgFd1PeYqPTxTE1awDh5jYeAayIIjvZjLBHy971DLaTHBAzWwuYygqn_xscoiBxMtf1LncymZJzkqhYw3M-GBNupEZ.jpg?r=90b"
       ],
       iframe: iframe("https://www.youtube.com/embed/7bOphbY6MI4?si=AHS2ywUkVZtVH6MX"),
       seasons: 2,
@@ -295,7 +296,9 @@ const AllContent = {
       genre: [ "Animação", "Ação", "Aventura" ],
       rating: 8.4,
       imagesUrl: [
-        "https://m.media-amazon.com/images/S/pv-target-images/843838036cc65da9220af3d522161e34cc233f00bd20c1331b03153f35a196f7.jpg"
+        "https://m.media-amazon.com/images/S/pv-target-images/843838036cc65da9220af3d522161e34cc233f00bd20c1331b03153f35a196f7.jpg",
+        "https://m.media-amazon.com/images/M/MV5BYWI1OTM1MGQtOTI5NC00OTdhLTg3YzgtZWRhYWY3ODg5NzI0XkEyXkFqcGc@._V1_.jpg"
+
       ],
       iframe: iframe("https://www.youtube.com/embed/SS6ABPkfmBE?si=4l9h6HamL83zxljL"),
       studio: "Sony Pictures Animation"
