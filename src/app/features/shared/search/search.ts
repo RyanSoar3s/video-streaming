@@ -46,8 +46,8 @@ export class Search {
   onClickEnter(event: KeyboardEvent): void {
     if (event.key === "Enter") {
       const search = this.search();
-      if (search) search.nativeElement.value = "";
       this.searchContent()
+      if (search) search.nativeElement.value = "";
 
     };
 
@@ -61,7 +61,6 @@ export class Search {
     const typed = search.nativeElement.value;
 
     const searchContent = this.videoStreaming.searchBySameTitle(typed!);
-
     if (search) search.nativeElement.value = "";
 
     this.content.emit(
