@@ -41,8 +41,33 @@
 
                             }" [ngStyle]="{ 'color': (option.select) ? 'black' : 'white' }">{{ option.content }}</p>
 
-            } @else {
-              <img [ngClass]="'h-[24px] w-[24px]'" [src]="option.content + ((option.select) ? 'black.png' : 'white.png')" [alt]="'lupa'">
+            }
+            @else {
+              @if (isShowSearchBar) {
+                <div #searchContainer [ngClass]="'absolute right-0 rounded-full'" [ngStyle]="{
+                  'height': (isLarge) ? '55px' : (MD) ? '50px' : '',
+                  'width': '100%'
+
+                }">
+                  <app-search
+                    [height]="'100%'"
+                    [width]="'100%'"
+                    [input]="{ 'borderRadius': 'calc(Infinity * 1px)', 'paddingRight': '40px' }"
+                    (content)="void navigateByContentSearched($event)"
+
+                  >
+                  </app-search>
+
+                </div>
+
+              }
+              @else {
+                <div [ngClass]="'flex items-center justify-center h-full w-full'" (click)="isShowSearchBar = !isShowSearchBar">
+                  <img [ngClass]="'h-[24px] w-[24px]'" [src]="option.content + ((option.select) ? 'black.png' : 'white.png')" [alt]="'lupa'">
+
+                </div>
+
+              }
 
             }
 
