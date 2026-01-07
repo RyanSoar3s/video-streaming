@@ -41,13 +41,18 @@
           }">
 
   @if (isSmall) {
-    <div [ngClass]="'flex justify-end w-full gap-[15px]'">
-      <input [ngClass]="'input'" [type]="'text'" [name]="'search'" [id]="'search'" [placeholder]="'buscar'">
+    <div [ngClass]="'flex justify-center h-[34px] w-full'">
+     <div [ngClass]="'w-[80%]'">
+       <app-search
+        [height]="'100%'"
+        [width]="'100%'"
+        [input]="{ 'borderRadius': '8px', 'paddingRight': '30px' }"
+        [button]="{ 'height': '22px', 'width': '22px', 'marginRight': '6px' }"
+        (content)="void navigateByContentSearched($event)"
 
-      <div [ngClass]="'flex items-center justify-center h-[25px] w-[25px] cursor-pointer'">
-       <img [ngClass]="'h-full w-full'" [src]="magnifyingGlass" [alt]="'lupa'">
+        ></app-search>
 
-      </div>
+     </div>
 
     </div>
 

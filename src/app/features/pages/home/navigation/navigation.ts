@@ -1,13 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Responsive } from '@core/services/responsive';
+import { VideoStreaming } from '@core/services/video-streaming';
+import { Search } from '@features/shared/search/search';
+import { TVideoStreaming, TContent } from '@models/videoStreaming.model';
 
 @Component({
   selector: 'app-navigation',
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
+    Search
 
   ],
   templateUrl: './navigation.html',
@@ -46,8 +50,35 @@ export class Navigation {
 
   ];
 
-
+  private router = inject(Router);
   protected readonly responsive = inject(Responsive);
   public isOpen = false;
+
+  getCatalog(option: Array<string>): Array<{ param: string } & TContent> {
+    const vs = this.videoStreaming.videoStreaming();
+    const key = option[1] as keyof TVideoStreaming;
+    const content = { param: option[0], ...vs![key] };
+
+    return [ content ] satisfies Array<{ param: string } & TContent>;
+
+  }
+
+
+  navigateByContentSearched(content: Array<{ params: string } & TContent>): void {
+    this.router.navigate([ "/home", "catalog" ], {
+      queryParams: {
+        search: content[0].params
+
+      },
+      state: {
+        fromSearch: true,
+        mode: "search",
+        catalog: content
+
+      }
+
+    });
+
+  }
 
 }
