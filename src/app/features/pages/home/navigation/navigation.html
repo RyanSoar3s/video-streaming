@@ -65,20 +65,19 @@
 
           }
 
-          <a [ngClass]="'absolute block h-full w-full right-0'"
-              [routerLink]="[
-                {
-                  outlets: {
-                    primary: (icon.link) ? [ icon.link ] : null,
-                    info: null
+          <a [ngClass]="'absolute block h-full w-full right-0'" [routerLink]="icon.link"
+              [queryParams]="(icon.link) ? { search: icon.option[0]} : null"
+              [state]="{
+                fromSearch: true,
+                mode: 'full',
+                catalog: getCatalog(icon.option)
 
-                  }
+                }"
 
-                }
+              >
 
-              ]">
             </a>
-            
+
         </div>
 
       </li>
