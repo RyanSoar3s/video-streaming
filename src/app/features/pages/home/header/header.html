@@ -7,16 +7,14 @@
 @let isLarge = LG || XL;
 @let isSmall = XS || SM;
 
-@let vs = videoStreaming.videoStreaming();
-
 <header
       [ngClass]="{
         'header': true,
-        'header-no-content': (!vs)
+        'header-no-content': (!headerContents)
 
       }"
       [ngStyle]="{
-      'background-image': (vs) ? 'url(' + vs.MainContent.items[0].imagesUrl[1] + ')' : '',
+      'background-image': (headerContents) ? 'url(' + headerContents[indexHeaderContent].imagesUrl[1] + ')' : '',
       'width': (isSmall) ? '100%' : 'calc(100% - 150px)'
 
       }">
@@ -28,14 +26,14 @@
     @if (!isSmall) {
       <nav [ngClass]="{
                   'nav': true,
-                  'w-[450px] h-[55px]': (isLarge),
-                  'w-[370px] h-[50px]': (MD)
+                  'h-[55px] gap-0.5': (isLarge),
+                  'h-[50px] gap-[4.7px]': (MD)
 
                   }">
         @for (option of navOptions; track option.id) {
           <div [ngClass]="{
                           'option': true,
-                          'bg-[#e5e5e5]': (option.select),
+                          'bg-[#e5e5e5]': (option.select && !isShowSearchBar),
                           'w-[130px]': (option.id !== 3 && isLarge),
                           'w-[100px]': (option.id !== 3 && MD),
                           'h-[54px]! w-[54px]': (option.id === 3 && isLarge),
@@ -51,10 +49,42 @@
                               'text-[0.9em]': (isLarge),
                               'text-[0.8em]': (MD)
 
-                            }" [ngStyle]="{ 'color': (option.select) ? 'black' : 'white' }">{{ option.content }}</p>
+                            }" [ngStyle]="{ 'color': (option.select) ? 'black' : 'white' }">
+                            @if (!isShowSearchBar) {
+                              {{ option.content }}
 
-            } @else {
-              <img [ngClass]="'h-[24px] w-[24px]'" [src]="option.content + ((option.select) ? 'black.png' : 'white.png')" [alt]="'lupa'">
+                            }
+
+                          </p>
+
+            }
+
+            @else {
+              @if (isShowSearchBar) {
+                <div #searchContainer [ngClass]="'absolute right-0 rounded-full'" [ngStyle]="{
+                  'height': (isLarge) ? '55px' : (MD) ? '50px' : '',
+                  'width': '100%'
+
+                }">
+                  <app-search
+                    [height]="'100%'"
+                    [width]="'100%'"
+                    [borderRadius]="'calc(Infinity * 1px)'"
+                    (content)="void navigateByContentSearched($event)"
+
+                  >
+                  </app-search>
+
+                </div>
+
+              }
+              @else {
+                <div [ngClass]="'flex items-center justify-center h-full w-full'" (click)="isShowSearchBar = !isShowSearchBar">
+                  <img [ngClass]="'h-[24px] w-[24px]'" [src]="option.content + ((option.select) ? 'black.png' : 'white.png')" [alt]="'lupa'">
+
+                </div>
+
+              }
 
             }
 
@@ -82,39 +112,39 @@
 
   </div>
 
-  @if (vs) {
-    @let c = vs.MainContent.items[0];
+  @if (headerContents) {
+    @let c = headerContents[indexHeaderContent];
 
-    <div [ngClass]="'text-white flex flex-col justify-evenly h-[320px] w-[365px] mb-[30px]!'">
-    <h1 [ngClass]="{
-                    'text-5xl': (isSmall),
-                    'text-6xl': (!isSmall),
-                    'font-medium': true
+    <div [ngClass]="'text-white flex flex-col justify-evenly h-[320px] w-[470px] mb-[30px]!'">
+      <h1 [ngClass]="{
+                      'text-5xl': (isSmall),
+                      'text-6xl': (!isSmall),
+                      'font-medium': true
 
-                    }">{{ c.title }}</h1>
-    <div [ngClass]="'flex items-center gap-2'">
-      <div [ngClass]="'h-[15px] w-[15px] mb-[6px]!'">
-        <img [ngClass]="'h-full w-full'" [src]="star" [alt]="'estrela'">
+                      }">{{ c.title }}</h1>
+      <div [ngClass]="'flex items-center gap-2'">
+        <div [ngClass]="'h-[15px] w-[15px] mb-[6px]!'">
+          <img [ngClass]="'h-full w-full'" [src]="star" [alt]="'estrela'">
+
+        </div>
+        <p>{{ c.rating | number:'1.1-1' }}/10 󠁯•󠁏󠁏 {{ c.genre[0] }} 󠁯•󠁏󠁏 {{ c.year }}</p>
 
       </div>
-      <p>{{ c.rating | number:'1.1-1' }}/10 󠁯•󠁏󠁏 {{ c.genre[0] }} 󠁯•󠁏󠁏 {{ c.year }}</p>
+
+      <div [ngClass]="'w-[350px]'">
+        <p [ngClass]="'text-justify line-clamp-2 w-full'">
+          {{ c.description }}
+
+        </p>
+
+      </div>
+
+      <button [ngClass]="'button'">
+        <span [ngClass]="'text-[1.2em] font-normal'">Assistir</span>
+
+      </button>
 
     </div>
-
-    <div [ngClass]="'w-[350px]'">
-      <p [ngClass]="'text-justify line-clamp-2 w-full'">
-        {{ c.description }}
-
-      </p>
-
-    </div>
-
-    <button [ngClass]="'button'">
-      <span [ngClass]="'text-[1.2em] font-normal'">Assistir</span>
-
-    </button>
-
-  </div>
 
   }
 
