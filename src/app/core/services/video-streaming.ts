@@ -42,4 +42,33 @@ export class VideoStreaming {
 
   }
 
+  searchByTitles(...titles: string[]): TContent["items"] {
+    const vs = this.videoStreamingSignal();
+    if (!vs || titles.length === 0) return [];
+
+    const normalizedTitles = new Set(
+      titles.map((t) => t.trim().toUpperCase())
+
+    );
+
+    return vs.All.items.filter((el) =>
+      normalizedTitles.has(el.title.toUpperCase())
+
+    );
+
+  }
+
+  searchBySameTitle(title: string): TContent["items"] {
+    const vs = this.videoStreamingSignal();
+    if (!vs) return [];
+
+    const t = title.trim().toUpperCase();
+
+    return vs.All.items.filter((el) =>
+      el.title.toUpperCase().includes(t)
+
+    );
+
+  }
+
 }
