@@ -1,7 +1,29 @@
 <div [ngClass]="'relative flex gap-3.5 h-full w-full'">
-  <input #search [ngClass]="'search'" [ngStyle]="{ 'border-radius': (borderRadius() !== '0px') ? borderRadius() : '8px' }" [attr.type]="'text'" [attr.name]="'search-input'" [placeholder]="'O que deseja buscar?'" [autocomplete]="'off'">
+  <input #search
+          [ngClass]="'search'"
+          [ngStyle]="{
+            'padding-right': input().paddingRight,
+            'border-radius': input().borderRadius
 
-  <button [ngClass]="'absolute right-0 self-center h-[calc(40px-12px)] w-[calc(40px-12px)] mr-3 cursor-pointer'" (click)="void searchContent()">
+          }"
+          [attr.type]="'text'"
+          [attr.name]="'search-input'"
+          [placeholder]="'O que deseja buscar?'"
+          [autocomplete]="'off'"
+
+          >
+
+  <button
+    [ngClass]="'absolute right-0 self-center cursor-pointer'"
+    [ngStyle]="{
+      'height': button().height,
+      'width': button().width,
+      'margin-right': button().marginRight
+
+    }"
+    (click)="void searchContent()"
+
+    >
     <img [ngClass]="'h-full w-full'" [src]="magnifyingGlass" [alt]="'lupa'">
 
   </button>

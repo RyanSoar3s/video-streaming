@@ -58,7 +58,6 @@
                           </p>
 
             }
-
             @else {
               @if (isShowSearchBar) {
                 <div #searchContainer [ngClass]="'absolute right-0 rounded-full'" [ngStyle]="{
@@ -69,7 +68,7 @@
                   <app-search
                     [height]="'100%'"
                     [width]="'100%'"
-                    [borderRadius]="'calc(Infinity * 1px)'"
+                    [input]="{ 'borderRadius': 'calc(Infinity * 1px)', 'paddingRight': '40px' }"
                     (content)="void navigateByContentSearched($event)"
 
                   >
