@@ -28,25 +28,47 @@ export class Search {
   height = input.required<string>();
   width = input.required<string>();
   margin = input<string>("0px");
-  borderRadius = input<string>("0px");
+  input = input<{
+                  paddingRight: string,
+                  borderRadius: string
+
+  }>({ borderRadius: "8px", paddingRight: "40px" });
+  button = input<{
+    height: string,
+    width: string,
+    marginRight: string
+
+  }>({ height: "28px", width: "28px", marginRight: "12px" });
 
   content = output<Array<{ params: string } & TContent>>();
 
   @HostListener("document:keydown", [ "$event" ])
   onClickEnter(event: KeyboardEvent): void {
-    if (event.key === "Enter") this.searchContent();
+    if (event.key === "Enter") {
+      const search = this.search();
+      if (search) search.nativeElement.value = "";
+      this.searchContent()
+
+    };
 
   }
 
   searchContent(): void {
-    const search = this.search()?.nativeElement.value;
-    const searchContent = this.videoStreaming.searchBySameTitle(search!);
+    const search = this.search();
+
+    if (!search) return;
+
+    const typed = search.nativeElement.value;
+
+    const searchContent = this.videoStreaming.searchBySameTitle(typed!);
+
+    if (search) search.nativeElement.value = "";
 
     this.content.emit(
                       [
                         {
-                          params: (search) ? search : "Todos",
-                          sectionTitle: (search) ? `Resultado: ${search}` : "Todos",
+                          params: (typed) ? typed : "Todos",
+                          sectionTitle: (typed) ? `Resultado: ${typed}` : "Todos",
                           items: searchContent
 
                         }
