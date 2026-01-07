@@ -6,7 +6,7 @@
 
 <section [ngClass]="'relative flex flex-col h-auto w-full mb-[30px]!'">
   @for (content of contents(); track i; let i = $index) {
-    <h2 [ngClass]="'text-[1.7em] font-bold mt-[20px]! mb-[20px]! ml-2.5'"> {{ content.sectionTitle }}</h2>
+    <h2 [ngClass]="'text-[1.7em] font-bold mt-[20px]! mb-[20px]! ml-2.5 truncate'"> {{ content.sectionTitle }}</h2>
     <div [ngClass]="'relative w-full'">
       @if (isCarousel()) {
         <div [ngClass]="'absolute h-full w-full'">

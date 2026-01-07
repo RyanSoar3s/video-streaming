@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { authGuard } from '@core/guards/auth-guard';
 import { loginGuard } from '@core/guards/login-guard';
 import { profileGuard } from '@core/guards/profile-guard';
+import { searchAccessGuard } from '@core/guards/search-access-guard';
 import { verifyGuard } from '@core/guards/verify-guard';
 import { getCatalogResolver } from '@core/resolvers/get-catalog-resolver';
 import { getProfileResolver } from '@core/resolvers/get-profile-resolver';
@@ -41,16 +42,18 @@ export const routes: Routes = [
       {
         path: "profile",
         pathMatch: "full",
-        canActivate: [ profileGuard ],
+        canActivateChild: [ profileGuard ],
         component: Profile,
         outlet: "info"
 
       },
       {
         path: "catalog",
+        canActivate: [ searchAccessGuard ],
         component: Catalog
 
       }
+
     ]
 
   }

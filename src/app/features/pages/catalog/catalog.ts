@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, effect, computed, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Responsive } from '@core/services/responsive';
-import { VideoStreaming } from '@core/services/video-streaming';
 import { ContentModel } from '@features/shared/content-model/content-model';
 import { Search } from '@features/shared/search/search';
 import { TContent } from '@models/videoStreaming.model';
@@ -23,15 +24,49 @@ import { TContent } from '@models/videoStreaming.model';
 
 })
 export class Catalog {
-  protected readonly videoStreaming = inject(VideoStreaming);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
   protected readonly responsive = inject(Responsive);
 
   protected readonly icon = "favicon.ico";
 
-  protected contentSearched: Array<TContent> | null = null;
+  private navState = signal<{
+    fromSearch?: boolean;
+    mode?: "full" | "search";
+    catalog?: Array<{ params: string } & TContent>;
 
-  setContentSearched(content: Array<TContent> | null): void {
-    this.contentSearched = content;
+  }>({});
+
+  private queryParams = toSignal(this.route.queryParamMap);
+
+  public contentSearched = computed(() => {
+    return this.navState().catalog ?? [];
+
+  });
+
+  constructor(){
+    effect(() => {
+      this.queryParams();
+      this.navState.set(history.state);
+
+    });
+
+  }
+
+  setContentSearched(content: Array<{ params: string } & TContent>): void {
+    this.router.navigate([], {
+      queryParams: {
+        search: content[0].params
+
+      },
+      state: {
+        fromSearch: true,
+        mode: "search",
+        catalog: content
+
+      }
+
+    });
 
   }
 
