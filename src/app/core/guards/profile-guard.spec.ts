@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import { CanActivateChildFn } from '@angular/router';
 import { expect, it, describe, beforeEach } from 'vitest';
 
 import { profileGuard } from './profile-guard';
 
 describe('profileGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) =>
+  const executeGuard: CanActivateChildFn = (...guardParameters) =>
       TestBed.runInInjectionContext(() => profileGuard(...guardParameters));
 
   beforeEach(() => {

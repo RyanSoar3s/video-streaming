@@ -42,13 +42,32 @@ export class VideoStreaming {
 
   }
 
-  searchByTitle(title: string): TContent["items"] | null {
+  searchByTitles(...titles: string[]): TContent["items"] {
     const vs = this.videoStreamingSignal();
+    if (!vs || titles.length === 0) return [];
 
-    let content: TContent["items"] | null = (vs) ?
-                                             vs.All.items.filter((el) => el.title.toUpperCase().includes(title.toUpperCase().trim())) : null;
+    const normalizedTitles = new Set(
+      titles.map((t) => t.trim().toUpperCase())
 
-    return content;
+    );
+
+    return vs.All.items.filter((el) =>
+      normalizedTitles.has(el.title.toUpperCase())
+
+    );
+
+  }
+
+  searchBySameTitle(title: string): TContent["items"] {
+    const vs = this.videoStreamingSignal();
+    if (!vs) return [];
+
+    const t = title.trim().toUpperCase();
+
+    return vs.All.items.filter((el) =>
+      el.title.toUpperCase().includes(t)
+
+    );
 
   }
 
