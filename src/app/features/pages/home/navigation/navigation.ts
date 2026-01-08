@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { Responsive } from '@core/services/responsive';
 import { VideoStreaming } from '@core/services/video-streaming';
 import { TVideoStreaming, TContent } from '@models/videoStreaming.model';
@@ -15,7 +15,7 @@ import { TVideoStreaming, TContent } from '@models/videoStreaming.model';
   templateUrl: './navigation.html',
   styleUrl: './navigation.css'
 })
-export class Navigation {
+export class Navigation implements OnInit {
   protected readonly videoStreaming = inject(VideoStreaming);
 
   protected readonly bars = "assets/navigation/bars.png";
@@ -31,14 +31,7 @@ export class Navigation {
 
   ];
 
-  protected readonly mostWatchedContent = [
-    { id: 0, name: "serie 1" },
-    { id: 1, name: "serie 2" },
-    { id: 2, name: "serie 3" },
-    { id: 3, name: "serie 4" },
-    { id: 4, name: "serie 5" }
-
-  ];
+  protected mostWatchedContent!: TContent["items"];
 
   protected readonly trendingContent = [
     { id: 0, name: "Ação",              color: "bg-red-600" },
@@ -53,12 +46,41 @@ export class Navigation {
   protected readonly responsive = inject(Responsive);
   public isOpen = false;
 
+  ngOnInit(): void {
+    this.mostWatchedContent = this.videoStreaming.searchByTitles("Breaking Bad", "Eu Nunca", "Round 6", "Sherlock", "Peaky Blinders")
+
+  }
+
   getCatalog(option: Array<string>): Array<{ param: string } & TContent> {
     const vs = this.videoStreaming.videoStreaming();
     const key = option[1] as keyof TVideoStreaming;
     const content = { param: option[0], ...vs![key] };
 
     return [ content ] satisfies Array<{ param: string } & TContent>;
+
+  }
+
+  navigateByContentSearched(content: Array<{ params: string } & TContent>): void {
+    this.router.navigate([ "/home", "catalog" ], {
+      queryParams: {
+        search: content[0].params
+
+      },
+      state: {
+        fromSearch: true,
+        mode: "search",
+        catalog: content
+
+      }
+
+    });
+
+  }
+
+  navigateByGenre(params: string): void {
+    const content = [ { params, ...this.videoStreaming.searchByGenre(params) } ];
+
+    this.navigateByContentSearched(content);
 
   }
 
