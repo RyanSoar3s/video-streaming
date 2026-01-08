@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Responsive } from '@core/services/responsive';
 import { VideoStreaming } from '@core/services/video-streaming';
@@ -17,7 +17,7 @@ import { TVideoStreaming, TContent } from '@models/videoStreaming.model';
   templateUrl: './navigation.html',
   styleUrl: './navigation.css'
 })
-export class Navigation {
+export class Navigation implements OnInit {
   protected readonly videoStreaming = inject(VideoStreaming);
 
   protected readonly bars = "assets/navigation/bars.png";
@@ -33,14 +33,7 @@ export class Navigation {
 
   ];
 
-  protected readonly mostWatchedContent = [
-    { id: 0, name: "serie 1" },
-    { id: 1, name: "serie 2" },
-    { id: 2, name: "serie 3" },
-    { id: 3, name: "serie 4" },
-    { id: 4, name: "serie 5" }
-
-  ];
+  protected mostWatchedContent!: TContent["items"];
 
   protected readonly trendingContent = [
     { id: 0, name: "Ação",              color: "bg-red-600" },
@@ -55,6 +48,11 @@ export class Navigation {
   private router = inject(Router);
   protected readonly responsive = inject(Responsive);
   public isOpen = false;
+
+  ngOnInit(): void {
+    this.mostWatchedContent = this.videoStreaming.searchByTitles("Breaking Bad", "Eu Nunca", "Round 6", "Sherlock", "Peaky Blinders")
+
+  }
 
   getCatalog(option: Array<string>): Array<{ param: string } & TContent> {
     const vs = this.videoStreaming.videoStreaming();
@@ -79,6 +77,13 @@ export class Navigation {
       }
 
     });
+
+  }
+
+  navigateByGenre(params: string): void {
+    const content = [ { params, ...this.videoStreaming.searchByGenre(params) } ];
+
+    this.navigateByContentSearched(content);
 
   }
 

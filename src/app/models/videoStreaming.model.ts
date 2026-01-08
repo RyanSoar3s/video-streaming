@@ -32,7 +32,7 @@ export type TContent = {
 
 };
 
-type TContentDivision = "All" | "MainContent" | "MostWatched" | "Releases" | "Movies" | "Series" | "Animations";
+type TContentDivision = "All" | "MostWatched" | "Releases" | "Movies" | "Series" | "Animations";
 
 export type TVideoStreaming = {
   [ K in TContentDivision ]: TContent
