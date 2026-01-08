@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 :host {
-  @apply absolute text-white flex justify-end pt-[15px] pr-[15px] w-lvw;
+  @apply absolute text-white flex justify-end pt-[15px] pr-[15px] w-lvw z-800;
 
 }
 
