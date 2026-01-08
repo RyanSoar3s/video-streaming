@@ -71,4 +71,19 @@ export class VideoStreaming {
 
   }
 
+  searchByGenre(genre: string): TContent {
+    const vs = this.videoStreamingSignal();
+
+    if (!vs) return {} as TContent;
+
+    const items = vs.All.items.filter((el) => el.genre.includes(genre));
+
+    return {
+      sectionTitle: `Gênero: ${genre}`,
+      items
+
+    } satisfies TContent;
+
+  }
+
 }
