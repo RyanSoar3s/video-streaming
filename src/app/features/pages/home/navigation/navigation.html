@@ -91,43 +91,49 @@
   </ul>
 
   @if (openMenu) {
-    <hr [ngClass]="'border-[#6f6f6f] w-[70%] mt-[20px]! ml-[calc(75px*0.5)]!'"/>
-    <div [ngClass]="'flex w-full pl-[calc(132px*0.5)]! mt-[20px]!'">
-      <p [ngClass]="'text-[#848484] text-[0.9em] font-medium w-[118px]'">Mais assistidos</p>
+    <div>
+      <hr [ngClass]="'border-[#6f6f6f] w-[70%] mt-[20px]! ml-[calc(75px*0.5)]!'"/>
+      <div [ngClass]="'flex w-full pl-[calc(132px*0.5)]! mt-[20px]!'">
+        <p [ngClass]="'text-[#848484] text-[0.9em] font-medium w-[118px]'">Mais assistidos</p>
+
+      </div>
+
+      <ul [ngClass]="'most-watched-content'">
+        @for (content of mostWatchedContent; track content.id) {
+          <li [ngClass]="'most-watched-content__item'">
+            <div [ngClass]="'h-[28px] w-[28px] bg-gray-400 rounded-full'"></div>
+
+            <p [ngClass]="'text-white text-[0.9em] font-normal self-center ml-[12px]! hover-underline'">{{ content.name }}</p>
+
+          </li>
+
+        }
+
+      </ul>
 
     </div>
+    
+    <div>
+      <hr [ngClass]="'border-[#6f6f6f] w-[70%] mt-[20px]! ml-[calc(75px*0.5)]!'"/>
+      <div [ngClass]="'flex w-full pl-[calc(112px*0.5)]! mt-[20px]!'">
+        <p [ngClass]="'text-[#848484] text-[0.9em] font-medium w-[138px]'">Conteúdos em Alta</p>
 
-    <ul [ngClass]="'most-watched-content'">
-      @for (content of mostWatchedContent; track content.id) {
-        <li [ngClass]="'most-watched-content__item'">
-          <div [ngClass]="'h-[28px] w-[28px] bg-gray-400 rounded-full'"></div>
+      </div>
 
-          <p [ngClass]="'text-white text-[0.9em] font-normal self-center ml-[12px]! hover-underline'">{{ content.name }}</p>
+      <ul [ngClass]="'trending-content'">
+        @for (trending of trendingContent; track trending.id) {
+          <div [ngClass]="'trending-content__item'">
+            <div [ngClass]="trending.color + ' h-[5px] w-[5px] rounded-full'"></div>
 
-        </li>
+            <p [ngClass]="'text-white text-[0.85em] font-normal self-center ml-[12px]! hover-underline'">{{ trending.name }}</p>
 
-      }
+          </div>
 
-    </ul>
-    <hr [ngClass]="'border-[#6f6f6f] w-[70%] mt-[20px]! ml-[calc(75px*0.5)]!'"/>
-    <div [ngClass]="'flex w-full pl-[calc(112px*0.5)]! mt-[20px]!'">
-      <p [ngClass]="'text-[#848484] text-[0.9em] font-medium w-[138px]'">Conteúdos em Alta</p>
+        }
+
+      </ul>
 
     </div>
-
-    <ul [ngClass]="'trending-content'">
-      @for (trending of trendingContent; track trending.id) {
-        <div [ngClass]="'trending-content__item'">
-          <div [ngClass]="trending.color + ' h-[5px] w-[5px] rounded-full'"></div>
-
-          <p [ngClass]="'text-white text-[0.85em] font-normal self-center ml-[12px]! hover-underline'">{{ trending.name }}</p>
-
-        </div>
-
-      }
-
-    </ul>
-
   }
 
 </section>

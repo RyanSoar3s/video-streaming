@@ -1,40 +1,49 @@
-import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpInterceptorFn
+
+} from '@angular/common/http';
 import { inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { responseError } from '@core/models/responseError.model';
-import { HandleToken } from '@core/services/handle-token';
-import { RequestApi } from '@core/services/request-api';
-import { catchError, throwError, switchMap } from 'rxjs';
+import { TokenRefreshStore } from '@core/services/token-refresh-store';
+import { Observable, catchError, throwError } from 'rxjs';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
-  const request = inject(RequestApi);
-  const handleToken = inject(HandleToken);
-  const router = inject(Router);
+  const refreshStore = inject(TokenRefreshStore);
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
-      if (error.status !== 401 || req.url.includes("/refresh")) return throwError(() => error);
+      if (
+        error.status !== 401 ||
+        req.url.includes("/refresh")
 
-      return request.refresh().pipe(
-        switchMap(({ token }) => {
-          const newReq = req.clone({
-            setHeaders: { Authorization: `Bearer ${token}` }
+      ) {
+        return throwError(() => error)
 
-          });
+      }
 
-          return next(newReq);
+      return new Observable<HttpEvent<unknown>>((observer) => {
+        refreshStore.enqueue({
+          retry: (token: string) => {
+            next(
+              req.clone({
+                setHeaders: {
+                  Authorization: `Bearer ${token}`
 
-        }),
-        catchError((refreshError: responseError) => {
-          console.error(`Error: ${refreshError.error.message}`);
-          handleToken.clear();
-          router.navigate([ "" ], { queryParams: { session: "expirada" } });
+                }
 
-          return throwError(() => refreshError);
+              })
 
-        })
+            ).subscribe(observer);
+          },
+          
+          error: (err) => observer.error(err)
 
-      );
+        });
+
+        refreshStore.refreshIfNeeded();
+
+      });
 
     })
 
