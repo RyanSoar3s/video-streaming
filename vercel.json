@@ -1,0 +1,25 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "name": "Video Streaming Application",
+  "version": 2,
+  "public": false,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+
+    }
+
+  ],
+  "functions": {
+    "api/index.js": {
+      "memory": 1024,
+      "maxDuration": 10,
+      "includeFiles": "server/**"
+
+    }
+
+  },
+  "outputDirectory": "dist/video-streaming"
+
+}
