@@ -3,7 +3,13 @@
   "name": "Video Streaming Application",
   "version": 2,
   "public": false,
+
   "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.js"
+
+    },
     {
       "source": "/(.*)",
       "destination": "/"
@@ -11,6 +17,7 @@
     }
 
   ],
+
   "functions": {
     "api/index.js": {
       "memory": 1024,
@@ -20,6 +27,7 @@
     }
 
   },
+
   "outputDirectory": "dist/video-streaming/browser"
 
 }
