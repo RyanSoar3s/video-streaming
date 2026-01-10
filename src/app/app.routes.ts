@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from '@core/guards/auth-guard';
+import { contentAccessGuard } from '@core/guards/content-access-guard';
 import { loginGuard } from '@core/guards/login-guard';
 import { profileGuard } from '@core/guards/profile-guard';
 import { searchAccessGuard } from '@core/guards/search-access-guard';
@@ -56,6 +57,7 @@ export const routes: Routes = [
       },
       {
         path: "content",
+        canActivate: [ contentAccessGuard ],
         component: ContentPage
 
       }
