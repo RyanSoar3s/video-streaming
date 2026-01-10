@@ -87,20 +87,20 @@
   <div [ngClass]="'flex flex-col gap-1.5 mb-2'">
     <h2 [ngClass]="'text-[1.3em] font-semibold'">Descrição:</h2>
     <div [ngClass]="'relative overflow-hidden'">
-      <p #description [ngClass]="'w-[300px] line-clamp-2 text-justify'">
+      <p #description [ngClass]="'w-[min(300px,100%)] line-clamp-2 text-justify'">
         {{ c[0].description }}
 
       </p>
-      @if (!showMore) {
-        <p
-          [ngClass]="'absolute left-[300px] font-semibold bottom-0 cursor-pointer'"
-          (click)="void showDescription()"
-
-          >ver mais</p>
-
-      }
 
     </div>
+    @if (!showMore) {
+      <p
+        [ngClass]="'left-0 bottom-0 font-semibold cursor-pointer'"
+        (click)="void showDescription()"
+
+        >ver mais</p>
+
+    }
 
   </div>
 
