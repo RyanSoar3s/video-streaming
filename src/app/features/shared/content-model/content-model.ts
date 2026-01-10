@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 
   ],
   templateUrl: './content-model.html',
-  styleUrl: './content-model.css',
+  styleUrl: './content-model.css'
 })
 
 export class ContentModel {

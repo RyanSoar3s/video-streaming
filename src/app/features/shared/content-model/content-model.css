@@ -21,7 +21,7 @@
 }
 
 .carousel {
-  @apply relative grid h-auto w-full m-[20px_0px_60px_0px]! p-[0px_15px]! transition ease-out duration-500 scroll-smooth z-10;
+  @apply relative grid justify-items-center h-auto w-full m-[20px_0px_60px_0px]! p-[0px_15px]! transition ease-out duration-500 scroll-smooth z-10;
 
 }
 
