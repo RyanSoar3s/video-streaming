@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: ""
+  apiUrl: "https://video-streaming-tawny-nine.vercel.app/"
 
 };
