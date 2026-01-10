@@ -4,6 +4,8 @@ import { faArrowRight, faArrowLeft, faBoxOpen, faSearch } from '@fortawesome/fre
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Responsive } from '@core/services/responsive';
 import { TContent } from '@models/videoStreaming.model';
+import { VideoStreaming } from '@core/services/video-streaming';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-content-model',
@@ -24,6 +26,8 @@ export class ContentModel {
 
   protected readonly star = "assets/home/star.png";
 
+  private videoStreaming = inject(VideoStreaming);
+  private router = inject(Router);
   protected readonly responsive = inject(Responsive);
   private renderer = inject(Renderer2);
 
@@ -92,6 +96,24 @@ export class ContentModel {
       content.scroll = 0;
       const section = this.items()[index].nativeElement;
       this.renderer.setStyle(section, "transform", "translateX(0px)");
+
+    });
+
+  }
+
+  navigateContent(title: string): void {
+    const content = this.videoStreaming.searchByTitles(title);
+
+    this.router.navigate([ "home", "content" ], {
+      queryParams: {
+        title: content[0].title
+
+      },
+      state: {
+        access: true,
+        content: [ { params: content[0].title, ...content } ]
+
+      }
 
     });
 

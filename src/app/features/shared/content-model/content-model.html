@@ -52,13 +52,17 @@
                       (SM) ? '160px' : '120px'
 
           }">
-            <div [ngClass]="'bg-gray-500 w-full rounded-[20px] transition hover:transform-[scale(1.05)] active:transform-[scale(1.05)] cursor-pointer'" [ngStyle]="{
-              'height': (XL) ? '265px' :
-                        (LG) ? '260px' :
-                        (MD) ? '250px' :
-                        (SM) ? '230px' : '200px'
+            <div
+              [ngClass]="'bg-gray-500 w-full rounded-[20px] transition hover:transform-[scale(1.05)] active:transform-[scale(1.05)] cursor-pointer'" [ngStyle]="{
+                'height': (XL) ? '265px' :
+                          (LG) ? '260px' :
+                          (MD) ? '250px' :
+                          (SM) ? '230px' : '200px'
 
-            }">
+              }"
+              (click)="void navigateContent(item.title)"
+
+              >
 
              <img
               [src]="item.imagesUrl[0]"
