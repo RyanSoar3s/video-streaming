@@ -18,7 +18,7 @@ import { TContent } from '@models/videoStreaming.model';
   templateUrl: './catalog.html',
   styleUrl: './catalog.css',
   host: {
-    '[style.padding]': `(responsive.isSm() || responsive.isXs()) ? '9px 20px' : '30px 10px 30px 150px'`
+    '[style.padding]': `(responsive.isSm() || responsive.isXs()) ? '9px 0px' : '30px 10px 30px 150px'`
 
   }
 
