@@ -20,6 +20,10 @@
       }
     ]
   },
+  "workspaces": [
+    "server"
+    
+  ],
   "private": true,
   "dependencies": {
     "@angular/cdk": "^20.1.3",
