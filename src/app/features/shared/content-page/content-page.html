@@ -1,0 +1,121 @@
+@let c = content()[0];
+@let XS = responsive.isXs();
+@let SM = responsive.isSm();
+@let LG = responsive.isLg();
+@let XL = responsive.isXl();
+
+@let bgImage = (XL || LG) ? c[0].imagesUrl[1] : c[0].imagesUrl[0];
+
+@if (XS || SM) {
+  <div [ngClass]="'absolute h-[42px] w-[42px] top-[14px] left-[15px] cursor-pointer'">
+    <img [ngClass]="'h-full w-full'" [src]="icon" [alt]="'Imagem de ícone'">
+
+  </div>
+
+}
+
+<div
+  [ngClass]="'banner'"
+  [ngStyle]="{
+    'height': (XS || SM) ? '400px' : '700px',
+    'background-image': 'url(' + bgImage + ')'
+
+  }"
+
+  >
+
+  <iframe
+      #iframe
+      [ngClass]="'h-full w-full rounded-3xl'"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+
+  >
+  </iframe>
+
+</div>
+
+<div [ngClass]="'flex flex-col gap-[15px] h-auto w-[70%] mb-[30px]'">
+  <div [ngClass]="'flex justify-between'">
+    <h1 [ngClass]="'text-[2.5em] font-semibold'">{{ c[0].title }}</h1>
+
+     <div [ngClass]="'flex gap-2 h-[21px]'">
+      <div [ngClass]="'h-[15px] w-[15px] mt-[2px]!'">
+        <img [ngClass]="'h-full w-full'" [src]="star" [alt]="'estrela'">
+
+      </div>
+
+      <p>{{ c[0].rating | number:'1.1-1'}}</p>
+
+     </div>
+
+  </div>
+
+  <p [ngClass]="'text-[#b4b4b4]'">{{ c[0].year }}</p>
+
+  <div [ngClass]="'flex gap-2 text-[#b4b4b4]'">
+    @let n = c[0].genre.length - 1;
+
+    @for (g of c[0].genre; track i; let i = $index) {
+      <p>{{ g }}</p>
+      @if (i < n) { | }
+
+    }
+
+  </div>
+
+  <div [ngClass]="'flex justify-between'">
+    <fa-icon
+      [ngClass]="'icons'"
+      [icon]="(clickedFaHeart) ? faHeartSolid : faHeartRegular"
+      (click)="clickedFaHeart = !clickedFaHeart"
+
+      >
+    </fa-icon>
+
+    <fa-icon
+      [ngClass]="'icons'"
+      [icon]="(clickedFaPlus) ? faCheck : faPlus"
+      (click)="clickedFaPlus = !clickedFaPlus"
+
+      >
+    </fa-icon>
+
+  </div>
+
+  <div [ngClass]="'flex flex-col gap-1.5 mb-2'">
+    <h2 [ngClass]="'text-[1.3em] font-semibold'">Descrição:</h2>
+    <div [ngClass]="'relative overflow-hidden'">
+      <p #description [ngClass]="'w-[300px] line-clamp-2 text-justify'">
+        {{ c[0].description }}
+
+      </p>
+      @if (!showMore) {
+        <p
+          [ngClass]="'absolute left-[300px] font-semibold bottom-0 cursor-pointer'"
+          (click)="void showDescription()"
+
+          >ver mais</p>
+
+      }
+
+    </div>
+
+  </div>
+
+  <button
+    [ngClass]="'play'"
+    [disabled]="playButtonDisabled"
+    (click)="void openVideo()"
+
+    >
+    <p [ngClass]="'text-[1.2em] font-semibold'">
+      <fa-icon [icon]="faPlay"></fa-icon>
+      Assistir
+
+    </p>
+
+  </button>
+
+</div>

@@ -1,0 +1,21 @@
+@reference "tailwindcss";
+
+:host {
+  @apply bg-[#060606] text-white absolute top-0 flex flex-col items-center gap-20 mb-5 pt-12 min-h-lvh w-lvw z-800;
+
+}
+
+.banner {
+  @apply bg-cover bg-top bg-no-repeat w-[70%] border-2 border-solid border-white shadow-[inset_1px_1px_25px_16px_#000000bf] rounded-3xl;
+
+}
+
+.icons {
+  @apply text-[1.5em] font-bold cursor-pointer;
+
+}
+
+.play {
+  @apply bg-red-500 h-[50px] rounded-[20px] hover:opacity-80 active:opacity-80 disabled:opacity-80 disabled:cursor-default cursor-pointer;
+
+}
