@@ -1,8 +1,3 @@
-const iframe = (src) => (
-  `<iframe width="560" height="315" src="${src}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
-
-)
-
 const AllContent = {
   sectionTitle: "Todos",
   items: [
@@ -16,9 +11,15 @@ const AllContent = {
       genre: [ "Ação", "Aventura" ],
       rating: 8.0,
       imagesUrl: [
-        "https://www.dvdplanetstore.pk/wp-content/uploads/2017/12/cezWGskPY5x7GaglTTRN4Fugfb8.jpg"
+        "https://www.dvdplanetstore.pk/wp-content/uploads/2017/12/cezWGskPY5x7GaglTTRN4Fugfb8.jpg",
+        "https://cloudfront-us-east-1.images.arcpublishing.com/estadao/KGKRV37M4RLVRA5CDD3YUVJLF4.jpg"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/KeNEGtsCWEk?si=A537wOEMs-3k6zLj")
+      video: {
+        url: "https://www.youtube.com/embed/KeNEGtsCWEk?si=A537wOEMs-3k6zLj"
+
+      }
+
     },
 
     {
@@ -31,9 +32,15 @@ const AllContent = {
       genre: [ "Drama", "Crime", "Suspense" ],
       rating: 8.3,
       imagesUrl: [
-        "https://m.media-amazon.com/images/I/71KcAg70yNL.jpg"
+        "https://m.media-amazon.com/images/I/71KcAg70yNL.jpg",
+        "https://cultura.sc.gov.br/images/noticias/2020/janeiro/JOKER_-_DIVULGACAO_-_IMAGEM_01.jpg"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/621pfj0EfIc?si=Mw-Vf6Wg8rzM65l-")
+      video: {
+        url: "https://www.youtube.com/embed/621pfj0EfIc?si=Mw-Vf6Wg8rzM65l-"
+
+      }
+
     },
 
     {
@@ -46,10 +53,16 @@ const AllContent = {
       genre: [ "Animação", "Comédia", "Aventura" ],
       rating: 7.6,
       imagesUrl: [
-        "https://assets-prd.ignimgs.com/2023/06/02/panda-1685743792136.jpg"
+        "https://assets-prd.ignimgs.com/2023/06/02/panda-1685743792136.jpg",
+        "https://www.planocritico.com/wp-content/uploads/2016/02/plano-cr%C3%ADtico-kung-fu-panda-2008.jpg"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/40IBUnOZoC4?si=0MDOuwhcCTR4ET04"),
+      video: {
+        url: "https://www.youtube.com/embed/40IBUnOZoC4?si=0MDOuwhcCTR4ET04"
+
+      },
       studio: "DreamWorks Animation"
+
     },
 
     {
@@ -62,9 +75,15 @@ const AllContent = {
       genre: [ "Ficção Científica", "Drama", "Aventura" ],
       rating: 8.7,
       imagesUrl: [
-        "https://i.pinimg.com/736x/0b/b9/72/0bb9725b6764aeb79e1121af37b16333.jpg"
+        "https://i.pinimg.com/736x/0b/b9/72/0bb9725b6764aeb79e1121af37b16333.jpg",
+        "https://isabelaboscov.com/wp-content/uploads/2016/08/interstellar_feat.jpg?w=1038&h=520&crop=1"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/i6avfCqKcQo?si=HlosV7LR0Cng-TYE")
+      video: {
+        url: "https://www.youtube.com/embed/i6avfCqKcQo?si=HlosV7LR0Cng-TYE"
+
+      }
+
     },
 
     {
@@ -77,9 +96,15 @@ const AllContent = {
       genre: [ "Comédia", "Fantasia" ],
       rating: 7.0,
       imagesUrl: [
-        "https://flinflononline.com/assets/images/2025/themask.webp"
+        "https://flinflononline.com/assets/images/2025/themask.webp",
+        "https://m.media-amazon.com/images/M/MV5BNTQzOGM4YmUtYzE3NS00YjAxLWFkZWYtMTYzNGE5NDMwNWY4XkEyXkFqcGc@._V1_.jpg"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/FAtTJ62Vz1U?si=eRpwBUv__E1wWnzF")
+      video: {
+        url: "https://www.youtube.com/embed/FAtTJ62Vz1U?si=eRpwBUv__E1wWnzF"
+
+      }
+
     },
 
     {
@@ -92,10 +117,16 @@ const AllContent = {
       genre: [ "Animação", "Comédia", "Fantasia" ],
       rating: 7.9,
       imagesUrl: [
-        "https://digicartaz.com/uploads/posts/2023-01/shrek.webp"
+        "https://digicartaz.com/uploads/posts/2023-01/shrek.webp",
+        "https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABfn8MLPrWZ8H5MtN6UaZKQ7yDjcznOiqTgDKPUN7D7DTe-78R0rhGK5AYh2AZ9moQv5CisgNVMEeU8qgdv3DbpdRE9mHgYa_C4Y5.jpg?r=b62"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/EM3ec1Uc4lw?si=wk8q63RKTnxjIV9V"),
+      video: {
+        url: "https://www.youtube.com/embed/EM3ec1Uc4lw?si=wk8q63RKTnxjIV9V"
+
+      },
       studio: "DreamWorks Animation"
+
     },
     {
       type: [ "movie", "animation" ],
@@ -107,10 +138,16 @@ const AllContent = {
       genre: [ "Animação", "Comédia", "Aventura" ],
       rating: 6.9,
       imagesUrl: [
-        "https://s3.amazonaws.com/nightjarprod/content/uploads/sites/330/2024/06/05000823/zMpJY5CJKUufG9OTw0In4eAFqPX.jpg"
+        "https://s3.amazonaws.com/nightjarprod/content/uploads/sites/330/2024/06/05000823/zMpJY5CJKUufG9OTw0In4eAFqPX.jpg",
+        "https://m.media-amazon.com/images/S/pv-target-images/c4e98189d9818cdd180d157ec30d1984d7afe75497a065dc13a0b44a1171fefb.jpg"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/kqGSRLN2XsM?si=ndHZFYabRe6O_TP3"),
+      video: {
+        url: "https://www.youtube.com/embed/kqGSRLN2XsM?si=ndHZFYabRe6O_TP3"
+
+      },
       studio: "DreamWorks Animation"
+
     },
 
     {
@@ -125,10 +162,15 @@ const AllContent = {
       imagesUrl: [
         "https://m.media-amazon.com/images/M/MV5BNTQzNGZjNDEtOTMwYi00MzFjLWE2ZTYtYzYxYzMwMjZkZDc5XkEyXkFqcGc@._V1_.jpg",
         "https://images5.alphacoders.com/853/853867.jpg"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/Eq3pF5OhlJk?si=lNXEB7rlwlW_bciy"),
+      video: {
+        url: "https://www.youtube.com/embed/Eq3pF5OhlJk?si=lNXEB7rlwlW_bciy"
+
+      },
       seasons: 4,
       episodes: 13
+
     },
 
     {
@@ -141,11 +183,17 @@ const AllContent = {
       genre: [ "Comédia", "Drama" ],
       rating: 7.8,
       imagesUrl: [
-        "https://i0.wp.com/chronicallystreaming.com/wp-content/uploads/2022/08/screen-shot-2022-08-22-at-11.32.19-am.png"
+        "https://i0.wp.com/chronicallystreaming.com/wp-content/uploads/2022/08/screen-shot-2022-08-22-at-11.32.19-am.png",
+        "https://dnm.nflximg.net/api/v6/BvVbc2Wxr2w6QuoANoSpJKEIWjQ/AAAAQRfPZODYcfvaK8EP0qf7WdVxb7YNxaEF6zW-9ake807ollOr_ciy_WXKGSsLtgEhBoV-sdYSjjJ2pI6TE72rmiJl5jIOwGnSYX6wCIdkQhzsOr5ngyAfVeeEjhcyQ8QA99WpcxuybDgSymF4eeiPRnfhq9A.jpg?r=048"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/3APbcPU_F4M?si=Y4TLTArSDCWcotZZ"),
+      video: {
+        url: "https://www.youtube.com/embed/3APbcPU_F4M?si=RsF-iXXfgSo2urVz"
+
+      },
       seasons: 4,
       episodes: 40
+
     },
 
     {
@@ -158,11 +206,17 @@ const AllContent = {
       genre: [ "Drama", "Crime" ],
       rating: 8.7,
       imagesUrl: [
-        "https://m.media-amazon.com/images/M/MV5BOGM0NGY3ZmItOGE2ZC00OWIxLTk0N2EtZWY4Yzg3ZDlhNGI3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+        "https://m.media-amazon.com/images/M/MV5BOGM0NGY3ZmItOGE2ZC00OWIxLTk0N2EtZWY4Yzg3ZDlhNGI3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+        "https://m.media-amazon.com/images/S/pv-target-images/0094920244a8673146cb15e2eae6a8207a50ac03e0d92784dcc1b3cf52c1db03.jpg"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/K-RoN7MA5V8?si=gfqsVDrhmT7YIBSd"),
+      video: {
+        url: "https://www.youtube.com/embed/K-RoN7MA5V8?si=gfqsVDrhmT7YIBSd"
+
+      },
       seasons: 6,
       episodes: 36
+
     },
 
     {
@@ -175,11 +229,17 @@ const AllContent = {
       genre: [ "Comédia" ],
       rating: 7.6,
       imagesUrl: [
-        "https://m.media-amazon.com/images/M/MV5BM2U1M2QxZDYtMzgyYS00OWQ5LWIyNGUtMmQ1MGQ2NTU2NzNhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+        "https://m.media-amazon.com/images/M/MV5BM2U1M2QxZDYtMzgyYS00OWQ5LWIyNGUtMmQ1MGQ2NTU2NzNhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+        "https://static0.moviewebimages.com/wordpress/wp-content/uploads/2024/06/everybody-hates-chris-animated.jpg"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/mdLZCbixmJ8?si=S2YB7g8hARspr5zm"),
+      video: {
+        url: "https://www.youtube.com/embed/mdLZCbixmJ8?si=S2YB7g8hARspr5zm"
+
+      },
       seasons: 4,
       episodes: 88
+
     },
 
     {
@@ -194,10 +254,15 @@ const AllContent = {
       imagesUrl: [
         "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p20492218_b_v8_ae.jpg",
         "https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABSlCq3x0mzdgFd1PeYqPTxTE1awDh5jYeAayIIjvZjLBHy971DLaTHBAzWwuYygqn_xscoiBxMtf1LncymZJzkqhYw3M-GBNupEZ.jpg?r=90b"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/7bOphbY6MI4?si=AHS2ywUkVZtVH6MX"),
+      video: {
+        url: "https://www.youtube.com/embed/7bOphbY6MI4?si=AHS2ywUkVZtVH6MX"
+
+      },
       seasons: 2,
       episodes: 16
+
     },
 
     {
@@ -210,11 +275,17 @@ const AllContent = {
       genre: [ "Comédia" ],
       rating: 7.0,
       imagesUrl: [
-        "https://m.media-amazon.com/images/M/MV5BM2I3ZTMyMDktNWFiZi00MDZiLTk4ZDUtMDBjNjUxZDJlN2EyXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+        "https://m.media-amazon.com/images/M/MV5BM2I3ZTMyMDktNWFiZi00MDZiLTk4ZDUtMDBjNjUxZDJlN2EyXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+        "https://lh3.googleusercontent.com/SpV1cLd9vb1DxWv32unteaXp4EYn4x6u_XOf7hr3Vnl173HbufeflXWpz6G51hL7OWigCcPQaK4A9g=w1440-ns-nd-rj"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/PZceSFWgF0o?si=BmNR5ZgVbHB1K6qw"),
+      video: {
+        url: "https://www.youtube.com/embed/PZceSFWgF0o?si=BmNR5ZgVbHB1K6qw"
+
+      },
       seasons: 5,
       episodes: 123
+
     },
 
     {
@@ -227,12 +298,18 @@ const AllContent = {
       genre: [ "Animação", "Ação", "Aventura" ],
       rating: 7.6,
       imagesUrl: [
-        "https://pbs.twimg.com/media/F8AzwPGXsAA7fMX.jpg"
+        "https://pbs.twimg.com/media/F8AzwPGXsAA7fMX.jpg",
+        "https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABQ1s0vDBlEwQzqGayxfyqaKtOoDBMENT5Gb5Wk4hIwTyNz9Iax2hJcLfFqlC9wN7GAEubsoGTxZcT1cWz2B9Gx4EVz8wfxPsYPat.jpg?r=54a"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/z0yzRwCFblA?si=yERVZkiOW8hqLgFJ"),
+      video: {
+        url: "https://www.youtube.com/embed/sO2UJ7elDy0?si=t2fV0yliqRMsvNUx"
+
+      },
       seasons: 4,
       episodes: 52,
       studio: "Cartoon Network Studios"
+
     },
 
     {
@@ -245,12 +322,18 @@ const AllContent = {
       genre: [ "Animação", "Comédia" ],
       rating: 8.6,
       imagesUrl: [
-        "https://i.pinimg.com/1200x/40/2e/ee/402eee131f61c675f8cb9590936c35ac.jpg"
+        "https://i.pinimg.com/1200x/40/2e/ee/402eee131f61c675f8cb9590936c35ac.jpg",
+        "https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/88b98d28-7feb-494a-b31a-05b49d71f1ea/compose?aspectRatio=1.78&format=webp&width=1200"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/3R1ebDCv7vM?si=ta6Yop_3cJx8PG7u"),
+      video: {
+        url: "https://www.youtube.com/embed/3R1ebDCv7vM?si=ta6Yop_3cJx8PG7u"
+
+      },
       seasons: 35,
       episodes: 760,
       studio: "20th Television Animation"
+
     },
 
     {
@@ -263,12 +346,18 @@ const AllContent = {
       genre: [ "Animação", "Comédia" ],
       rating: 6.6,
       imagesUrl: [
-        "https://m.media-amazon.com/images/M/MV5BMmRjYmJmN2QtMTNiMS00MGRkLTg0NWItMGMyNGE5ODE4ZjkyXkEyXkFqcGc@._V1_.jpg"
+        "https://m.media-amazon.com/images/M/MV5BMmRjYmJmN2QtMTNiMS00MGRkLTg0NWItMGMyNGE5ODE4ZjkyXkEyXkFqcGc@._V1_.jpg",
+        "https://i.ytimg.com/vi/QsJYRum6460/maxresdefault.jpg"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/KSWjIsxDUBc?si=vl7xbcdoh8oTNxHc"),
+      video: {
+        url: "https://www.youtube.com/embed/KSWjIsxDUBc?si=vl7xbcdoh8oTNxHc"
+
+      },
       seasons: 37,
       episodes: 195,
       studio: "Universal Animation Studios"
+
     },
 
     {
@@ -281,9 +370,15 @@ const AllContent = {
       genre: [ "Ação", "Crime", "Drama" ],
       rating: 9.0,
       imagesUrl: [
-        "https://images.moviesanywhere.com/bd47f9b7d090170d79b3085804075d41/c6140695-a35f-46e2-adb7-45ed829fc0c0.jpg"
+        "https://images.moviesanywhere.com/bd47f9b7d090170d79b3085804075d41/c6140695-a35f-46e2-adb7-45ed829fc0c0.jpg",
+        "https://m.media-amazon.com/images/S/pv-target-images/5dfd6d9e178dfd5cd385f4a171c7b09ce3cbcd5ca1ff7ba3ba983b5c88203d59.jpg"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/8sB1HTghkg4?si=8jdn5ssWsigo9nWc")
+      video: {
+        url: "https://www.youtube.com/embed/8sB1HTghkg4?si=8jdn5ssWsigo9nWc"
+
+      }
+
     },
 
     {
@@ -296,11 +391,17 @@ const AllContent = {
       genre: [ "Drama", "Crime" ],
       rating: 9.5,
       imagesUrl: [
-        "https://es.web.img3.acsta.net/pictures/18/04/04/22/52/3191575.jpg"
+        "https://es.web.img3.acsta.net/pictures/18/04/04/22/52/3191575.jpg",
+        "https://igormiranda.com.br/wp-content/uploads/2023/05/breaking-bad-serie-elenco.jpg"
+
       ],
-      iframe: iframe("https://www.youtube.com/embed/_-Nv0JOcGxg?si=Khn4hf8XKuDPUJcy"),
+      video: {
+        url: "https://www.youtube.com/embed/_-Nv0JOcGxg?si=Khn4hf8XKuDPUJcy"
+
+      },
       seasons: 5,
       episodes: 62
+
     },
 
     {
@@ -317,8 +418,12 @@ const AllContent = {
         "https://m.media-amazon.com/images/M/MV5BYWI1OTM1MGQtOTI5NC00OTdhLTg3YzgtZWRhYWY3ODg5NzI0XkEyXkFqcGc@._V1_.jpg"
 
       ],
-      iframe: iframe("https://www.youtube.com/embed/SS6ABPkfmBE?si=4l9h6HamL83zxljL"),
+      video: {
+        url: "https://www.youtube.com/embed/SS6ABPkfmBE?si=4l9h6HamL83zxljL"
+
+      },
       studio: "Sony Pictures Animation"
+
     },
 
     {
@@ -330,9 +435,17 @@ const AllContent = {
       year: 2004,
       genre: [ "Animação", "Comédia", "Fantasia" ],
       rating: 7.4,
-      imagesUrl: [ "https://images.justwatch.com/poster/65682147/s718/shrek-2.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/oW-vf54cUes?si=BtDavlwtQhPCw8Z-"),
+      imagesUrl: [
+        "https://images.justwatch.com/poster/65682147/s718/shrek-2.jpg",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1D4kUl0_Uu5_mEy8pHUHAFEZsHxLROU1TizrHTxJz8jQKggG9mvtjuwdH04iFfX_qe8DFhnhadzUqWE2jdUcQ3_cACrBraYfvk_iTBynSRZUoVgttb6qItnglFUEOPl-X3NwGJdgE1EYb/s1600/IMG_20200519_143217.jpg"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/oW-vf54cUes?si=BtDavlwtQhPCw8Z-"
+
+      },
       studio: "DreamWorks Animation"
+
     },
 
     {
@@ -344,9 +457,17 @@ const AllContent = {
       year: 2007,
       genre: [ "Animação", "Comédia", "Fantasia" ],
       rating: 6.1,
-      imagesUrl: [ "https://images.contentstack.io/v3/assets/blt13adb7e2033fcee5/blt10cb868fe0ed3e48/691c877da8d021337a6fcb5e/ShrekTheThird_Poster_2000x3000_uaa.jpg?width=2560" ],
-      iframe: iframe("https://www.youtube.com/embed/_MoIr7811Bs?si=IQSRKXR_UkihjkYU"),
+      imagesUrl: [
+        "https://images.contentstack.io/v3/assets/blt13adb7e2033fcee5/blt10cb868fe0ed3e48/691c877da8d021337a6fcb5e/ShrekTheThird_Poster_2000x3000_uaa.jpg?width=2560",
+        "https://m.media-amazon.com/images/S/pv-target-images/23f562c5f20e4979c1985cec2e7fa4eb990522ca037bafb4214d0a36f61b3eed._SX1080_FMjpg_.jpg"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/_MoIr7811Bs?si=IQSRKXR_UkihjkYU"
+
+      },
       studio: "DreamWorks Animation"
+
     },
 
     {
@@ -358,9 +479,17 @@ const AllContent = {
       year: 2010,
       genre: [ "Animação", "Comédia", "Fantasia" ],
       rating: 6.3,
-      imagesUrl: [ "https://images.contentstack.io/v3/assets/blt13adb7e2033fcee5/blt5b394e078158f08f/691c877ab80cd0eef37c83ea/ShrekForeverAfter_Poster_2000x3000_uaa.jpg?width=2560" ],
-      iframe: iframe("https://www.youtube.com/embed/Ma9oseKpj9g?si=dXIFJblLUgNjvsh9"),
+      imagesUrl: [
+        "https://images.contentstack.io/v3/assets/blt13adb7e2033fcee5/blt5b394e078158f08f/691c877ab80cd0eef37c83ea/ShrekForeverAfter_Poster_2000x3000_uaa.jpg?width=2560",
+        "https://m.media-amazon.com/images/S/pv-target-images/dfbcdc8c9f0da8d2616db23b636b000d18c32ae403c1679020533cee3196d1cd._SX1080_FMjpg_.jpg"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/Ma9oseKpj9g?si=dXIFJblLUgNjvsh9"
+
+      },
       studio: "DreamWorks Animation"
+
     },
 
     {
@@ -372,9 +501,17 @@ const AllContent = {
       year: 2008,
       genre: [ "Animação", "Comédia", "Aventura" ],
       rating: 6.6,
-      imagesUrl: [ "https://images.justwatch.com/poster/240593489/s718/madagascar-2-a-grande-escapada.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/MUAbupPbGbQ?si=kxFZRYfrWQZ1tRiW"),
+      imagesUrl: [
+        "https://images.justwatch.com/poster/240593489/s718/madagascar-2-a-grande-escapada.jpg",
+        "https://occ-0-8407-92.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABY-HR_aw-TazNefXhDwxz-ajJ1aTgvvjvodrlRH1HN1SVU3-fZUJ2k1l6pJffQgGPOlhTNbplu_xcEz-hM_ryhXAQ-09ex4P6a3S.jpg?r=176"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/MUAbupPbGbQ?si=kxFZRYfrWQZ1tRiW"
+
+      },
       studio: "DreamWorks Animation"
+
     },
 
     {
@@ -386,9 +523,17 @@ const AllContent = {
       year: 2012,
       genre: [ "Animação", "Comédia", "Aventura" ],
       rating: 6.8,
-      imagesUrl: [ "https://images.justwatch.com/poster/240598478/s718/madagascar-3-os-procurados.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/laNiRXqh82Q?si=rYErn-OOBP5zt5e_"),
+      imagesUrl: [
+        "https://images.justwatch.com/poster/240598478/s718/madagascar-3-os-procurados.jpg",
+        "https://occ-0-8407-92.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABXjzvXjHTRflz6ghHKj_11nQW2SgAM1fgaAqlBYNOhHyWZzGE53laQFl3PJE_ttQVnpUeiHC3FPvhR-pXv3Pkkg0KcwtoSQUXCf7.jpg?r=0db"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/laNiRXqh82Q?si=rYErn-OOBP5zt5e_"
+
+      },
       studio: "DreamWorks Animation"
+
     },
 
     {
@@ -400,9 +545,17 @@ const AllContent = {
       year: 2023,
       genre: [ "Animação", "Ação", "Aventura" ],
       rating: 8.6,
-      imagesUrl: [ "https://cdnb.artstation.com/p/assets/images/images/048/509/001/large/hazza-jarrar-mm.jpg?1650236822" ],
-      iframe: iframe("https://www.youtube.com/embed/_4is7I_ZxTg?si=3thCtDDfc5i3V94U"),
+      imagesUrl: [
+        "https://cdnb.artstation.com/p/assets/images/images/048/509/001/large/hazza-jarrar-mm.jpg?1650236822",
+        "https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABbSgv1dDgUpXTDNz6i2tus0qkwMdlkzEV_AdhUVxxIc4EVKTyy-cxtKoSF3O2LjPhoJchs55PbxsQx1Uninvc4_dMz8PmRru0Q6q.jpg?r=7ea"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/_4is7I_ZxTg?si=3thCtDDfc5i3V94U"
+
+      },
       studio: "Sony Pictures Animation"
+
     },
 
     {
@@ -414,8 +567,16 @@ const AllContent = {
       year: 2005,
       genre: [ "Ação", "Crime", "Drama" ],
       rating: 8.2,
-      imagesUrl: [ "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p35903_p_v8_ay.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/neY2xVmOfUM?si=FQrcl5O9AEYy9w7t")
+      imagesUrl: [
+        "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p35903_p_v8_ay.jpg",
+        "https://occ-0-8407-92.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABW1LyLDTX3OIZ1c53CHy_S3HEAq-o-Lyjwe1JkRg-a1XoF4n4H77XQ4FV5pjzj33Oxl_WnII-irLlWmOab3kdn_oFVHSuNv-cUK3.jpg?r=bf6"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/neY2xVmOfUM?si=FQrcl5O9AEYy9w7t"
+
+      }
+
     },
 
     {
@@ -427,8 +588,16 @@ const AllContent = {
       year: 2012,
       genre: [ "Ação", "Crime", "Drama" ],
       rating: 8.4,
-      imagesUrl: [ "https://alchemistnany.wordpress.com/wp-content/uploads/2012/07/the-dark-knight-rises-batman-poster.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/q8ncjHylG6c?si=03335iglHM-8kGAl")
+      imagesUrl: [
+        "https://alchemistnany.wordpress.com/wp-content/uploads/2012/07/the-dark-knight-rises-batman-poster.jpg",
+        "https://shorester.wordpress.com/wp-content/uploads/2012/08/the-dark-knight-rises-7.jpg"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/q8ncjHylG6c?si=03335iglHM-8kGAl"
+
+      }
+
     },
 
     {
@@ -440,11 +609,19 @@ const AllContent = {
       year: 2008,
       genre: [ "Animação", "Ação", "Aventura" ],
       rating: 7.4,
-      imagesUrl: [ "https://m.media-amazon.com/images/M/MV5BOGQ5YWFjYjItODE5OC00ZDQxLTk5ZmYtNzY0YzM4NjIyMWFlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/kdBp2Sh--vw?si=f3CjAqeV9c6ytBWX"),
+      imagesUrl: [
+        "https://m.media-amazon.com/images/M/MV5BOGQ5YWFjYjItODE5OC00ZDQxLTk5ZmYtNzY0YzM4NjIyMWFlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+        "https://m.media-amazon.com/images/S/pv-target-images/1b7305edff605d63116f3ef0f9499304ccb2569b7c6e823619d94ec1becb6b8b._SX1080_FMjpg_.jpg"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/kdBp2Sh--vw?si=f3CjAqeV9c6ytBWX"
+
+      },
       studio: "Cartoon Network Studios",
       seasons: 3,
       episodes: 46
+
     },
 
     {
@@ -456,11 +633,19 @@ const AllContent = {
       year: 2010,
       genre: [ "Animação", "Ação", "Aventura" ],
       rating: 7.5,
-      imagesUrl: [ "https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/ben_10_ultimate_alien.png" ],
-      iframe: iframe("https://www.youtube.com/embed/NDNyZ4dIP54?si=5fB2yZMJ_fKQhnT8"),
+      imagesUrl: [
+        "https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/ben_10_ultimate_alien.png",
+        "https://m.media-amazon.com/images/S/pv-target-images/ba6bf7241aadcaf2bb253c845ae10f1eb0252c8bf212dcb0b457dc3f7cb135ef.jpg"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/NDNyZ4dIP54?si=5fB2yZMJ_fKQhnT8"
+
+      },
       studio: "Cartoon Network Studios",
       seasons: 3,
       episodes: 52
+
     },
     {
       type: [ "animation", "serie" ],
@@ -471,11 +656,19 @@ const AllContent = {
       year: 2010,
       genre: [ "Animação", "Ação", "Aventura" ],
       rating: 6.6,
-      imagesUrl: [ "https://m.media-amazon.com/images/M/MV5BYjE1N2EzYzQtMWExOC00N2FjLWEwYjMtNjdlNWUwYzQwMzEyXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/jKSi87myWds?si=JQqIjrhRtTVav9E5"),
+      imagesUrl: [
+        "https://m.media-amazon.com/images/M/MV5BYjE1N2EzYzQtMWExOC00N2FjLWEwYjMtNjdlNWUwYzQwMzEyXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+        "https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/6bac1cc5-2946-45f5-bf4c-cbe6d4d5d029/5a54ff0e-6bbf-11ef-bb0b-0afff21f57b1?host=wbd-images.prod-vod.h264.io&partner=beamcom"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/jKSi87myWds?si=JQqIjrhRtTVav9E5"
+
+      },
       studio: "Cartoon Network Studios",
       seasons: 8,
       episodes: 80
+
     },
     {
       type: [ "movie" ],
@@ -486,8 +679,16 @@ const AllContent = {
       year: 1973,
       genre: [ "Terror" ],
       rating: 8.1,
-      imagesUrl: [ "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p6107_p_v10_az.jpg " ],
-      iframe: iframe("https://www.youtube.com/embed/4x6a6igB1AQ?si=AGDjjy5xcA53V2o8")
+      imagesUrl: [
+        "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p6107_p_v10_az.jpg ",
+        "https://cinephilecorner.com/wp-content/uploads/2024/10/the-exorcist-film-review-1973.webp"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/4x6a6igB1AQ?si=AGDjjy5xcA53V2o8"
+
+      }
+
     },
 
     {
@@ -499,8 +700,16 @@ const AllContent = {
       year: 2018,
       genre: [ "Terror", "Suspense" ],
       rating: 7.3,
-      imagesUrl: [ "https://m.media-amazon.com/images/S/pv-target-images/2be98bed028f1d53e01a860b6bb91c362dc32611c45effbcf2aa2645d590b22a.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/Ui13PlmyZhQ?si=vo1ibiWQ8a-JevL5")
+      imagesUrl: [
+        "https://m.media-amazon.com/images/S/pv-target-images/2be98bed028f1d53e01a860b6bb91c362dc32611c45effbcf2aa2645d590b22a.jpg",
+        "https://m.media-amazon.com/images/S/pv-target-images/cd041ddf6841d6f03d38fe96a739a8cee7320f023b486303f6cd8e98beba2d14.jpg"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/Ui13PlmyZhQ?si=vo1ibiWQ8a-JevL5"
+
+      }
+
     },
 
     {
@@ -512,8 +721,16 @@ const AllContent = {
       year: 2013,
       genre: [ "Terror", "Suspense" ],
       rating: 7.5,
-      imagesUrl: [ "https://m.media-amazon.com/images/I/81yAfVk+7UL._AC_UF894,1000_QL80_.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/GQrrXceHn2E?si=p1aKLPXkkTb02Kcu")
+      imagesUrl: [
+        "https://m.media-amazon.com/images/I/81yAfVk+7UL._AC_UF894,1000_QL80_.jpg",
+        "https://cinemacao.com/wp-content/uploads/2014/07/inv8.jpg"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/GQrrXceHn2E?si=p1aKLPXkkTb02Kcu"
+
+      }
+
     },
 
     {
@@ -525,8 +742,16 @@ const AllContent = {
       year: 1980,
       genre: [ "Terror", "Suspense" ],
       rating: 8.4,
-      imagesUrl: [ "https://assets-prd.ignimgs.com/2023/10/07/shining-ver2-xlg-button-1696713779756.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/dSQ3yN5yJ0g?si=tW2IM-9jBRq6XCUA")
+      imagesUrl: [
+        "https://assets-prd.ignimgs.com/2023/10/07/shining-ver2-xlg-button-1696713779756.jpg",
+        "https://m.media-amazon.com/images/M/MV5BMTg0MzkzODUwNV5BMl5BanBnXkFtZTgwODM1MjEwNDI@._V1_.jpg"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/dSQ3yN5yJ0g?si=tW2IM-9jBRq6XCUA"
+
+      }
+
     },
 
     {
@@ -538,8 +763,16 @@ const AllContent = {
       year: 2017,
       genre: [ "Terror", "Suspense" ],
       rating: 7.8,
-      imagesUrl: [ "https://s3.amazonaws.com/nightjarprod/content/uploads/sites/189/2024/09/24164547/tFXcEccSQMf3lfhfXKSU9iRBpa3-scaled.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/mDGV5UucTu8?si=jSJjuQQd_LbPKYh3")
+      imagesUrl: [
+        "https://s3.amazonaws.com/nightjarprod/content/uploads/sites/189/2024/09/24164547/tFXcEccSQMf3lfhfXKSU9iRBpa3-scaled.jpg",
+        "https://pyxis.nymag.com/v1/imgs/001/b4c/699e2c65f9c92ff77154a1b2909b3eaf6b-17-get-out-review.2x.h473.w710.jpg"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/mDGV5UucTu8?si=jSJjuQQd_LbPKYh3"
+
+      }
+
     },
 
     {
@@ -551,8 +784,16 @@ const AllContent = {
       year: 1982,
       genre: [ "Ficção Científica", "Drama" ],
       rating: 8.1,
-      imagesUrl: [ "http://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/gCcx85zbxz4?si=jd_ct2UGA1WQdGxn")
+      imagesUrl: [
+        "http://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_.jpg",
+        "https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABaHT4U_VI3Hpghhv_yb3A98yiUsAK8a5E3lkBU9zp88a0HprtBtvvbcCwXhfxR_9xqQfkzY9hwKe8G3S5TwNT7J9hpwRuDk8zyeD.jpg?r=ad3"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/gCcx85zbxz4?si=jd_ct2UGA1WQdGxn"
+
+      }
+
     },
 
     {
@@ -564,8 +805,16 @@ const AllContent = {
       year: 1999,
       genre: [ "Ficção Científica", "Ação" ],
       rating: 8.7,
-      imagesUrl: [ "https://storage.googleapis.com/pod_public/1300/106922.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/vKQi3bBA1y8?si=JOZcbTdU12D60X3H")
+      imagesUrl: [
+        "https://storage.googleapis.com/pod_public/1300/106922.jpg",
+        "https://sm.ign.com/ign_br/news/n/new-matrix/new-matrix-movie-writer-says-its-not-a-reboot_66m3.jpg"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/vKQi3bBA1y8?si=JOZcbTdU12D60X3H"
+
+      }
+
     },
 
     {
@@ -577,8 +826,16 @@ const AllContent = {
       year: 2010,
       genre: [ "Ficção Científica", "Ação", "Suspense" ],
       rating: 8.8,
-      imagesUrl: [ "https://m.media-amazon.com/images/S/pv-target-images/cc72ff2193c0f7a85322aee988d6fe1ae2cd9f8800b6ff6e8462790fe2aacaf3.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/R_VX0e0PX90?si=AMT0Hjv7SQJnuoNz")
+      imagesUrl: [
+        "https://m.media-amazon.com/images/S/pv-target-images/cc72ff2193c0f7a85322aee988d6fe1ae2cd9f8800b6ff6e8462790fe2aacaf3.jpg",
+        "https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABSHktF8BHUjajWUYpC_mH3L-yzecnbav68BCAq35tDl7yFdYTNG6w8YQSVEaeq2T6pPylranFVq_qig3aSlpWPdDrUSRiwr-NpZC.jpg?r=074"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/R_VX0e0PX90?si=AMT0Hjv7SQJnuoNz"
+
+      }
+
     },
 
     {
@@ -590,8 +847,16 @@ const AllContent = {
       year: 2014,
       genre: [ "Ficção Científica", "Drama" ],
       rating: 7.7,
-      imagesUrl: [ "https://s3.amazonaws.com/nightjarprod/content/uploads/sites/189/2024/11/18154142/dmJW8IAKHKxFNiUnoDR7JfsK7Rp.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/EoQuVnKhxaM?si=3_Duxf3jftTmxnie")
+      imagesUrl: [
+        "https://s3.amazonaws.com/nightjarprod/content/uploads/sites/189/2024/11/18154142/dmJW8IAKHKxFNiUnoDR7JfsK7Rp.jpg",
+        "https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABV8MdM5mJx9hluQjXMnWcznL0XDuJDiqL9lMVbDy5_ZFXSvzjSua3Q17LAm2rFDibb1fn23rsXGctQ7qpEu0U6p0I3NkaGci5etK.jpg?r=aaf"
+
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/sNExF5WYMaA?si=v31lZSaXDrVCGCgX"
+
+      }
+
     },
 
     {
@@ -603,10 +868,17 @@ const AllContent = {
       year: 2009,
       genre: [ "Ficção Científica", "Ação" ],
       rating: 7.9,
-      imagesUrl: [ "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p177953_p_v8_ae.jpg" ],
-      iframe: iframe("https://www.youtube.com/embed/DyLUwOcR5pk?si=8GZE4VSNQp0xtEjX")
-    }
+      imagesUrl: [
+        "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p177953_p_v8_ae.jpg",
+        "https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABW79hBkmDDBdmAaMHonHvP1tCAK3nmsByDR_jOZ5BJKjnZ3if_9xb0bkHQfJIXSpi3YjShQld8AnNkZ9NZaFsKTrSmQvyRDXSYac.jpg?r=623"
 
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/DyLUwOcR5pk?si=8GZE4VSNQp0xtEjX"
+
+      }
+
+    }
 
   ]
 
