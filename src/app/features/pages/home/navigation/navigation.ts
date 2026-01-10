@@ -87,4 +87,22 @@ export class Navigation implements OnInit {
 
   }
 
+  navigateByContentPage(title: string): void {
+    const content = this.videoStreaming.searchByTitles(title);
+
+    this.router.navigate([ "home", "content" ], {
+      queryParams: {
+        title: content[0].title
+
+      },
+      state: {
+        access: true,
+        content: [ { params: content[0].title, ...content } ]
+
+      }
+
+    });
+
+  }
+
 }

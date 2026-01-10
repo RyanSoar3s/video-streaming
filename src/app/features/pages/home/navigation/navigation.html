@@ -41,8 +41,8 @@
           }">
 
   @if (isSmall) {
-    <div [ngClass]="'flex justify-center h-[34px] w-full'">
-     <div [ngClass]="'w-[80%]'">
+    <div [ngClass]="'flex justify-center h-auto w-full'">
+     <div [ngClass]="'h-[37px] w-[80%]'">
        <app-search
         [height]="'100%'"
         [width]="'100%'"
@@ -108,7 +108,14 @@
 
             </div>
 
-            <p [ngClass]="'text-white text-[0.9em] font-normal self-center ml-[12px]! hover-underline'">{{ content.title }}</p>
+            <p
+              [ngClass]="'text-white text-[0.9em] font-normal self-center ml-[12px]! hover-underline'"
+              (click)="void navigateByContentPage(content.title)"
+
+            >
+              {{ content.title }}
+
+            </p>
 
           </li>
 
