@@ -7,7 +7,10 @@ type TBaseMedia = {
   genre: Array<string>,
   rating: number,
   imagesUrl: Array<string>,
-  iframe: string
+  video: {
+    url: string
+
+  }
 
 };
 
