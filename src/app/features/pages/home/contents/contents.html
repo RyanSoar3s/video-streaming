@@ -1,18 +1,8 @@
-@let categories = [ "Todos", "Filmes", "Séries", "Animações" ];
-
 @let vs = videoStreaming.allFiltered();
 
 <div [ngClass]="'shadow'"></div>
-<div [ngClass]="'flex flex-col gap-[40px] h-[150px] w-[calc(100%-150px)] mt-[10px]! mb-[20px]! pl-[30px]!'">
-  <h1 [ngClass]="'text-[1.85em] font-normal'">Categorias</h1>
-
-  <nav [ngClass]="'inline-flex h-[38px] w-auto gap-5'">
-    @for (cat of categories; track cat) {
-      <div [ngClass]="'categories__options'">{{ cat }}</div>
-
-    }
-
-  </nav>
+<div [ngClass]="'h-[50px] w-[calc(100%-150px)] mt-[20px]! mb-[50px]! pl-[10px]'">
+  <h1 [ngClass]="'text-[2.3em] font-bold'">Nosso Catálogo</h1>
 
 </div>
 
