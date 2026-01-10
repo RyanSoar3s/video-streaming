@@ -10,6 +10,7 @@ import { Login } from '@features/pages/auth/login/login';
 import { VerifyCode } from '@features/pages/auth/verify-code/verify-code';
 import { Catalog } from '@features/pages/catalog/catalog';
 import { Profile } from '@features/pages/home/profile/profile';
+import { ContentPage } from '@features/shared/content-page/content-page';
 
 export const routes: Routes = [
   {
@@ -51,6 +52,11 @@ export const routes: Routes = [
         path: "catalog",
         canActivate: [ searchAccessGuard ],
         component: Catalog
+
+      },
+      {
+        path: "content",
+        component: ContentPage
 
       }
 
