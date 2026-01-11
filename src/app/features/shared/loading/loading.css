@@ -33,7 +33,7 @@
 
 
 :host {
-  @apply absolute flex items-center justify-center h-lvh w-lvw z-900;
+  @apply absolute flex items-center justify-center h-dvh w-lvw z-900;
 
 }
 

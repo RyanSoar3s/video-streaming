@@ -12,7 +12,7 @@
 }
 
 html, body {
-  @apply h-lvh w-lvw font-rubik custom-scrollbar overflow-x-hidden;
+  @apply h-dvh w-lvw font-rubik custom-scrollbar overflow-x-hidden;
 
 }
 

@@ -1,6 +1,6 @@
 @reference "tailwindcss";
 
 :host {
-  @apply bg-[#060606] text-white absolute flex flex-col items-center justify-start top-0 min-h-lvh w-lvw z-801;
+  @apply bg-[#060606] text-white absolute flex flex-col items-center justify-start top-0 min-h-dvh w-lvw z-801;
 
 }

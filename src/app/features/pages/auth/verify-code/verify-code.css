@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 :host {
-  @apply relative h-lvh w-lvw bg-[image:url('../banners/banner.avif')] text-white bg-cover bg-center bg-no-repeat flex items-center justify-center overflow-hidden;
+  @apply relative h-dvh w-lvw bg-[image:url('../banners/banner.avif')] text-white bg-cover bg-center bg-no-repeat flex items-center justify-center overflow-hidden;
 
 }
 

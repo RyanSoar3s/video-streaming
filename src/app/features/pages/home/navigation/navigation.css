@@ -51,7 +51,7 @@
 }
 
 :host {
-  @apply absolute block h-svh w-0 z-999;
+  @apply absolute block h-dvh w-0 z-999;
 
 }
 
