@@ -42,7 +42,7 @@ export class ContentPage {
 
   protected showMore = false;
 
-  private iframe = viewChild<ElementRef<HTMLIFrameElement>>("iframe");
+  private player = viewChild<ElementRef<HTMLDivElement>>("player");
   private description = viewChild<ElementRef<HTMLParagraphElement>>("description");
 
   private navState = signal<{
@@ -62,6 +62,17 @@ export class ContentPage {
     effect(() => {
       this.queryParams();
       this.navState.set(history.state);
+      this.playButtonDisabled = false;
+
+      const player = this.player();
+
+      if (!player) return;
+
+      const iframe = player.nativeElement.children[0];
+
+      if (!iframe) return;
+
+      this.renderer.removeChild(player.nativeElement, iframe)
 
     });
 
@@ -75,16 +86,32 @@ export class ContentPage {
   }
 
   openVideo(): void {
-    const iframe = this.iframe();
+    const player = this.player();
 
-    if (!iframe) return;
+    if (!player) return;
 
     const c = this.content()[0][0];
 
     this.playButtonDisabled = true;
-    this.renderer.setAttribute(iframe.nativeElement, "title", c.title);
-    this.renderer.setAttribute(iframe.nativeElement, "src", c.video.url);
-    
+
+    const iframe = this.renderer.createElement("iframe") as HTMLIFrameElement;
+
+    this.renderer.setAttribute(iframe, "title", c.title);
+    this.renderer.setAttribute(iframe, "src", c.video.url);
+    this.renderer.setAttribute(iframe, "frameborder", "0");
+    this.renderer.setAttribute(
+      iframe,
+      "allow",
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+
+    );
+    this.renderer.setAttribute(iframe, "referrerpolicy", "strict-origin-when-cross-origin");
+    this.renderer.setAttribute(iframe, "allowfullscreen", "");
+
+    this.renderer.addClass(iframe, "iframe");
+
+    this.renderer.appendChild(player.nativeElement, iframe);
+
   }
 
 }

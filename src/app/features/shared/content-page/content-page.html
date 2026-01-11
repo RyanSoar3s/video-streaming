@@ -15,6 +15,7 @@
 }
 
 <div
+  #player
   [ngClass]="'banner'"
   [ngStyle]="{
     'height': (XS || SM) ? '400px' : '700px',
@@ -22,18 +23,7 @@
 
   }"
 
-  >
-
-  <iframe
-      #iframe
-      [ngClass]="'h-full w-full rounded-3xl'"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen
-
-  >
-  </iframe>
-
+>
 </div>
 
 <div [ngClass]="'flex flex-col gap-[15px] h-auto w-[70%] mb-[30px]'">
