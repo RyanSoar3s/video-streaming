@@ -11,12 +11,12 @@
       @if (isCarousel()) {
         <div [ngClass]="'absolute h-full w-full'">
           <div [ngClass]="'flex items-end justify-between p-[0px_10px]! h-full'">
-            <button [ngClass]="'arrow'" [disabled]="!canScroll(i)" (click)="void navigateCarrousel('left', i)">
+            <button [ngClass]="'arrow'" [disabled]="!canScroll(i)" (click)="void navigateCarousel('left', i)">
               <fa-icon [icon]="faArrowLeft"></fa-icon>
 
             </button>
 
-            <button [ngClass]="'arrow'" [disabled]="!canScroll(i)" (click)="void navigateCarrousel('right', i)">
+            <button [ngClass]="'arrow'" [disabled]="!canScroll(i)" (click)="void navigateCarousel('right', i)">
               <fa-icon [icon]="faArrowRight"></fa-icon>
 
             </button>

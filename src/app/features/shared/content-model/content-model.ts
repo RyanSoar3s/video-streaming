@@ -49,13 +49,13 @@ export class ContentModel {
       (children[1] as HTMLElement).offsetLeft -
       (children[0] as HTMLElement).offsetLeft;
 
-    const visible = Math.ceil(parent.offsetWidth / step);
+    const visible = Math.round(parent.offsetWidth / step);
 
     return children.length > visible;
 
   }
 
-  navigateCarrousel(direction: "left" | "right", index: number): void {
+  navigateCarousel(direction: "left" | "right", index: number): void {
     const content = this.contents()[index];
     const container = this.items()[index]?.nativeElement;
     const parent = container?.parentElement;
@@ -71,7 +71,7 @@ export class ContentModel {
       (children[1] as HTMLElement).offsetLeft -
       (children[0] as HTMLElement).offsetLeft;
 
-    const visible = Math.ceil(parent.offsetWidth / step);
+    const visible = Math.round(parent.offsetWidth / step);
     const maxPage = Math.max(0, children.length - visible);
 
     content.scroll = (direction === "right") ?
