@@ -4,6 +4,7 @@ import {
   ChangeDetectorRef,
   Component, ElementRef,
   inject,
+  OnDestroy,
   Renderer2,
   viewChild,
   viewChildren
@@ -15,10 +16,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { RequestApi } from '@core/services/request-api';
 import { Router, RouterOutlet } from '@angular/router';
-import { timer } from 'rxjs';
+import { filter, Subscription, take, timer } from 'rxjs';
 import { PendingVerification } from '@core/services/pending-verification';
 import { Loading } from '@features/shared/loading/loading';
 import { responseError } from '@core/models/responseError.model';
+import { GoogleAuth } from '@core/services/google-auth';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +35,7 @@ import { responseError } from '@core/models/responseError.model';
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
-export class Login implements AfterViewInit {
+export class Login implements AfterViewInit, OnDestroy {
   protected readonly responsive = inject(Responsive);
   private renderer = inject(Renderer2);
   private request = inject(RequestApi);
@@ -68,7 +70,21 @@ export class Login implements AfterViewInit {
   private googleBtn = viewChild<ElementRef<HTMLElement>>("googleBtn");
   private pass = viewChild<ElementRef<HTMLElement>>("pass");
 
+  private googleAuthService = inject(GoogleAuth);
+  private sub = new Subscription();
+
   ngAfterViewInit() {
+    this.sub = this.googleAuthService.isGoogleScriptLoaded$
+              .pipe(
+                filter((loaded) => loaded),
+                take(1)
+
+              )
+              .subscribe(() => this.initializeGoogleButton());
+
+  }
+
+  private initializeGoogleButton(): void {
     google.accounts.id.initialize({
       client_id: "456680708228-mc2jdi64ut8b3udqkua7rrvcj19os8ao.apps.googleusercontent.com",
       callback: (response: any) => this.handleCredentialResponse(response)
@@ -214,6 +230,10 @@ export class Login implements AfterViewInit {
 
 
     }
+
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
 
   }
 
