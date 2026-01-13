@@ -1,33 +1,56 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { expect, it, describe, beforeEach } from 'vitest';
 
+import { screen } from '@testing-library/angular';
+import userEvent from '@testing-library/user-event';
+
 import { Navigation } from './navigation';
-import { By } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
+import { VideoStreaming } from '@core/services/video-streaming';
+import videoStreamingMock from '@mock/video-streaming.mock';
 
 describe('Navigation', () => {
   let component: Navigation;
   let fixture: ComponentFixture<Navigation>;
+  let videoStreaming: VideoStreaming;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Navigation]
+      imports: [ Navigation ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { params: {}, queryParams: {} }
+          }
+
+        },
+        {
+          provide: VideoStreaming,
+          useValue: videoStreamingMock
+
+        }
+
+      ]
     })
     .compileComponents();
 
+    videoStreaming = TestBed.inject(VideoStreaming);
+
     fixture = TestBed.createComponent(Navigation);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    await fixture.whenStable();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it("should open menu", async () => {
+    expect(component.isOpen).toBeFalsy();
 
-  it('should open menu', () => {
-    const menu = fixture.debugElement.query(By.css("div.menu-img-icon"));
+    const user = userEvent.setup();
 
-    menu.triggerEventHandler("click", null);
-    fixture.detectChanges();
+    await user.click(
+      screen.getByTestId("menu")
+
+    );
 
     expect(component.isOpen).toBeTruthy();
 
