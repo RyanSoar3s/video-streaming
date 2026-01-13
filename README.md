@@ -53,7 +53,7 @@ src/
 │   ├── features/          # Funcionalidades principais
 │   │   ├── pages/         # Páginas (home, Catálogo, etc.)
 │   │   └── shared/        # Componentes reutilizáveis
-│   ├── mocks              # Mocks para testes unitários
+│   ├── mocks/             # Mocks para testes unitários
 │   ├── models/            # Tipagens e interfaces
 │   ├── types/             # Tipos globais
 │   └── app.component.*
@@ -221,3 +221,4 @@ Projeto desenvolvido para fins educacionais e portfólio.
 ## 📄 Licença
 
 Este projeto está licenciado sob a [MIT License](LICENSE)
+
