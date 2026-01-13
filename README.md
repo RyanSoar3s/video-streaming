@@ -56,7 +56,7 @@ src/
 │   ├── mocks/             # Mocks para testes unitários
 │   ├── models/            # Tipagens e interfaces
 │   ├── types/             # Tipos globais
-│   └── app.component.*
+│   └── app.*
 ├── assets/
 └── ...
 ```
@@ -221,4 +221,5 @@ Projeto desenvolvido para fins educacionais e portfólio.
 ## 📄 Licença
 
 Este projeto está licenciado sob a [MIT License](LICENSE)
+
 
