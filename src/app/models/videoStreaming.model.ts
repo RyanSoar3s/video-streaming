@@ -1,6 +1,6 @@
 type TBaseMedia = {
   type: Array<"movie" | "serie" | "animation">,
-  id: string,
+  id: number,
   title: string,
   description: string,
   year: number,
