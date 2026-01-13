@@ -8,12 +8,14 @@
           }"
           [attr.type]="'text'"
           [attr.name]="'search-input'"
+          [attr.aria-label]="'search'"
           [placeholder]="'O que deseja buscar?'"
           [autocomplete]="'off'"
 
           >
 
   <button
+    [attr.aria-label]="'button-search'"
     [ngClass]="'absolute right-0 self-center cursor-pointer'"
     [ngStyle]="{
       'height': button().height,
