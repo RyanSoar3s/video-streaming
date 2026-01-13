@@ -34,7 +34,7 @@ export class ContentModel {
   private items = viewChildren<ElementRef<HTMLElement>>("items");
 
   isCarousel = input(false);
-  contents = input.required<Array<TContent & { scroll?: number }>>();
+  contents = input.required<Array<{ info: TContent, scroll?: number }>>();
 
   canScroll(index: number): boolean {
     const container = this.items()[index]?.nativeElement;
@@ -111,7 +111,7 @@ export class ContentModel {
       },
       state: {
         access: true,
-        content: [ { params: content[0].title, ...content } ]
+        content: [ { params: content[0].title, info: content } ]
 
       }
 

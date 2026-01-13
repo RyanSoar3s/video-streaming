@@ -33,7 +33,7 @@ export class Catalog {
   private navState = signal<{
     fromSearch?: boolean;
     mode?: "full" | "search";
-    catalog?: Array<{ params: string } & TContent>;
+    catalog?: Array<{ params: string, info: TContent }>;
 
   }>({});
 
@@ -53,7 +53,7 @@ export class Catalog {
 
   }
 
-  setContentSearched(content: Array<{ params: string } & TContent>): void {
+  setContentSearched(content: Array<{ params: string, info: TContent }>): void {
     this.router.navigate([], {
       queryParams: {
         search: content[0].params

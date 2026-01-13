@@ -35,19 +35,19 @@ export class ContentPage {
 
   protected clickedFaHeart = false;
   protected clickedFaPlus = false;
-  protected playButtonDisabled = false;
+  public playButtonDisabled = false;
 
   protected readonly icon = "favicon.ico";
   protected readonly star = "assets/home/star.png";
 
-  protected showMore = false;
+  public showMore = false;
 
   private player = viewChild<ElementRef<HTMLDivElement>>("player");
   private description = viewChild<ElementRef<HTMLParagraphElement>>("description");
 
   private navState = signal<{
     access?: boolean;
-    content?: Array<{ params: string } & TContent["items"]>;
+    content?: Array<{ params: string, info: TContent["items"] }>;
 
   }>({});
 
@@ -61,7 +61,7 @@ export class ContentPage {
   constructor(){
     effect(() => {
       this.queryParams();
-      this.navState.set(history.state);
+      this.navState.set(history.state); console.log(this.content())
       this.playButtonDisabled = false;
 
       const player = this.player();
@@ -90,7 +90,7 @@ export class ContentPage {
 
     if (!player) return;
 
-    const c = this.content()[0][0];
+    const c = this.content()[0].info[0];
 
     this.playButtonDisabled = true;
 

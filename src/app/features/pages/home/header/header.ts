@@ -36,8 +36,8 @@ export class Header implements OnInit {
   protected readonly videoStreaming = inject(VideoStreaming);
 
   protected isShowSearchBar = false;
-  protected headerContents: TContent["items"] | undefined = undefined;
   protected indexHeaderContent = 0;
+  public headerContents: TContent["items"] = [];
 
   searchContainer = viewChild<ElementRef<HTMLDivElement>>("searchContainer");
 
@@ -77,7 +77,7 @@ export class Header implements OnInit {
 
   }
 
-  navigateByContentSearched(content: Array<{ params: string } & TContent>): void {
+  navigateByContentSearched(content: Array<{ params: string, info: TContent }>): void {
     this.router.navigate([ "/home", "catalog" ], {
       queryParams: {
         search: content[0].params
@@ -104,7 +104,7 @@ export class Header implements OnInit {
       },
       state: {
         access: true,
-        content: [ { params: content[0].title, ...content } ]
+        content: [ { params: content[0].title, info: content } ]
 
       }
 

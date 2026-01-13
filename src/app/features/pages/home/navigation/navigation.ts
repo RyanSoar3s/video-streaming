@@ -54,16 +54,16 @@ export class Navigation implements OnInit {
 
   }
 
-  getCatalog(option: Array<string>): Array<{ param: string } & TContent> {
+  getCatalog(option: Array<string>): Array<{ param: string, info: TContent }> {
     const vs = this.videoStreaming.videoStreaming();
     const key = option[1] as keyof TVideoStreaming;
-    const content = { param: option[0], ...vs![key] };
+    const content = { param: option[0], info: vs![key] } satisfies { param: string, info: TContent };
 
-    return [ content ] satisfies Array<{ param: string } & TContent>;
+    return [ content ];
 
   }
 
-  navigateByContentSearched(content: Array<{ params: string } & TContent>): void {
+  navigateByContentSearched(content: Array<{ params: string, info: TContent }>): void {
     this.router.navigate([ "/home", "catalog" ], {
       queryParams: {
         search: content[0].params
@@ -81,7 +81,7 @@ export class Navigation implements OnInit {
   }
 
   navigateByGenre(params: string): void {
-    const content = [ { params, ...this.videoStreaming.searchByGenre(params) } ];
+    const content = [ { params, info: this.videoStreaming.searchByGenre(params) } ];
 
     this.navigateByContentSearched(content);
 
@@ -97,7 +97,7 @@ export class Navigation implements OnInit {
       },
       state: {
         access: true,
-        content: [ { params: content[0].title, ...content } ]
+        content: [ { params: content[0].title, info: content } ]
 
       }
 

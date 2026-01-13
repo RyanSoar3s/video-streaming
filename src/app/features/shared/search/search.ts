@@ -40,7 +40,7 @@ export class Search {
 
   }>({ height: "28px", width: "28px", marginRight: "12px" });
 
-  content = output<Array<{ params: string } & TContent>>();
+  content = output<Array<{ params: string, info: TContent }>>();
 
   @HostListener("document:keydown", [ "$event" ])
   onClickEnter(event: KeyboardEvent): void {
@@ -67,12 +67,15 @@ export class Search {
                       [
                         {
                           params: (typed) ? typed : "Todos",
-                          sectionTitle: (typed) ? `Resultado: ${typed}` : "Todos",
-                          items: searchContent
+                          info: {
+                            sectionTitle: (typed) ? `Resultado: ${typed}` : "Todos",
+                            items: searchContent
+                            
+                          }
 
                         }
 
-                      ] satisfies Array<{ params: string } & TContent>
+                      ] satisfies Array<{ params: string, info: TContent }>
 
                     );
 
