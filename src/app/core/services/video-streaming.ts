@@ -13,13 +13,13 @@ export class VideoStreaming {
     if (!vs) return null;
 
     return [
-      this.processSection(vs.MostWatched, "rating"),
-      this.processSection(vs.Releases, "year"),
-      this.processSection(vs.Movies),
-      this.processSection(vs.Series),
-      this.processSection(vs.Animations)
+      { info: this.processSection(vs.MostWatched, "rating") },
+      { info: this.processSection(vs.Releases, "year") },
+      { info: this.processSection(vs.Movies) },
+      { info: this.processSection(vs.Series) },
+      { info: this.processSection(vs.Animations) }
 
-    ];
+    ] satisfies Array<{ info: TContent }>;
 
   });
 
