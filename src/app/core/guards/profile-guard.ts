@@ -8,8 +8,7 @@ export const profileGuard: CanActivateChildFn = () => {
   const router = inject(Router);
 
   if (isEmpty) {
-    router.navigate([ "/home" ]);
-    return false;
+    return router.createUrlTree([ "/home" ]);
 
   }
 

@@ -9,14 +9,12 @@ export const loginGuard: CanActivateFn = () => {
   const pendingVerification = inject(PendingVerification);
 
   if (pendingVerification.isPendingVerification()) {
-    router.navigate([ "/verify-code" ]);
-    return false;
+    return router.createUrlTree([ "/verify-code" ]);
 
   }
 
   if (handleToken.getToken()) {
-    router.navigate([ "/home" ]);
-    return false;
+    return router.createUrlTree([ "/home" ]);
 
   }
 

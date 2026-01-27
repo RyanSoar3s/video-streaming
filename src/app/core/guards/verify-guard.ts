@@ -8,8 +8,7 @@ export const verifyGuard: CanActivateFn = () => {
   const router = inject(Router);
 
   if (!isPendingVerification) {
-    router.navigate([ "" ]);
-    return false;
+    return router.createUrlTree([ "" ]);
 
   }
 
